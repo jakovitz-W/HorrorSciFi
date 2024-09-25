@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBehavior_Platformer : MonoBehaviour
+public class EnemyBehavior: MonoBehaviour
 {
     public enum EnemyType{
         Debug, //stationary
@@ -112,19 +112,9 @@ public class EnemyBehavior_Platformer : MonoBehaviour
         transform.localScale = theScale;
     }
 
-    void OnTriggerEnter2D(Collider2D other){
-
-        if(other.gameObject.CompareTag("GroundCheck")){
-            Destroy(gameObject);
-            player.GetComponent<PlayerMovement>().isInvincible = true;
-        } else if(other.gameObject.CompareTag("Activator")){
-            canTrack = true;
-        }
-    }
-
     void OnCollisionEnter2D(Collision2D col){
         if(col.gameObject.CompareTag("Player")){
-            player.GetComponent<PlayerMovement>().OnDeath(false);
+            player.GetComponent<PlayerMovement>().ReduceSpeed();
         } else if(col.gameObject.CompareTag("Enemy")){
             wallHit = true;
             Flip();

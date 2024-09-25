@@ -11,16 +11,12 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D rb;
     public float runSpeed = 40f;
     private float horizontalMove;
-    private bool isCrouched = false;
-    private bool isJumping = false;
-    private bool isSprinting = false;
-    private float jumpCount = 0f;
-    public bool ignoreGround = false;
+    private float verticalMove;
     public bool isInvincible = false;
 
     private void Awake(){
         playerControls = new PlayerControls();
-        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        //levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         rb = GetComponent<Rigidbody2D>();
         
     }
@@ -33,60 +29,42 @@ public class PlayerMovement : MonoBehaviour
         playerControls.Disable();
     }
 
-    //double jump logic does not work with new unity input system
     void FixedUpdate(){
         horizontalMove = playerControls.Land.Move.ReadValue<Vector2>().x * runSpeed;
-        //Debug.Log(horizontalMove);
-        if(playerControls.Land.Jump.ReadValue<float>() > 0 && jumpCount < 1){
-            //Debug.Log(playerControls.Land.Jump.ReadValue<float>());
-            isJumping = true;
-            jumpCount++;
-        }
-        if(playerControls.Land.Crouch.ReadValue<float>() > 0){
-            isCrouched = true;
-        }else{
-            isCrouched = false;
-        }
-        if(playerControls.Land.Sprint.ReadValue<float>() > 0){
-            isSprinting = true;
-        } else{
-            isSprinting = false;
-        }
-
-        if(controller.m_Grounded)
-            jumpCount = 0;
+        verticalMove = playerControls.Land.Move.ReadValue<Vector2>().y * runSpeed;
         
     }
     void Update(){
-        controller.Move(horizontalMove * Time.fixedDeltaTime, isCrouched, isJumping, isSprinting, ignoreGround);
-        isJumping = false;    
-
-        if(isInvincible && controller.m_Grounded){
-            isInvincible = false;
-        }  
+        controller.Move(horizontalMove * Time.fixedDeltaTime, verticalMove * Time.fixedDeltaTime);
     }
 
-    public void OnDeath(bool outOfBounds){
-        if(!isInvincible){
-            transform.position = levelManager.GetCurrentCheckpoint().transform.position;
-            horizontalMove = 0f;
-        } else if(outOfBounds){
-            transform.position = levelManager.GetCurrentCheckpoint().transform.position;
-            horizontalMove = 0f;           
+    public void OnDeath(){
+
+        transform.position = levelManager.GetCurrentCheckpoint().transform.position;
+        horizontalMove = 0f;
+
+    }
+
+    public void ReduceSpeed(){
+        if(runSpeed != 0){
+            runSpeed -= (.005f * runSpeed);
+        } else{
+            //too slow to continue
+            OnDeath();
+            ResetSpeed();
         }
     }
 
-    public IEnumerator OnFinish(){
-        yield return new WaitForSeconds(3);
-        //GameObject.Find("SceneManager").GetComponent<SceneManagement>().OnMain();
+    public void ResetSpeed(){
+        runSpeed = 40f;
     }
 
+    //change to pickup (callback context with pickup)
     void OnTriggerEnter2D(Collider2D other){
-        if(other.gameObject.CompareTag("Coin")){
-            levelManager.CoinCollected(other.gameObject);
+        
+        if(other.gameObject.CompareTag("Key Item")){
+            levelManager.ItemCollected(other.gameObject);
             other.gameObject.SetActive(false);
-        } else if(other.gameObject.CompareTag("DeathTrigger")){
-            OnDeath(true);
         }
     }
 }
