@@ -22,10 +22,14 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void OnEnable(){
+        playerControls.Land.Pickup.performed += Pickup;
+        playerControls.Land.Interact.performed += Interact;
         playerControls.Enable();
     }
 
     private void OnDisable(){
+        playerControls.Land.Pickup.performed -= Pickup;
+        playerControls.Land.Interact.performed -= Interact; 
         playerControls.Disable();
     }
 
@@ -59,12 +63,42 @@ public class PlayerMovement : MonoBehaviour
         runSpeed = 40f;
     }
 
-    //change to pickup (callback context with pickup)
-    void OnTriggerEnter2D(Collider2D other){
-        
-        if(other.gameObject.CompareTag("Key Item")){
-            levelManager.ItemCollected(other.gameObject);
-            other.gameObject.SetActive(false);
+    void Pickup(InputAction.CallbackContext ctx){
+
+        LayerMask mask = LayerMask.GetMask("Key Item");
+        if(ctx.performed){
+            Collider2D col = Physics2D.OverlapCircle(transform.position, .5f, mask);
+            if(col != null){
+                Debug.Log("Pickup");
+                GameObject target = col.gameObject;
+                //levelManager.ItemCollected(target);
+                Destroy(target);
+            }
+        }
+    }
+
+    void Interact(InputAction.CallbackContext ctx){
+
+        LayerMask mask = LayerMask.GetMask("Interactable") | LayerMask.GetMask("Key Item");
+        if(ctx.performed){
+            Collider2D col = Physics2D.OverlapCircle(transform.position, .5f, mask);
+            if(col != null){
+                GameObject target = col.gameObject;
+
+                switch(target.tag){
+                    case "Key Item":
+                        Debug.Log("key");
+                        break;
+                    case "Human":
+                        break;
+                    case "Door":
+                        break;
+                    case "Dropoff":
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

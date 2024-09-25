@@ -3,15 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Key Item
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Key Item
   - Water
   - UI
-  - 
+  - Interactable
   - 
   - 
   - 
