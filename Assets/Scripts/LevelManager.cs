@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour
     public GameObject[] keyUI;
     private GameObject player;
     private int keyNum;
+    public GameObject[] doors;
 
     public void OnRoomChange(int room){
         
@@ -65,12 +66,6 @@ public class Level{
     public GameObject currentCheckpoint;
     public int chIndex  = 0; //checkpoint index
     public GameObject[] itemsWorld;
-
-    void KeyItemUsed(int id){
-        //if the key item's id matches the door requirement
-        //item id corresponds to the level id
-        manager.OnRoomChange(id);
-    }
     
     public void CheckpointReached(){
         chIndex++;

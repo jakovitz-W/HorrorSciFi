@@ -12,8 +12,10 @@ public class PlayerMovement : MonoBehaviour
     public float runSpeed = 40f;
     private float horizontalMove;
     private float verticalMove;
-    public bool isInvincible = false;
-
+    public List<GameObject> humans;
+    public int humansSaved = 0;
+    public List<GameObject> keys;
+    
     private void Awake(){
         playerControls = new PlayerControls();
         //levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
@@ -69,10 +71,10 @@ public class PlayerMovement : MonoBehaviour
         if(ctx.performed){
             Collider2D col = Physics2D.OverlapCircle(transform.position, .5f, mask);
             if(col != null){
-                Debug.Log("Pickup");
                 GameObject target = col.gameObject;
+                keys.Add(target);
                 //levelManager.ItemCollected(target);
-                Destroy(target);
+                target.SetActive(false);
             }
         }
     }
@@ -90,14 +92,30 @@ public class PlayerMovement : MonoBehaviour
                         Debug.Log("key");
                         break;
                     case "Human":
+                        Debug.Log("Human");
+                        humans.Add(target);
                         break;
                     case "Door":
+                        Debug.Log("Door");
+                        CheckDoor(target);
                         break;
                     case "Dropoff":
+                        Debug.Log("Dropoff");
+                        humansSaved += humans.Count;
+                        humans.Clear();
                         break;
                     default:
                         break;
                 }
+            }
+        }
+    }
+
+    void CheckDoor(GameObject door){
+        for(int i = 0; i < keys.Count; i++){
+            if(keys[i].GetComponent<ItemScript>().id == 0 /*levelManager.doors.IndexOf(door)*/){ //yikes
+                door.GetComponent<Collider2D>().enabled = false;
+                Debug.Log("Door Unlocked");
             }
         }
     }

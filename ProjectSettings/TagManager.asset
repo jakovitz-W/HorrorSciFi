@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Key Item
+  - Human
+  - Door
+  - Dropoff
   layers:
   - Default
   - TransparentFX
