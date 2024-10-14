@@ -8,6 +8,10 @@ TagManager:
   - Human
   - Door
   - Dropoff
+  - Torch
+  - Taser
+  - Meltable
+  - Zappable
   layers:
   - Default
   - TransparentFX
@@ -16,7 +20,7 @@ TagManager:
   - Water
   - UI
   - Interactable
-  - 
+  - Weapon
   - 
   - 
   - 
@@ -44,4 +48,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Lit
+    uniqueID: 498124117
     locked: 0

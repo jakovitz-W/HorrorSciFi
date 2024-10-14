@@ -15,12 +15,15 @@ public class PlayerMovement : MonoBehaviour
     public List<GameObject> humans;
     public int humansSaved = 0;
     public List<GameObject> keys;
-    
+    private bool hasTorch, hasTaser;
+    public GameObject[] weapons;
+
     private void Awake(){
         playerControls = new PlayerControls();
         //levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         rb = GetComponent<Rigidbody2D>();
-        
+        hasTorch = false;
+        hasTaser = false;
     }
 
     private void OnEnable(){
@@ -67,13 +70,23 @@ public class PlayerMovement : MonoBehaviour
 
     void Pickup(InputAction.CallbackContext ctx){
 
-        LayerMask mask = LayerMask.GetMask("Key Item");
+        LayerMask mask = LayerMask.GetMask("Key Item") | LayerMask.GetMask("Weapon");
         if(ctx.performed){
             Collider2D col = Physics2D.OverlapCircle(transform.position, .5f, mask);
             if(col != null){
+
                 GameObject target = col.gameObject;
-                keys.Add(target);
-                //levelManager.ItemCollected(target);
+
+                if(target.tag == "Key Item"){
+                    keys.Add(target);
+                    //levelManager.ItemCollected(target);
+                } else if(target.tag == "Torch"){
+                    //weapons[0] = target;
+                    hasTorch = true;
+                } else if(target.tag == "Taser"){
+                    weapons[1] = target;
+                    hasTaser = true;
+                }
                 target.SetActive(false);
             }
         }
@@ -89,20 +102,30 @@ public class PlayerMovement : MonoBehaviour
 
                 switch(target.tag){
                     case "Key Item":
-                        Debug.Log("key");
                         break;
                     case "Human":
-                        Debug.Log("Human");
+                        //check if human has special function
                         humans.Add(target);
                         break;
                     case "Door":
-                        Debug.Log("Door");
                         CheckDoor(target);
                         break;
                     case "Dropoff":
-                        Debug.Log("Dropoff");
                         humansSaved += humans.Count;
                         humans.Clear();
+                        break;
+                    case "Meltable":
+                        if(hasTorch){
+                            //play melting animation
+                            target.GetComponent<Collider2D>().enabled = false;
+                        }
+                        break;
+                    case "Zappable":
+
+                        if(hasTaser){
+                            //this function is more complex, needs to be seperated
+                            //do routine based on type of object zapped
+                        }
                         break;
                     default:
                         break;
@@ -112,11 +135,21 @@ public class PlayerMovement : MonoBehaviour
     }
 
     void CheckDoor(GameObject door){
+        bool doorUnlocked = false;
         for(int i = 0; i < keys.Count; i++){
             if(keys[i].GetComponent<ItemScript>().id == 0 /*levelManager.doors.IndexOf(door)*/){ //yikes
                 door.GetComponent<Collider2D>().enabled = false;
-                Debug.Log("Door Unlocked");
+                doorUnlocked = true;
             }
+        }
+
+        if(doorUnlocked){
+            //play open animation
+            Debug.Log("Door Unlocked");
+        }
+        else{
+            //popup text box saying door is locked, need to find key, etc
+            Debug.Log("This door is locked");
         }
     }
 }
