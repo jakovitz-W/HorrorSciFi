@@ -138,13 +138,15 @@ public class PlayerMovement : MonoBehaviour
         bool doorUnlocked = false;
         for(int i = 0; i < keys.Count; i++){
             if(keys[i].GetComponent<ItemScript>().id == 0 /*levelManager.doors.IndexOf(door)*/){ //yikes
-                door.GetComponent<Collider2D>().enabled = false;
+                //door.GetComponent<Collider2D>().enabled = false;
                 doorUnlocked = true;
             }
         }
 
         if(doorUnlocked){
             //play open animation
+            //allow 2nd interaction to move to next room
+            //potentially use a seperate loading zone instead
             Debug.Log("Door Unlocked");
         }
         else{
