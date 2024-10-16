@@ -6,14 +6,12 @@ using UnityEngine.Events;
 public class CharacterController : MonoBehaviour
 {
     [Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f;
-    [SerializeField] private bool m_AirControl = true;
     private Rigidbody2D rb;
     private bool m_FacingRight = true;
     private Vector3 m_Velocity = Vector3.zero;
 
     private void Awake(){
         rb = GetComponent<Rigidbody2D>();
-
     }
 
     public void Move(float moveX, float moveY){

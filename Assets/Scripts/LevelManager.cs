@@ -7,12 +7,12 @@ public class LevelManager : MonoBehaviour
 {
     //store stages in GameObject[] and set active/unactive to reduce lag
     public Level[] levels;
+    [HideInInspector]
     public int LIndex; //level index
-    public GameObject[] levelParents;
+    public GameObject[] levelParents;    
+    public GameObject[] doors;
     public GameObject[] keyUI;
     private GameObject player;
-    private int keyNum;
-    public GameObject[] doors;
     public Animator transition;
 
 
@@ -21,21 +21,23 @@ public class LevelManager : MonoBehaviour
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(1);
 
-        LIndex = room;
         levelParents[room].SetActive(true);
-        player.transform.position = levels[LIndex].checkpoints[0].transform.position;
+        player.transform.position = levels[room].checkpoint.transform.position;
 
         for(int i = 0; i < levels.Length; i++){
             if(i != room){
                 levelParents[i].SetActive(false);
             }
         }
+
+        LIndex++;
+
         yield return new WaitForSeconds(1);
         transition.SetTrigger("End");
     }
 
     public IEnumerator Backtrack(){
-
+        
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(1);
         LIndex--;
@@ -53,49 +55,24 @@ public class LevelManager : MonoBehaviour
         
     }
 
-    public void ProcessCheckpoint(){
-        levels[LIndex].CheckpointReached();
-    }
-
-    public GameObject GetCurrentCheckpoint(){
-        return levels[LIndex].currentCheckpoint;
-    }
     void Start(){
-        player = GameObject.FindWithTag("Player");
-        LIndex = 0; //for a level select use a set value based on the button pushed
-        levels[LIndex].currentCheckpoint = levels[LIndex].checkpoints[0];
-        levels[LIndex].chIndex = 0;
 
+        player = GameObject.FindWithTag("Player");
+        LIndex = 0;
 
         for(int i = LIndex + 1; i < levels.Length; i++){ //deactivate all but current level
             levelParents[i].SetActive(false);
+            levels[i].hasKey = false;
         }
 
-        player.transform.position = levels[LIndex].checkpoints[0].transform.position;
-    }
-
-    public void ItemCollected(GameObject item){
-
-        int index = Array.IndexOf(levels[LIndex].itemsWorld, item);
-        keyUI[index].SetActive(true);
-        keyNum++;
+        player.transform.position = levels[0].checkpoint.transform.position;
     }
 }
 
+
 [System.Serializable]
 public class Level{
-    public LevelManager manager;
-    public GameObject[] checkpoints;
-    public GameObject currentCheckpoint;
-    public int chIndex  = 0; //checkpoint index
-    public GameObject[] itemsWorld;
-    
-    public void CheckpointReached(){
-        chIndex++;
-
-        if(chIndex < (checkpoints.Length - 1)){
-            currentCheckpoint = checkpoints[chIndex];
-        }
-    }
+    public GameObject checkpoint;
+    public bool hasKey; 
 } 
 
