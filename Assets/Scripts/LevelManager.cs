@@ -7,14 +7,13 @@ public class LevelManager : MonoBehaviour
 {
     //store stages in GameObject[] and set active/unactive to reduce lag
     public Level[] levels;
-    [HideInInspector]
-    public int LIndex; //level index
-    public GameObject[] levelParents;    
-    public GameObject[] doors;
     public GameObject[] keyUI;
     private GameObject player;
-    public Animator transition;
-
+    [HideInInspector] public int LIndex; //level index
+    [SerializeField] private GameObject[] levelParents;  
+    [SerializeField] private GameObject[] doors;
+    [SerializeField] private Animator transition;
+    
 
     public IEnumerator OnRoomChange(int room){
         

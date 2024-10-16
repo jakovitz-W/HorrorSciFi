@@ -5,10 +5,10 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public CharacterController controller;
+    [SerializeField] private CharacterController controller;
+    [SerializeField] private float runSpeed = 40f;
     private PlayerControls playerControls;
     private LevelManager levelManager;
-    public float runSpeed = 40f;
     private float horizontalMove;
     private float verticalMove;
 
