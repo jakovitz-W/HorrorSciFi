@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public CharacterController controller;
     private PlayerControls playerControls;
     public LevelManager levelManager;
+    private int nextRoom;
     private Rigidbody2D rb;
     public float runSpeed = 40f;
     private float horizontalMove;
@@ -20,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake(){
         playerControls = new PlayerControls();
-        //levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
+        levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         rb = GetComponent<Rigidbody2D>();
         hasTorch = false;
         hasTaser = false;
@@ -68,6 +69,16 @@ public class PlayerMovement : MonoBehaviour
         runSpeed = 40f;
     }
 
+    void OnTriggerEnter2D(Collider2D other){
+        if(other.gameObject.tag == "BlockTrigger"){
+            //play blocking animation, activate spriterenderer for now
+            GameObject obstacle = other.transform.parent.gameObject;
+            obstacle.GetComponent<SpriteRenderer>().enabled = true;
+            obstacle.GetComponent<Collider2D>().enabled = true;
+            other.gameObject.SetActive(false); //make sure player doesn't get stuck a second time
+        }
+    }
+
     void Pickup(InputAction.CallbackContext ctx){
 
         LayerMask mask = LayerMask.GetMask("Key Item") | LayerMask.GetMask("Weapon");
@@ -110,6 +121,9 @@ public class PlayerMovement : MonoBehaviour
                     case "Door":
                         CheckDoor(target);
                         break;
+                    case "Checkpoint":
+                        StartCoroutine(levelManager.Backtrack());
+                        break;
                     case "Dropoff":
                         humansSaved += humans.Count;
                         humans.Clear();
@@ -137,16 +151,16 @@ public class PlayerMovement : MonoBehaviour
     void CheckDoor(GameObject door){
         bool doorUnlocked = false;
         for(int i = 0; i < keys.Count; i++){
-            if(keys[i].GetComponent<ItemScript>().id == 0 /*levelManager.doors.IndexOf(door)*/){ //yikes
-                //door.GetComponent<Collider2D>().enabled = false;
+            if(keys[i].GetComponent<ItemScript>().id == levelManager.LIndex){ //assumes only one door per level
+                nextRoom = i + 1;
                 doorUnlocked = true;
             }
         }
 
         if(doorUnlocked){
             //play open animation
-            //allow 2nd interaction to move to next room
-            //potentially use a seperate loading zone instead
+            //go through door
+            StartCoroutine(levelManager.OnRoomChange(nextRoom));
             Debug.Log("Door Unlocked");
         }
         else{

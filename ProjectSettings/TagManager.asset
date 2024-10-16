@@ -12,6 +12,8 @@ TagManager:
   - Taser
   - Meltable
   - Zappable
+  - Checkpoint
+  - BlockTrigger
   layers:
   - Default
   - TransparentFX
