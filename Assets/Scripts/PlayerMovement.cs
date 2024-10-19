@@ -57,11 +57,13 @@ public class PlayerMovement : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other){
 
-        if(other.gameObject.tag == "BlockTrigger"){
+        if(other.gameObject.tag == "BlockTrigger"){ //activates a barrier within the scene
+
             //play blocking animation, activate spriterenderer for now
             GameObject obstacle = other.transform.parent.gameObject;
             obstacle.GetComponent<SpriteRenderer>().enabled = true;
             obstacle.GetComponent<Collider2D>().enabled = true;
+            
             other.gameObject.SetActive(false); //make sure player doesn't get stuck a second time
         }
     }
