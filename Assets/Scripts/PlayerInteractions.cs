@@ -15,12 +15,14 @@ public class PlayerInteractions : MonoBehaviour
     private bool hasTorch, hasTaser;
     public GameObject[] keyUI;
     private int keyNum; //keeps track of how many keys the player has picked up
+    public float radius = 1f;
 
     void Awake(){
         
         playerControls = new PlayerControls();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         rb = GetComponent<Rigidbody2D>();
+        humans = new List<GameObject>();
         hasTorch = false;
         hasTaser = false;
         currentLevel = levelManager.levels[0];
@@ -44,7 +46,7 @@ public class PlayerInteractions : MonoBehaviour
         LayerMask mask = LayerMask.GetMask("Key Item", "Weapon");
         if(ctx.performed){
 
-            Collider2D col = Physics2D.OverlapCircle(transform.position, .5f, mask);
+            Collider2D col = Physics2D.OverlapCircle(transform.position, radius, mask);
 
             if(col != null){
 
@@ -73,7 +75,7 @@ public class PlayerInteractions : MonoBehaviour
 
         if(ctx.performed){
 
-            Collider2D col = Physics2D.OverlapCircle(transform.position, .5f, mask);
+            Collider2D col = Physics2D.OverlapCircle(transform.position, radius, mask);
 
             if(col != null){
                 GameObject target = col.gameObject;
