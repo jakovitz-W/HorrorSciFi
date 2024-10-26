@@ -9,6 +9,9 @@ public class CharacterController : MonoBehaviour
     private Rigidbody2D rb;
     private bool m_FacingRight = true;
     private Vector3 m_Velocity = Vector3.zero;
+    [SerializeField] private int tiltAmount = 10;
+    [SerializeField] private float tiltSpeed = 50f;
+    private Quaternion targetRotation;
 
     private void Awake(){
         rb = GetComponent<Rigidbody2D>();
@@ -26,6 +29,16 @@ public class CharacterController : MonoBehaviour
         else if(moveX < 0 && m_FacingRight){
             Flip();
         }
+
+        if(moveX > 0){
+            targetRotation = Quaternion.Euler(0f, 0f, -tiltAmount);
+        } else if(moveX < 0){
+            targetRotation = Quaternion.Euler(0f, 0f, tiltAmount);
+        } else{
+            targetRotation = Quaternion.Euler(0f, 0f, 0f);
+        }
+
+        transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, tiltSpeed * Time.fixedDeltaTime);
 
     }
     private void Flip(){

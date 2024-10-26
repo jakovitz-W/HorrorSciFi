@@ -28,12 +28,8 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate(){
         horizontalMove = playerControls.Land.Move.ReadValue<Vector2>().x * runSpeed;
         verticalMove = playerControls.Land.Move.ReadValue<Vector2>().y * runSpeed;
-        
-    }
-    void Update(){
         controller.Move(horizontalMove * Time.fixedDeltaTime, verticalMove * Time.fixedDeltaTime);
     }
-
     public void OnDeath(){
 
         GameObject checkpoint = levelManager.levels[levelManager.LIndex].checkpoint;
