@@ -15,6 +15,9 @@ TagManager:
   - Checkpoint
   - BlockTrigger
   - Enemy
+  - Button
+  - PressurePlate
+  - Exit
   layers:
   - Default
   - TransparentFX
@@ -24,8 +27,8 @@ TagManager:
   - UI
   - Interactable
   - Weapon
-  - 
-  - 
+  - PressurePlate
+  - Player
   - 
   - 
   - 
@@ -49,9 +52,21 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Default
-    uniqueID: 0
+  - name: Background
+    uniqueID: 53201575
     locked: 0
   - name: Lit
     uniqueID: 498124117
+    locked: 0
+  - name: BackgroundObjects
+    uniqueID: 402365943
+    locked: 0
+  - name: Gameplay
+    uniqueID: 153029555
+    locked: 0
+  - name: ForegroundObjects
+    uniqueID: 1400087775
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0

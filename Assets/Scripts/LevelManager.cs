@@ -15,6 +15,9 @@ public class LevelManager : MonoBehaviour
     
     public IEnumerator OnRoomChange(int room){ //this method allows the player to go to the next room
         
+        //don't want player to be able to move while changing scenes
+        player.GetComponent<PlayerMovement>().enabled = false;
+
         //starts fade transition
         transition.SetTrigger("Start");
         yield return new WaitForSeconds(1);
@@ -34,9 +37,13 @@ public class LevelManager : MonoBehaviour
         //end fade transition
         yield return new WaitForSeconds(1);
         transition.SetTrigger("End");
+        player.GetComponent<PlayerMovement>().enabled = true;
     }
 
     public IEnumerator Backtrack(){ //this method allows the player to go to the previous room
+        
+        //don't want player to be able to move while changing scenes
+        player.GetComponent<PlayerMovement>().enabled = false;
         
         //starts fade transition
         transition.SetTrigger("Start");
@@ -57,7 +64,7 @@ public class LevelManager : MonoBehaviour
         //end fade transition
         yield return new WaitForSeconds(1);
         transition.SetTrigger("End");
-        
+        player.GetComponent<PlayerMovement>().enabled = true;
     }
 
     void Start(){

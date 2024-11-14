@@ -7,7 +7,7 @@ public class CharacterController : MonoBehaviour
 {
     [Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f;
     private Rigidbody2D rb;
-    private bool m_FacingRight = true;
+    public bool m_FacingRight = true;
     private Vector3 m_Velocity = Vector3.zero;
     [SerializeField] private int tiltAmount = 10;
     [SerializeField] private float tiltSpeed = 50f;
@@ -41,7 +41,7 @@ public class CharacterController : MonoBehaviour
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, tiltSpeed * Time.fixedDeltaTime);
 
     }
-    private void Flip(){
+    public void Flip(){
         m_FacingRight = !m_FacingRight;
 
         Vector3 theScale = transform.localScale;

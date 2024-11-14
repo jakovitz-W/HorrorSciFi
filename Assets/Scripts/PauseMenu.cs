@@ -45,4 +45,15 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
     }
 
+    public void ResetRoom(){
+        //play loading animation
+        //grab room
+        //grab initial state of the room?
+        //set all critical objects back to their initial position/state
+            //if critical object position/state has changed then reset them
+            //else skip
+        //Set player position
+        //stop loading animation
+    }
+
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerInteractions : MonoBehaviour
 {
@@ -12,10 +13,16 @@ public class PlayerInteractions : MonoBehaviour
     private Rigidbody2D rb;
     private List<GameObject> humans;
     public int humansSaved = 0;
-    private bool hasTorch, hasTaser;
+
     public GameObject[] keyUI;
     private int keyNum; //keeps track of how many keys the player has picked up
     public float radius = 1f;
+
+    public GameObject flameThrower;
+    private bool hasTorch, hasTaser;
+    private bool torchActive, taserActive;
+    [SerializeField] private TMP_Text activeToolText;
+
 
     void Awake(){
         
@@ -23,8 +30,15 @@ public class PlayerInteractions : MonoBehaviour
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         rb = GetComponent<Rigidbody2D>();
         humans = new List<GameObject>();
+
+        activeToolText.text = "Active Tool: None";
         hasTorch = false;
+        flameThrower.SetActive(false);
+        taserActive = false;
+
         hasTaser = false;
+        taserActive = false;
+
         currentLevel = levelManager.levels[0];
         keyNum = 0;
     }
@@ -32,13 +46,76 @@ public class PlayerInteractions : MonoBehaviour
     private void OnEnable(){
         playerControls.Land.Pickup.performed += Pickup;
         playerControls.Land.Interact.performed += Interact;
+        playerControls.Land.UseWeapon.started += UseWeapon;
+        playerControls.Land.UseWeapon.canceled += UseWeapon;
+        playerControls.Land.SwapWeapon.performed += SwapWeapon;
         playerControls.Enable();
     }
 
     private void OnDisable(){
         playerControls.Land.Pickup.performed -= Pickup;
         playerControls.Land.Interact.performed -= Interact; 
+        playerControls.Land.UseWeapon.started -= UseWeapon;
+        playerControls.Land.UseWeapon.canceled -= UseWeapon;
+        playerControls.Land.SwapWeapon.performed -= SwapWeapon;
         playerControls.Disable();
+    }
+
+    void UseWeapon(InputAction.CallbackContext ctx){
+
+        if(ctx.started){
+            if(hasTorch && torchActive){
+                //check if adding lights to particle path is possible
+                flameThrower.SetActive(true);
+            }
+
+            LayerMask mask = LayerMask.GetMask("Interactable");
+            Collider2D col = Physics2D.OverlapCircle(transform.position, radius, mask);
+            
+            if(col != null){
+                GameObject target = col.gameObject;
+
+                if(target.tag == "Meltable"){
+
+                    if(hasTorch && torchActive){
+                        //StartCoroutine(target.Melt());
+                        target.GetComponent<Collider2D>().enabled = false;
+                    }
+                } else if(target.tag == "Zappable"){
+
+                    if(hasTaser && taserActive){
+                        //StartCoroutine(target.Zap())
+                        target.GetComponent<Collider2D>().enabled = false; 
+                    }
+                    
+                } else if(target.tag == "Enemy"){
+
+                }
+            }
+        }
+
+        if(ctx.canceled){
+            if(hasTorch && torchActive){
+                flameThrower.SetActive(false);
+            }
+           
+        }
+    }
+
+    void SwapWeapon(InputAction.CallbackContext ctx){
+        
+        if(ctx.performed){
+            if(torchActive && hasTaser){
+                torchActive = false;
+                taserActive = true;
+                activeToolText.text = "Active Tool: Taser";
+
+            } else if(taserActive && hasTorch){
+                torchActive = true;
+                taserActive = false;
+                activeToolText.text = "Active Tool: Blowtorch";
+            }
+        }
     }
 
     void Pickup(InputAction.CallbackContext ctx){
@@ -60,9 +137,14 @@ public class PlayerInteractions : MonoBehaviour
                 }else if(target.tag == "Torch"){
 
                     hasTorch = true;
+                    torchActive = true;
+                    activeToolText.text = "Active Tool: Blowtorch";
                 }else if(target.tag == "Taser"){
 
                     hasTaser = true;
+                    taserActive = true;
+                    torchActive = false;
+                    activeToolText.text = "Active Tool: Taser";
                 }
                 target.SetActive(false);
             }
@@ -94,7 +176,7 @@ public class PlayerInteractions : MonoBehaviour
                     case "Checkpoint":
                         StartCoroutine(levelManager.Backtrack());
                         int i = levelManager.LIndex - 1;
-                        currentLevel = levelManager.levels[i]; //proboably a more elegant way to do this
+                        currentLevel = levelManager.levels[i];
                         break;
                     case "Human":
                         //TODO: check if human has special function
@@ -104,17 +186,11 @@ public class PlayerInteractions : MonoBehaviour
                         humansSaved += humans.Count;
                         humans.Clear();
                         break;
-                    case "Meltable":
-                        if(hasTorch){
-                            //TODO: play melting animation
-                            target.GetComponent<Collider2D>().enabled = false;
-                        }
+                    case "Button":
+                        
                         break;
-                    case "Zappable":
-                        if(hasTaser){
-                            //this function is more complex, needs to be seperated
-                            //do routine based on type of object zapped
-                        }
+                    case "Exit":
+                        transform.position = levelManager.levels[levelManager.LIndex].checkpoint.transform.position; //oof
                         break;
                     default:
                         break;

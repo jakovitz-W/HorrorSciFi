@@ -9,25 +9,56 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float runSpeed = 40f;
     private PlayerControls playerControls;
     private LevelManager levelManager;
-    private float horizontalMove;
-    private float verticalMove;
+    [HideInInspector] public float horizontalMove, verticalMove;
+
+    [SerializeField] private GameObject tinyDrone;
+    [SerializeField] private GameObject droneCam;
+    public bool droneActive;
 
     private void Awake(){
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         playerControls = new PlayerControls();
+        tinyDrone.SetActive(false);
+        droneCam.SetActive(false);
     }
 
     private void OnEnable(){
+        playerControls.Land.ActivateDrone.performed += SwapToDrone;
         playerControls.Enable();
     }
 
     private void OnDisable(){
+        playerControls.Land.ActivateDrone.performed -= SwapToDrone;
         playerControls.Disable();
     }
 
+    void SwapToDrone(InputAction.CallbackContext ctx){
+
+        if(ctx.performed){
+            if(!droneActive){
+                droneActive = true;
+                tinyDrone.SetActive(true);
+                tinyDrone.transform.position = transform.position;
+                droneCam.SetActive(true);
+                droneCam.transform.position = tinyDrone.transform.position;
+                
+                
+                horizontalMove = 0;
+                verticalMove = 0;
+            }
+        }
+    }
+
     void FixedUpdate(){
-        horizontalMove = playerControls.Land.Move.ReadValue<Vector2>().x * runSpeed;
-        verticalMove = playerControls.Land.Move.ReadValue<Vector2>().y * runSpeed;
+
+        if(!droneActive){ //so player doesn't keep moving after activating tiny dude
+
+            horizontalMove = playerControls.Land.Move.ReadValue<Vector2>().x * runSpeed;
+            verticalMove = playerControls.Land.Move.ReadValue<Vector2>().y * runSpeed;
+        } else{
+            horizontalMove = 0;
+            verticalMove = 0;
+        }
         controller.Move(horizontalMove * Time.fixedDeltaTime, verticalMove * Time.fixedDeltaTime);
     }
     public void OnDeath(){
@@ -55,9 +86,10 @@ public class PlayerMovement : MonoBehaviour
 
         if(other.gameObject.tag == "BlockTrigger"){ //activates a barrier within the scene
 
-            //play blocking animation, activate spriterenderer for now
+            //play blocking animation
             GameObject obstacle = other.transform.parent.gameObject;
-            obstacle.GetComponent<SpriteRenderer>().enabled = true;
+            obstacle.transform.Find("Sprite").gameObject.GetComponent<Animator>().Play("grate-drop");
+            //obstacle.GetComponent<SpriteRenderer>().enabled = true;
             obstacle.GetComponent<Collider2D>().enabled = true;
             
             other.gameObject.SetActive(false); //make sure player doesn't get stuck a second time

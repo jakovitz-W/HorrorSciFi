@@ -53,6 +53,33 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""UseWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""a418ec70-c0cd-42d5-9802-0f76d5122f1b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ActivateDrone"",
+                    ""type"": ""Button"",
+                    ""id"": ""ccc00f8c-8ad4-48de-b101-ec959c2debbe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SwapWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""cec79ab7-6c29-4347-a4f9-98847490f54f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +159,39 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Pickup"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac28cd27-d5f1-4736-9028-87f9a5c3d491"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Land"",
+                    ""action"": ""UseWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""abe01351-4cf2-4bb7-a92c-abfa3bcc2d9e"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Land"",
+                    ""action"": ""ActivateDrone"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""112e5934-745e-42bf-a1d3-316b0f5b71c1"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Land"",
+                    ""action"": ""SwapWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -177,6 +237,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Land_Move = m_Land.FindAction("Move", throwIfNotFound: true);
         m_Land_Interact = m_Land.FindAction("Interact", throwIfNotFound: true);
         m_Land_Pickup = m_Land.FindAction("Pickup", throwIfNotFound: true);
+        m_Land_UseWeapon = m_Land.FindAction("UseWeapon", throwIfNotFound: true);
+        m_Land_ActivateDrone = m_Land.FindAction("ActivateDrone", throwIfNotFound: true);
+        m_Land_SwapWeapon = m_Land.FindAction("SwapWeapon", throwIfNotFound: true);
         // General
         m_General = asset.FindActionMap("General", throwIfNotFound: true);
         m_General_Pause = m_General.FindAction("Pause", throwIfNotFound: true);
@@ -244,6 +307,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Land_Move;
     private readonly InputAction m_Land_Interact;
     private readonly InputAction m_Land_Pickup;
+    private readonly InputAction m_Land_UseWeapon;
+    private readonly InputAction m_Land_ActivateDrone;
+    private readonly InputAction m_Land_SwapWeapon;
     public struct LandActions
     {
         private @PlayerControls m_Wrapper;
@@ -251,6 +317,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Land_Move;
         public InputAction @Interact => m_Wrapper.m_Land_Interact;
         public InputAction @Pickup => m_Wrapper.m_Land_Pickup;
+        public InputAction @UseWeapon => m_Wrapper.m_Land_UseWeapon;
+        public InputAction @ActivateDrone => m_Wrapper.m_Land_ActivateDrone;
+        public InputAction @SwapWeapon => m_Wrapper.m_Land_SwapWeapon;
         public InputActionMap Get() { return m_Wrapper.m_Land; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -269,6 +338,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pickup.started += instance.OnPickup;
             @Pickup.performed += instance.OnPickup;
             @Pickup.canceled += instance.OnPickup;
+            @UseWeapon.started += instance.OnUseWeapon;
+            @UseWeapon.performed += instance.OnUseWeapon;
+            @UseWeapon.canceled += instance.OnUseWeapon;
+            @ActivateDrone.started += instance.OnActivateDrone;
+            @ActivateDrone.performed += instance.OnActivateDrone;
+            @ActivateDrone.canceled += instance.OnActivateDrone;
+            @SwapWeapon.started += instance.OnSwapWeapon;
+            @SwapWeapon.performed += instance.OnSwapWeapon;
+            @SwapWeapon.canceled += instance.OnSwapWeapon;
         }
 
         private void UnregisterCallbacks(ILandActions instance)
@@ -282,6 +360,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pickup.started -= instance.OnPickup;
             @Pickup.performed -= instance.OnPickup;
             @Pickup.canceled -= instance.OnPickup;
+            @UseWeapon.started -= instance.OnUseWeapon;
+            @UseWeapon.performed -= instance.OnUseWeapon;
+            @UseWeapon.canceled -= instance.OnUseWeapon;
+            @ActivateDrone.started -= instance.OnActivateDrone;
+            @ActivateDrone.performed -= instance.OnActivateDrone;
+            @ActivateDrone.canceled -= instance.OnActivateDrone;
+            @SwapWeapon.started -= instance.OnSwapWeapon;
+            @SwapWeapon.performed -= instance.OnSwapWeapon;
+            @SwapWeapon.canceled -= instance.OnSwapWeapon;
         }
 
         public void RemoveCallbacks(ILandActions instance)
@@ -359,6 +446,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnPickup(InputAction.CallbackContext context);
+        void OnUseWeapon(InputAction.CallbackContext context);
+        void OnActivateDrone(InputAction.CallbackContext context);
+        void OnSwapWeapon(InputAction.CallbackContext context);
     }
     public interface IGeneralActions
     {
