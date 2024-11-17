@@ -207,6 +207,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Skip"",
+                    ""type"": ""Button"",
+                    ""id"": ""bb73dbc5-cb36-4efa-970e-c29291bbd616"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -218,6 +227,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Land"",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""47df004c-bb80-4e4e-b5f2-c3031cf8b60f"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Land"",
+                    ""action"": ""Skip"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -243,6 +263,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         // General
         m_General = asset.FindActionMap("General", throwIfNotFound: true);
         m_General_Pause = m_General.FindAction("Pause", throwIfNotFound: true);
+        m_General_Skip = m_General.FindAction("Skip", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -391,11 +412,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_General;
     private List<IGeneralActions> m_GeneralActionsCallbackInterfaces = new List<IGeneralActions>();
     private readonly InputAction m_General_Pause;
+    private readonly InputAction m_General_Skip;
     public struct GeneralActions
     {
         private @PlayerControls m_Wrapper;
         public GeneralActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause => m_Wrapper.m_General_Pause;
+        public InputAction @Skip => m_Wrapper.m_General_Skip;
         public InputActionMap Get() { return m_Wrapper.m_General; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -408,6 +431,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Skip.started += instance.OnSkip;
+            @Skip.performed += instance.OnSkip;
+            @Skip.canceled += instance.OnSkip;
         }
 
         private void UnregisterCallbacks(IGeneralActions instance)
@@ -415,6 +441,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Skip.started -= instance.OnSkip;
+            @Skip.performed -= instance.OnSkip;
+            @Skip.canceled -= instance.OnSkip;
         }
 
         public void RemoveCallbacks(IGeneralActions instance)
@@ -453,5 +482,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     public interface IGeneralActions
     {
         void OnPause(InputAction.CallbackContext context);
+        void OnSkip(InputAction.CallbackContext context);
     }
 }

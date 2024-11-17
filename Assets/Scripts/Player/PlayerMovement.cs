@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private CharacterController controller;
-    [SerializeField] private float runSpeed = 40f;
+    public float baseSpeed = 30f;
+    public float runSpeed = 30f;
     private PlayerControls playerControls;
     private LevelManager levelManager;
     [HideInInspector] public float horizontalMove, verticalMove;
@@ -14,12 +15,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject tinyDrone;
     [SerializeField] private GameObject droneCam;
     public bool droneActive;
+    public bool droneUnlocked;
 
     private void Awake(){
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         playerControls = new PlayerControls();
         tinyDrone.SetActive(false);
         droneCam.SetActive(false);
+        droneActive = false;
+        droneUnlocked = false;
+        runSpeed = baseSpeed;
     }
 
     private void OnEnable(){
@@ -35,13 +40,12 @@ public class PlayerMovement : MonoBehaviour
     void SwapToDrone(InputAction.CallbackContext ctx){
 
         if(ctx.performed){
-            if(!droneActive){
+            if(!droneActive && droneUnlocked){
                 droneActive = true;
                 tinyDrone.SetActive(true);
                 tinyDrone.transform.position = transform.position;
                 droneCam.SetActive(true);
                 droneCam.transform.position = tinyDrone.transform.position;
-                
                 
                 horizontalMove = 0;
                 verticalMove = 0;
@@ -70,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void ReduceSpeed(){
         if(runSpeed != 0){
-            runSpeed -= (.005f * runSpeed);
+            runSpeed -= (.05f * runSpeed);
         } else{
             //too slow to continue
             OnDeath();
@@ -93,6 +97,13 @@ public class PlayerMovement : MonoBehaviour
             obstacle.GetComponent<Collider2D>().enabled = true;
             
             other.gameObject.SetActive(false); //make sure player doesn't get stuck a second time
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D col){
+
+        if(col.gameObject.tag == "Enemy"){
+            ReduceSpeed();
         }
     }
 }
