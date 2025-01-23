@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ed039fd4ad9c60045b23e9b2d55252ca
+guid: 579c49d065b63d94d94691cbec9a23a1
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,11 +93,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_0
+      name: upgrade_icons_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c238707f393b46e4aa277f470e874a9c
-      internalID: -926166955
+      spriteID: a5022d7bc1ba0b546ab5d36adf42207d
+      internalID: 1098096301
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_1
+      name: upgrade_icons_1
       rect:
         serializedVersion: 2
         x: 64
@@ -132,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b0612b0eca146444974c3e85de6892a
-      internalID: 1712092164
+      spriteID: 6036ac35daa936a448bd598a87929d58
+      internalID: -2039801505
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_2
+      name: upgrade_icons_2
       rect:
         serializedVersion: 2
         x: 0
@@ -153,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 627392542ee617c4a88fe5ab5273d38c
-      internalID: -84807621
+      spriteID: 251c2860a94e69f42bb6fc6be0a54e4a
+      internalID: -1225529516
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_3
+      name: upgrade_icons_3
       rect:
         serializedVersion: 2
         x: 64
@@ -174,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6007bb76ac79af04d935fc505e355d9d
-      internalID: 995176304
+      spriteID: ac1a19fb8ceca184382b25be314af9be
+      internalID: -1467555810
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_4
+      name: upgrade_icons_4
       rect:
         serializedVersion: 2
         x: 0
@@ -195,29 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3913fb1865378a48aa18132288463f7
-      internalID: 278562574
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_5
-      rect:
-        serializedVersion: 2
-        x: 64
-        y: 0
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 35afe468cd7f3f844b46fb5b8788053a
-      internalID: -1496420505
+      spriteID: 44803478ef03cad489ea8c1af1693285
+      internalID: 1625448909
       vertices: []
       indices: 
       edges: []
@@ -233,12 +225,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Astronaut (Walk-Cycle)_0: -926166955
-      Astronaut (Walk-Cycle)_1: 1712092164
-      Astronaut (Walk-Cycle)_2: -84807621
-      Astronaut (Walk-Cycle)_3: 995176304
-      Astronaut (Walk-Cycle)_4: 278562574
-      Astronaut (Walk-Cycle)_5: -1496420505
+      upgrade_icons_0: 1098096301
+      upgrade_icons_1: -2039801505
+      upgrade_icons_2: -1225529516
+      upgrade_icons_3: -1467555810
+      upgrade_icons_4: 1625448909
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

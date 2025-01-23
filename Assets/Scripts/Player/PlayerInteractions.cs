@@ -22,10 +22,11 @@ public class PlayerInteractions : MonoBehaviour
     public float stunTime = 3f;
 
     public GameObject flameThrower, taser;
-    private bool hasTorch, hasTaser;
-    private bool torchActive, taserActive;
+    public bool hasTorch, hasTaser;
+    public bool torchActive, taserActive;
     [SerializeField] private TMP_Text activeToolText;
     [SerializeField] private DialogueSystem diSystem;
+    [SerializeField] private UpgradeSystem upgradeSystem;
 
     private PlayerMovement pMovement;
 
@@ -117,7 +118,7 @@ public class PlayerInteractions : MonoBehaviour
                         }
                         
                     } else if(target.tag == "Enemy"){
-                        //StartCoroutine(target.Stun(stunTime));
+                        StartCoroutine(target.GetComponent<EnemyBehavior>().Stun(stunTime));
                     }
                 }
             }
@@ -241,6 +242,9 @@ public class PlayerInteractions : MonoBehaviour
                             break;
                         case "Enemy":
                             diSystem.SetText("Monster", false, false);
+                            break;
+                        case "Upgrade":
+                            upgradeSystem.OpenMenu();
                             break;
                         default:
                             break;

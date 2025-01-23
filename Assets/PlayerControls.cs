@@ -216,6 +216,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenDebugMenu"",
+                    ""type"": ""Button"",
+                    ""id"": ""9d2f24b2-7c40-487f-a642-16e12c97f8f3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -238,6 +247,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Land"",
                     ""action"": ""Skip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""03bfb514-9709-44a3-8b94-b63a68343074"",
+                    ""path"": ""<Keyboard>/tab"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Land"",
+                    ""action"": ""OpenDebugMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -264,6 +284,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_General = asset.FindActionMap("General", throwIfNotFound: true);
         m_General_Pause = m_General.FindAction("Pause", throwIfNotFound: true);
         m_General_Skip = m_General.FindAction("Skip", throwIfNotFound: true);
+        m_General_OpenDebugMenu = m_General.FindAction("OpenDebugMenu", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -413,12 +434,14 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private List<IGeneralActions> m_GeneralActionsCallbackInterfaces = new List<IGeneralActions>();
     private readonly InputAction m_General_Pause;
     private readonly InputAction m_General_Skip;
+    private readonly InputAction m_General_OpenDebugMenu;
     public struct GeneralActions
     {
         private @PlayerControls m_Wrapper;
         public GeneralActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause => m_Wrapper.m_General_Pause;
         public InputAction @Skip => m_Wrapper.m_General_Skip;
+        public InputAction @OpenDebugMenu => m_Wrapper.m_General_OpenDebugMenu;
         public InputActionMap Get() { return m_Wrapper.m_General; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -434,6 +457,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Skip.started += instance.OnSkip;
             @Skip.performed += instance.OnSkip;
             @Skip.canceled += instance.OnSkip;
+            @OpenDebugMenu.started += instance.OnOpenDebugMenu;
+            @OpenDebugMenu.performed += instance.OnOpenDebugMenu;
+            @OpenDebugMenu.canceled += instance.OnOpenDebugMenu;
         }
 
         private void UnregisterCallbacks(IGeneralActions instance)
@@ -444,6 +470,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Skip.started -= instance.OnSkip;
             @Skip.performed -= instance.OnSkip;
             @Skip.canceled -= instance.OnSkip;
+            @OpenDebugMenu.started -= instance.OnOpenDebugMenu;
+            @OpenDebugMenu.performed -= instance.OnOpenDebugMenu;
+            @OpenDebugMenu.canceled -= instance.OnOpenDebugMenu;
         }
 
         public void RemoveCallbacks(IGeneralActions instance)
@@ -483,5 +512,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     {
         void OnPause(InputAction.CallbackContext context);
         void OnSkip(InputAction.CallbackContext context);
+        void OnOpenDebugMenu(InputAction.CallbackContext context);
     }
 }

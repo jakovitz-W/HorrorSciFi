@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private CharacterController controller;
     public float baseSpeed = 30f;
     public float runSpeed = 30f;
+    [SerializeField] private float regenPercent = .05f;
+    [SerializeField] private float regenStep = 2f;
     private PlayerControls playerControls;
     private LevelManager levelManager;
     [HideInInspector] public float horizontalMove, verticalMove;
@@ -16,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject droneCam;
     public bool droneActive;
     public bool droneUnlocked;
+    public bool hasDroneKey = false; //for upgrade menu
 
     private void Awake(){
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
@@ -73,7 +76,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void ReduceSpeed(){
-        if(runSpeed != 0){
+        if(runSpeed > 10){
             runSpeed -= (.05f * runSpeed);
         } else{
             //too slow to continue
@@ -82,8 +85,17 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    public IEnumerator RegenSpeed(){
+
+        while(runSpeed <= baseSpeed){
+            runSpeed += (runSpeed * regenPercent);
+            yield return new WaitForSeconds(regenStep);
+            StartCoroutine(RegenSpeed());
+        }
+    }
+
     public void ResetSpeed(){
-        runSpeed = 40f;
+        runSpeed = baseSpeed;
     }
 
     void OnTriggerEnter2D(Collider2D other){

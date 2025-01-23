@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ed039fd4ad9c60045b23e9b2d55252ca
+guid: 38b3e7abf1d1b6f439ea7cababa859c0
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,11 +93,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_0
+      name: flesh monster 1_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c238707f393b46e4aa277f470e874a9c
-      internalID: -926166955
+      spriteID: 37be61b5e0568d344b36544e0d34bbd7
+      internalID: 36620461
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_1
+      name: flesh monster 1_1
       rect:
         serializedVersion: 2
         x: 64
@@ -132,14 +145,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b0612b0eca146444974c3e85de6892a
-      internalID: 1712092164
+      spriteID: 33c72082abcb54847a1c4b830ccaba2b
+      internalID: 237654998
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_2
+      name: flesh monster 1_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 128
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df13b6358ada0204ea9ef7aaa0974254
+      internalID: 982374525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flesh monster 1_3
       rect:
         serializedVersion: 2
         x: 0
@@ -153,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 627392542ee617c4a88fe5ab5273d38c
-      internalID: -84807621
+      spriteID: 9a6c7ded5c2c7014194b83a588e94481
+      internalID: 1798970117
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_3
+      name: flesh monster 1_4
       rect:
         serializedVersion: 2
         x: 64
@@ -174,14 +208,35 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6007bb76ac79af04d935fc505e355d9d
-      internalID: 995176304
+      spriteID: b77a9ebde093b5348866788999df0714
+      internalID: -56614296
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_4
+      name: flesh monster 1_5
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 64
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a55029b996e03349ad216d24e48acf3
+      internalID: 2085213013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: flesh monster 1_6
       rect:
         serializedVersion: 2
         x: 0
@@ -195,14 +250,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3913fb1865378a48aa18132288463f7
-      internalID: 278562574
+      spriteID: 3d791fd0cd5cb454bace75a23bd62000
+      internalID: -1196842169
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_5
+      name: flesh monster 1_7
       rect:
         serializedVersion: 2
         x: 64
@@ -216,8 +271,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35afe468cd7f3f844b46fb5b8788053a
-      internalID: -1496420505
+      spriteID: ffc1189564c832c4fbee62b6b23728d5
+      internalID: -766165987
       vertices: []
       indices: 
       edges: []
@@ -233,12 +288,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Astronaut (Walk-Cycle)_0: -926166955
-      Astronaut (Walk-Cycle)_1: 1712092164
-      Astronaut (Walk-Cycle)_2: -84807621
-      Astronaut (Walk-Cycle)_3: 995176304
-      Astronaut (Walk-Cycle)_4: 278562574
-      Astronaut (Walk-Cycle)_5: -1496420505
+      flesh monster 1_0: 36620461
+      flesh monster 1_1: 237654998
+      flesh monster 1_2: 982374525
+      flesh monster 1_3: 1798970117
+      flesh monster 1_4: -56614296
+      flesh monster 1_5: 2085213013
+      flesh monster 1_6: -1196842169
+      flesh monster 1_7: -766165987
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

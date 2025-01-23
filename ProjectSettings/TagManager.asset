@@ -18,6 +18,8 @@ TagManager:
   - Button
   - PressurePlate
   - Exit
+  - Upgrade
+  - BlocksSight
   layers:
   - Default
   - TransparentFX

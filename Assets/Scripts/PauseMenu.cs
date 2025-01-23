@@ -41,8 +41,13 @@ public class PauseMenu : MonoBehaviour
     }
 
     public void Resume(){ //in seperate function so button can call it
+        pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         Cursor.visible = false;
+    }
+
+    public void Quit(){
+        Application.Quit();
     }
 
     public void ResetRoom(){

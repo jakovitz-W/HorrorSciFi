@@ -4929,7 +4929,6 @@ GameObject:
   - component: {fileID: 8143101049464059257}
   - component: {fileID: 1776768121235755890}
   - component: {fileID: 3118471662265852120}
-  - component: {fileID: 2045255375049631475}
   - component: {fileID: 955285215903251790}
   - component: {fileID: 2488184577248401048}
   - component: {fileID: 2732550152579128348}
@@ -5057,7 +5056,7 @@ MonoBehaviour:
   tinyDrone: {fileID: 0}
   droneCam: {fileID: 0}
   droneActive: 0
-  droneUnlocked: 0
+  droneUnlocked: 1
 --- !u!114 &1776768121235755890
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5098,26 +5097,12 @@ MonoBehaviour:
   stunTime: 3
   flameThrower: {fileID: 4123658053712736080}
   taser: {fileID: 8268693447694951918}
+  hasTorch: 0
+  hasTaser: 0
+  torchActive: 0
+  taserActive: 0
   activeToolText: {fileID: 0}
   diSystem: {fileID: 0}
---- !u!114 &2045255375049631475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5314107682013061009}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2658eafd15a624a448fd6bc60472e375, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  diSystem: {fileID: 0}
-  regenPercent: 0.05
-  regenStep: 2
-  speedIncrease: 3
-  attackUpgrade: 0.3
-  stunUpgrade: 0.5
 --- !u!95 &955285215903251790
 Animator:
   serializedVersion: 5
