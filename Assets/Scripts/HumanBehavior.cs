@@ -17,14 +17,13 @@ public class HumanBehavior : MonoBehaviour
     void Awake(){
         monsters = new List<GameObject>();
     }
-    void OnCollisionEnter2D(Collision2D col){
-        if(col.gameObject.tag == "Enemy"){
 
-            if(health > 0){
-                TakeDamage(damageAmnt);
-            } else{
-                OnDeath();
-            }
+    public void Hit(){
+
+        if(health > 0){
+            TakeDamage(damageAmnt);
+        } else{
+            OnDeath();
         }
     }
     public void TakeDamage(float damageAmount){

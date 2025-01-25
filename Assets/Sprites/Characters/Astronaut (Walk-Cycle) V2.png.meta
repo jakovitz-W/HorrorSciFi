@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ed039fd4ad9c60045b23e9b2d55252ca
+guid: 4b912adb8d284bf4caf80d6d2321ab06
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -93,11 +93,24 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_0
+      name: Astronaut (Walk-Cycle) V2_0
       rect:
         serializedVersion: 2
         x: 0
@@ -111,14 +124,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c238707f393b46e4aa277f470e874a9c
-      internalID: -926166955
+      spriteID: 03881c35e5d58f44a891a9abba06e881
+      internalID: -2007511929
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_1
+      name: Astronaut (Walk-Cycle) V2_1
       rect:
         serializedVersion: 2
         x: 64
@@ -132,14 +145,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7b0612b0eca146444974c3e85de6892a
-      internalID: 1712092164
+      spriteID: 5757b45f964c3aa4792fbab77110b526
+      internalID: -1019340428
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_2
+      name: Astronaut (Walk-Cycle) V2_2
       rect:
         serializedVersion: 2
         x: 0
@@ -153,14 +166,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 627392542ee617c4a88fe5ab5273d38c
-      internalID: -84807621
+      spriteID: fa2060a449fe12c468143180dce08c95
+      internalID: 1664956516
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_3
+      name: Astronaut (Walk-Cycle) V2_3
       rect:
         serializedVersion: 2
         x: 64
@@ -174,14 +187,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6007bb76ac79af04d935fc505e355d9d
-      internalID: 995176304
+      spriteID: 5b16dd12c22c1c4499361cfa645b612a
+      internalID: 860213542
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_4
+      name: Astronaut (Walk-Cycle) V2_4
       rect:
         serializedVersion: 2
         x: 0
@@ -195,14 +208,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c3913fb1865378a48aa18132288463f7
-      internalID: 278562574
+      spriteID: 59ee617bae4734541ab1729b55af8a80
+      internalID: 2094209107
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Astronaut (Walk-Cycle)_5
+      name: Astronaut (Walk-Cycle) V2_5
       rect:
         serializedVersion: 2
         x: 64
@@ -216,8 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 35afe468cd7f3f844b46fb5b8788053a
-      internalID: -1496420505
+      spriteID: 29b7896ef6961a541bcaa59463464155
+      internalID: 466989190
       vertices: []
       indices: 
       edges: []
@@ -233,12 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Astronaut (Walk-Cycle)_0: -926166955
-      Astronaut (Walk-Cycle)_1: 1712092164
-      Astronaut (Walk-Cycle)_2: -84807621
-      Astronaut (Walk-Cycle)_3: 995176304
-      Astronaut (Walk-Cycle)_4: 278562574
-      Astronaut (Walk-Cycle)_5: -1496420505
+      Astronaut (Walk-Cycle) V2_0: -2007511929
+      Astronaut (Walk-Cycle) V2_1: -1019340428
+      Astronaut (Walk-Cycle) V2_2: 1664956516
+      Astronaut (Walk-Cycle) V2_3: 860213542
+      Astronaut (Walk-Cycle) V2_4: 2094209107
+      Astronaut (Walk-Cycle) V2_5: 466989190
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

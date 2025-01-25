@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7149674446700860956}
   - component: {fileID: 3947131702124056819}
   - component: {fileID: 915230683998904107}
-  m_Layer: 6
+  m_Layer: 10
   m_Name: flesh monster
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -33,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 19.149872, y: -20.53, z: 0}
-  m_LocalScale: {x: 6, y: 6, z: 1}
+  m_LocalScale: {x: 8, y: 8, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8397975562908491411}
@@ -103,8 +103,8 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_Mass: 8
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -113,11 +113,11 @@ Rigidbody2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
+    m_Bits: 1024
+  m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!70 &8727281288813009759
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -255,9 +255,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d38dfc180089194094c9b658b324db5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walk: 0
-  sightDistance: 2
+  sightDistance: 7
+  hasTarget: 0
   sightOrigin: {fileID: 5691864143052040934}
+  idleSpeed: 1
+  chaseSpeed: 2
+  currentSpeed: 1
+  direction: -1
+  attackCooldown: 1.5
+  attackBuffer: 3.5
+  isAttacking: 0
 --- !u!95 &915230683998904107
 Animator:
   serializedVersion: 5
@@ -305,7 +312,7 @@ Transform:
   m_GameObject: {fileID: 5691864143052040934}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.201, y: -0.084, z: 0}
+  m_LocalPosition: {x: -0.255, y: -0.084, z: 0}
   m_LocalScale: {x: 0.067810625, y: 0.1331641, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

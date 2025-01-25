@@ -98,7 +98,7 @@ public class PlayerInteractions : MonoBehaviour
                     taser.SetActive(true);
                 }
 
-                LayerMask mask = LayerMask.GetMask("Interactable");
+                LayerMask mask = LayerMask.GetMask("Interactable", "Enemy");
                 Collider2D col = Physics2D.OverlapCircle(transform.position, attackRadius, mask);
                 
                 if(col != null){
@@ -118,7 +118,11 @@ public class PlayerInteractions : MonoBehaviour
                         }
                         
                     } else if(target.tag == "Enemy"){
-                        StartCoroutine(target.GetComponent<EnemyBehavior>().Stun(stunTime));
+
+                        if(hasTorch || hasTaser){
+                            StartCoroutine(target.GetComponent<EnemyBehavior>().Stun(stunTime));
+                        }
+                        
                     }
                 }
             }
