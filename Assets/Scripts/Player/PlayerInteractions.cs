@@ -12,7 +12,7 @@ public class PlayerInteractions : MonoBehaviour
     private Level currentLevel;
     [HideInInspector] public PlayerControls playerControls;
     private Rigidbody2D rb;
-    private List<GameObject> humans;
+    [SerializeField] private List<GameObject> humans;
     public int humansSaved = 0;
 
     public GameObject[] keyUI;
@@ -194,7 +194,7 @@ public class PlayerInteractions : MonoBehaviour
 
     void Interact(InputAction.CallbackContext ctx){
 
-        LayerMask mask = LayerMask.GetMask("Interactable", "Key Item");
+        LayerMask mask = LayerMask.GetMask("Interactable", "Key Item", "Enemy");
 
         if(ctx.performed){
 
@@ -232,11 +232,12 @@ public class PlayerInteractions : MonoBehaviour
                             //get human dialogue box if it has one
                             HumanBehavior attributes = target.GetComponent<HumanBehavior>();
                             diSystem.SetText(attributes.dialogueKey, false, true);
-                            humans.Add(target);
-                            break;
-                        case "Dropoff":
-                            humansSaved += humans.Count;
-                            humans.Clear();
+
+                            if(humans.IndexOf(target) == -1){
+                                humans.Add(target);
+                                attributes.isFollowing = true;
+                            }
+
                             break;
                         case "Button":
                             
@@ -256,6 +257,11 @@ public class PlayerInteractions : MonoBehaviour
                 }
             }
         }
+    }
+
+    public void RemoveHuman(GameObject human){
+        humansSaved++;
+        humans.Remove(human);
     }
 
     //clean up this function, maybe utilize hasKey instead of repeating lines

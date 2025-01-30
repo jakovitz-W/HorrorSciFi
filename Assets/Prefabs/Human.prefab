@@ -565,6 +565,7 @@ GameObject:
   - component: {fileID: 1422078844006359583}
   - component: {fileID: 1171625862703066871}
   - component: {fileID: 2937599409755454986}
+  - component: {fileID: 4068827812250442035}
   - component: {fileID: 8403373314787828621}
   - component: {fileID: 3845869052368753071}
   m_Layer: 6
@@ -795,6 +796,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &4068827812250442035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7439376400246318163}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e702753face1d3b4e9c33223aff84911, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  climbSpeed: 2
+  endReached: 0
 --- !u!114 &8403373314787828621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -814,9 +829,14 @@ MonoBehaviour:
   maxHealth: 50
   healthBar: {fileID: 4868198486547425732}
   damageAmnt: 10
-  isFrightened: 0
+  idleSpeed: 0
+  fleeSpeed: 0
+  followSpeed: 0
+  direction: 1
   isFollowing: 0
+  isFrightened: 0
   monsters: []
+  isClimbing: 0
 --- !u!95 &3845869052368753071
 Animator:
   serializedVersion: 5

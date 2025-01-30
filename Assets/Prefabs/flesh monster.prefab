@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d38dfc180089194094c9b658b324db5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sightDistance: 7
+  sightDistance: 6.5
   hasTarget: 0
   sightOrigin: {fileID: 5691864143052040934}
   idleSpeed: 1

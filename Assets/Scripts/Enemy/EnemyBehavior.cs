@@ -46,7 +46,7 @@ public class EnemyBehavior : MonoBehaviour
                     target = ray.collider.gameObject;
                     anim.SetBool("walking", true);
                     
-                    target.GetComponent<HumanBehavior>().monsters.Add(this.gameObject);
+                    target.GetComponent<HumanBehavior>().Link(this.gameObject);
 
                 } else if(!idling){
                     //idle
@@ -65,8 +65,8 @@ public class EnemyBehavior : MonoBehaviour
             Vector2 destination = new Vector2(target.transform.position.x, transform.position.y);
             transform.position = Vector2.MoveTowards(transform.position, destination, currentSpeed * Time.deltaTime);
 
-            if(transform.position.x - attackBuffer <= target.transform.position.x){
-
+            float distance = Mathf.Abs(transform.position.x - target.transform.position.x);
+            if(distance <= attackBuffer){
                 if(!isAttacking){
                     StartCoroutine("Attack");
                 }
@@ -144,6 +144,21 @@ public class EnemyBehavior : MonoBehaviour
         isAttacking = false;
         currentSpeed = chaseSpeed;
         anim.SetBool("walking", true);
+    }
+
+    void OnCollisionEnter2D(Collision2D col){
+
+        if(col.gameObject.tag == "BlocksSight"){
+            Flip();
+        }
+        
+        if(col.gameObject.tag == "Human"){ //case where human runs into monster that's facing opposite direction
+    
+            if(!hasTarget){
+                StopCoroutine("ChooseDirection");
+                Flip();
+            }
+        }
     }
 
     public void Flip(){
