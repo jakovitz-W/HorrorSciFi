@@ -31,7 +31,7 @@ public class HumanBehavior : MonoBehaviour
     private LadderPathing ladderPathing;
     [SerializeField] private float sightDistance = 4f;
     [SerializeField] private Collider2D mainCol;
-    private bool dropped = false;
+    public bool dropped = false;
     private Transform dropoff;
 
     void OnEnable(){
@@ -76,7 +76,7 @@ public class HumanBehavior : MonoBehaviour
         }
 
 
-        if(isFrightened){
+        if(isFrightened && !dropped){
 
             CheckStuck();
 
@@ -95,7 +95,7 @@ public class HumanBehavior : MonoBehaviour
             }
         }
 
-        if(isFollowing && !isClimbing){
+        if(isFollowing && !isClimbing &&!dropped){
 
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, sightDistance, LayerMask.GetMask("GameplayObjects"));
 

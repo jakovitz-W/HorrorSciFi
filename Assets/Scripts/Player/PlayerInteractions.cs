@@ -13,7 +13,6 @@ public class PlayerInteractions : MonoBehaviour
     [HideInInspector] public PlayerControls playerControls;
     private Rigidbody2D rb;
     [SerializeField] private List<GameObject> humans;
-    public int humansSaved = 0;
 
     public GameObject[] keyUI;
     private int keyNum; //keeps track of how many keys the player has picked up
@@ -25,9 +24,9 @@ public class PlayerInteractions : MonoBehaviour
     public bool hasTorch, hasTaser;
     public bool torchActive, taserActive;
     [SerializeField] private TMP_Text activeToolText;
+
     [SerializeField] private DialogueSystem diSystem;
     [SerializeField] private UpgradeSystem upgradeSystem;
-
     private PlayerMovement pMovement;
 
 
@@ -99,30 +98,33 @@ public class PlayerInteractions : MonoBehaviour
                 }
 
                 LayerMask mask = LayerMask.GetMask("Interactable", "Enemy");
-                Collider2D col = Physics2D.OverlapCircle(transform.position, attackRadius, mask);
+                Collider2D[] col = Physics2D.OverlapCircleAll(transform.position, attackRadius, mask);
                 
-                if(col != null){
-                    GameObject target = col.gameObject;
+                if(col.Length != 0){
 
-                    if(target.tag == "Meltable"){
+                    for(int i = 0; i < col.Length; i++){
+                        GameObject target = col[i].gameObject;
 
-                        if(hasTorch && torchActive){
-                            //StartCoroutine(target.Melt());
-                            target.GetComponent<Collider2D>().enabled = false;
+                        if(target.tag == "Meltable"){
+
+                            if(hasTorch && torchActive){
+                                //StartCoroutine(target.Melt());
+                                target.GetComponent<Collider2D>().enabled = false;
+                            }
+                        } else if(target.tag == "ControlPanel"){
+
+                            if(hasTaser && taserActive){
+
+                                target.GetComponent<ButtonScript>().ActivateAll();                                
+                            }
+                            
+                        } else if(target.tag == "Enemy"){
+
+                            if(hasTorch || hasTaser){
+                                StartCoroutine(target.GetComponent<EnemyBehavior>().Stun(stunTime));
+                            }
+                            
                         }
-                    } else if(target.tag == "Zappable"){
-
-                        if(hasTaser && taserActive){
-                            //StartCoroutine(target.Zap())
-                            target.GetComponent<Collider2D>().enabled = false; 
-                        }
-                        
-                    } else if(target.tag == "Enemy"){
-
-                        if(hasTorch || hasTaser){
-                            StartCoroutine(target.GetComponent<EnemyBehavior>().Stun(stunTime));
-                        }
-                        
                     }
                 }
             }
@@ -260,7 +262,7 @@ public class PlayerInteractions : MonoBehaviour
     }
 
     public void RemoveHuman(GameObject human){
-        humansSaved++;
+        upgradeSystem.humansSaved++;
         humans.Remove(human);
     }
 

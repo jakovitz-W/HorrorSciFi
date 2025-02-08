@@ -38,15 +38,18 @@ public class EnemyBehavior : MonoBehaviour
             
             if(ray.collider != null){
                 if(ray.collider.CompareTag("Human")){
-
-                    currentSpeed = chaseSpeed;
-                    StopCoroutine("ChooseDirection");
-                    idling = false;
-                    hasTarget = true;
-                    target = ray.collider.gameObject;
-                    anim.SetBool("walking", true);
                     
-                    target.GetComponent<HumanBehavior>().Link(this.gameObject);
+                    if(!ray.collider.gameObject.GetComponent<HumanBehavior>().dropped){
+                        currentSpeed = chaseSpeed;
+                        StopCoroutine("ChooseDirection");
+                        idling = false;
+                        hasTarget = true;
+                        target = ray.collider.gameObject;
+                        anim.SetBool("walking", true);
+                        
+                        target.GetComponent<HumanBehavior>().Link(this.gameObject);                        
+                    }
+
 
                 } else if(!idling){
                     //idle
@@ -154,7 +157,7 @@ public class EnemyBehavior : MonoBehaviour
         
         if(col.gameObject.tag == "Human"){ //case where human runs into monster that's facing opposite direction
     
-            if(!hasTarget){
+            if(!hasTarget && !col.gameObject.GetComponent<HumanBehavior>().dropped){
                 StopCoroutine("ChooseDirection");
                 Flip();
             }
@@ -170,7 +173,6 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     public void Unlink(){
-        
         target = null;
         hasTarget = false;
         StopCoroutine("Attack");

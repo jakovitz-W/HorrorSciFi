@@ -15,13 +15,14 @@ public class UpgradeSystem : MonoBehaviour
 
 
     [SerializeField] private float speedCap, durationCap, rangeCap;
+    [SerializeField] private int regenCost = 1, speedCost = 2, durationCost = 1, rangeCost = 3;
 
     [SerializeField] private GameObject upgradeMenu;
-    private bool allowDroneUnlock = false;
-    private int spent = 0; //how much the player has spent
+    public int humansSaved = 0;
+    private int spent = 0;
     private int wallet = 0; //how much currency the player has
 
-    private bool regenUnlocked, speedUnlock, rangeUnlock, stunUnlock = false;
+    private bool regenUnlocked = false;
     [SerializeField] private GameObject regen, speed, range, stun, drone; //buttons
 
     void Awake(){
@@ -31,7 +32,7 @@ public class UpgradeSystem : MonoBehaviour
     }
     
     public void OpenMenu(){
-        //wallet = interactions.humansSaved - spent;
+        wallet = humansSaved - spent;
 
         if(movement.hasDroneKey){
             drone.SetActive(true);
@@ -41,6 +42,7 @@ public class UpgradeSystem : MonoBehaviour
 
         if(!upgradeMenu.activeSelf){
             upgradeMenu.SetActive(true);   
+            Recalculate();
             Time.timeScale = 0f;     
         } else{
             upgradeMenu.SetActive(false);
@@ -49,35 +51,59 @@ public class UpgradeSystem : MonoBehaviour
 
     }
 
+    void Recalculate(){
+        wallet = humansSaved - spent;
+
+        if(wallet < regenCost || regenUnlocked){
+            regen.SetActive(false);
+        } else{
+            regen.SetActive(true);
+        }
+
+        if(wallet < speedCost || movement.baseSpeed >= speedCap){
+            speed.SetActive(false);
+        } else{
+            speed.SetActive(true);
+        }
+
+        if(wallet < durationCost || interactions.stunTime >= durationCap){
+            stun.SetActive(false);
+        }else{
+            stun.SetActive(true);
+        }
+
+        if(wallet < rangeCost || interactions.attackRadius >= rangeCap){
+            range.SetActive(false);
+        } else{
+            range.SetActive(true);
+        }
+    }
+
     public void StartRegen(){
         StartCoroutine(movement.RegenSpeed());
-        regen.SetActive(false);
+        regenUnlocked = true;
+        spent += regenCost;
+        Recalculate();
     }
 
     public void IncreaseBaseSpeed(){
         movement.baseSpeed += speedIncrease;
         movement.runSpeed = movement.baseSpeed;
-        
-        if(movement.baseSpeed >= speedCap){
-            speed.SetActive(false);
-        }
+        spent += speedCost;
+        Recalculate();
     }
 
     public void IncreaseRange(){
         interactions.attackRadius += attackUpgrade;
         //increase the lifetime of the flame/taser particles
-
-        if(interactions.attackRadius >= rangeCap){
-            range.SetActive(false);
-        }
+        spent += rangeCost;
+        Recalculate();
     }
 
     public void IncreaseStunDuration(){
         interactions.stunTime += stunUpgrade;
-
-        if(interactions.stunTime >= durationCap){
-            stun.SetActive(false);
-        }
+        spent += durationCost;
+        Recalculate();
     }
 
     public void UnlockMiniDrone(){

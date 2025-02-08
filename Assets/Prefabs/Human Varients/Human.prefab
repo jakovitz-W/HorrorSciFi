@@ -659,7 +659,7 @@ CapsuleCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 512
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -739,7 +739,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -808,8 +808,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e702753face1d3b4e9c33223aff84911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  endPoint: {fileID: 0}
+  currentNodes: []
+  targetLadder: {fileID: 0}
   climbSpeed: 2
   endReached: 0
+  onLadder: 0
 --- !u!114 &8403373314787828621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -823,20 +827,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: Default
-  dropoff: {fileID: 1340858708373701607, guid: aa1a7f9f3403a8e48aaf12beb19d0651, type: 3}
   dialogueKey: Default
   health: 50
   maxHealth: 50
-  healthBar: {fileID: 4868198486547425732}
+  healthBar: {fileID: 100693469080946567, guid: f848aa671031ed04b84aab9c191f978c, type: 3}
   damageAmnt: 10
-  idleSpeed: 0
-  fleeSpeed: 0
-  followSpeed: 0
+  idleSpeed: 0.7
+  fleeSpeed: 1.5
+  followSpeed: 2
   direction: 1
   isFollowing: 0
   isFrightened: 0
   monsters: []
+  xBuffer: 2
   isClimbing: 0
+  sightDistance: 4
+  mainCol: {fileID: 2518178782277888963}
+  dropped: 0
 --- !u!95 &3845869052368753071
 Animator:
   serializedVersion: 5
