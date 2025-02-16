@@ -21,8 +21,7 @@ public class EnemyBehavior : MonoBehaviour
     public float attackBuffer = 2f;
     public bool isAttacking = false;
 
-
-    void Awake()
+    void OnEnable()
     {
         anim = GetComponent<Animator>();
         col = GetComponent<Collider2D>();
@@ -51,10 +50,12 @@ public class EnemyBehavior : MonoBehaviour
                     }
 
 
-                } else if(!idling){
-                    //idle
+                } else if(ray.collider.CompareTag("BlocksSight")){
+                    Flip();
+                } 
+                else if(!idling){
+                    
                     idling = true;
-
                     StartCoroutine("ChooseDirection");
                 }
             } else if(!idling){
@@ -85,7 +86,6 @@ public class EnemyBehavior : MonoBehaviour
 
     private IEnumerator ChooseDirection(){
 
-
         currentSpeed = idleSpeed;
         anim.SetBool("walking", true);
         float rand = Random.Range(1f, 3f);
@@ -101,7 +101,8 @@ public class EnemyBehavior : MonoBehaviour
 
         currentSpeed = idleSpeed;
         anim.SetBool("walking", true);
-
+        
+    
         if(!hasTarget){
             StartCoroutine("ChooseDirection");
         } else{
@@ -150,10 +151,6 @@ public class EnemyBehavior : MonoBehaviour
     }
 
     void OnCollisionEnter2D(Collision2D col){
-
-        if(col.gameObject.tag == "BlocksSight"){
-            Flip();
-        }
         
         if(col.gameObject.tag == "Human"){ //case where human runs into monster that's facing opposite direction
     

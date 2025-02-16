@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class CharacterController : MonoBehaviour
 {
     [Range(0, .3f)][SerializeField] private float m_MovementSmoothing = .05f;
-    private Rigidbody2D rb;
+    public Rigidbody2D rb;
     public bool m_FacingRight = true;
     private Vector3 m_Velocity = Vector3.zero;
     [SerializeField] private int tiltAmount = 10;

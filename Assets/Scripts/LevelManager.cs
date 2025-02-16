@@ -38,6 +38,7 @@ public class LevelManager : MonoBehaviour
         //end fade transition
         yield return new WaitForSeconds(1);
         transition.SetTrigger("End");
+        yield return new WaitForSeconds(1);
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerInteractions>().enabled = true;
     }
@@ -67,6 +68,7 @@ public class LevelManager : MonoBehaviour
         //end fade transition
         yield return new WaitForSeconds(1);
         transition.SetTrigger("End");
+        yield return new WaitForSeconds(1);
         player.GetComponent<PlayerInteractions>().enabled = true;
         player.GetComponent<PlayerMovement>().enabled = true;
     }

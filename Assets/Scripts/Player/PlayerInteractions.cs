@@ -12,7 +12,7 @@ public class PlayerInteractions : MonoBehaviour
     private Level currentLevel;
     [HideInInspector] public PlayerControls playerControls;
     private Rigidbody2D rb;
-    [SerializeField] private List<GameObject> humans;
+    public List<GameObject> humans;
 
     public GameObject[] keyUI;
     private int keyNum; //keeps track of how many keys the player has picked up
@@ -29,6 +29,7 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField] private UpgradeSystem upgradeSystem;
     private PlayerMovement pMovement;
 
+    public bool hasCure = false;
 
     void Awake(){
         
@@ -108,8 +109,7 @@ public class PlayerInteractions : MonoBehaviour
                         if(target.tag == "Meltable"){
 
                             if(hasTorch && torchActive){
-                                //StartCoroutine(target.Melt());
-                                target.GetComponent<Collider2D>().enabled = false;
+                                StartCoroutine(target.GetComponent<GrateController>().Melt());
                             }
                         } else if(target.tag == "ControlPanel"){
 
@@ -225,6 +225,8 @@ public class PlayerInteractions : MonoBehaviour
                             diSystem.SetText("Zap", false, false);
                             break;
                         case "Checkpoint":
+                            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                            rb.velocity = new Vector2(0,0);
                             StartCoroutine(levelManager.Backtrack());
                             int i = levelManager.LIndex - 1;
                             currentLevel = levelManager.levels[i];
@@ -277,6 +279,8 @@ public class PlayerInteractions : MonoBehaviour
 
                 i++;
                 currentLevel = levelManager.levels[i];
+                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                rb.velocity = new Vector2(0,0);
                 StartCoroutine(levelManager.OnRoomChange(i));
                 //remove key requirement to avoid redundancy
                 door.GetComponent<DoorScript>().requireKey = false;
@@ -284,7 +288,6 @@ public class PlayerInteractions : MonoBehaviour
                 return true;
 
             } else{
-                
                 diSystem.SetText("DoorLocked", false, true);
                 return false;
             }
@@ -292,6 +295,8 @@ public class PlayerInteractions : MonoBehaviour
 
             i++;
             currentLevel = levelManager.levels[i];
+            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            rb.velocity = new Vector2(0,0);
             StartCoroutine(levelManager.OnRoomChange(i));
             return false; //returning false because door should already appear unlocked
         }

@@ -199,6 +199,8 @@ public class HumanBehavior : MonoBehaviour
         if(left && right){
             stuck = true;
             anim.SetBool("isWalking", false);
+        } else{
+            stuck = false;
         }
     }
     private GameObject ReturnClosest(){
@@ -278,7 +280,7 @@ public class HumanBehavior : MonoBehaviour
         isFollowing = false;
         isClimbing = false;
         isFrightened = false;
-        currentSpeed = followSpeed;     
+        currentSpeed = followSpeed;
         
         for(int i = 0; i < monsters.Count; i++){
             monsters[i].GetComponent<EnemyBehavior>().Unlink();

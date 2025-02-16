@@ -225,6 +225,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""973361ac-10b6-4864-904d-81258fb68cb0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -260,6 +269,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""OpenDebugMenu"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6f8ab7a3-3d56-4efd-b639-f5a98ca19778"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Land"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -285,6 +305,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_General_Pause = m_General.FindAction("Pause", throwIfNotFound: true);
         m_General_Skip = m_General.FindAction("Skip", throwIfNotFound: true);
         m_General_OpenDebugMenu = m_General.FindAction("OpenDebugMenu", throwIfNotFound: true);
+        m_General_Inventory = m_General.FindAction("Inventory", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -435,6 +456,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_General_Pause;
     private readonly InputAction m_General_Skip;
     private readonly InputAction m_General_OpenDebugMenu;
+    private readonly InputAction m_General_Inventory;
     public struct GeneralActions
     {
         private @PlayerControls m_Wrapper;
@@ -442,6 +464,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_General_Pause;
         public InputAction @Skip => m_Wrapper.m_General_Skip;
         public InputAction @OpenDebugMenu => m_Wrapper.m_General_OpenDebugMenu;
+        public InputAction @Inventory => m_Wrapper.m_General_Inventory;
         public InputActionMap Get() { return m_Wrapper.m_General; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -460,6 +483,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @OpenDebugMenu.started += instance.OnOpenDebugMenu;
             @OpenDebugMenu.performed += instance.OnOpenDebugMenu;
             @OpenDebugMenu.canceled += instance.OnOpenDebugMenu;
+            @Inventory.started += instance.OnInventory;
+            @Inventory.performed += instance.OnInventory;
+            @Inventory.canceled += instance.OnInventory;
         }
 
         private void UnregisterCallbacks(IGeneralActions instance)
@@ -473,6 +499,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @OpenDebugMenu.started -= instance.OnOpenDebugMenu;
             @OpenDebugMenu.performed -= instance.OnOpenDebugMenu;
             @OpenDebugMenu.canceled -= instance.OnOpenDebugMenu;
+            @Inventory.started -= instance.OnInventory;
+            @Inventory.performed -= instance.OnInventory;
+            @Inventory.canceled -= instance.OnInventory;
         }
 
         public void RemoveCallbacks(IGeneralActions instance)
@@ -513,5 +542,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnSkip(InputAction.CallbackContext context);
         void OnOpenDebugMenu(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
     }
 }

@@ -20,7 +20,7 @@ public class UpgradeSystem : MonoBehaviour
     [SerializeField] private GameObject upgradeMenu;
     public int humansSaved = 0;
     private int spent = 0;
-    private int wallet = 0; //how much currency the player has
+    public int wallet = 0; //how much currency the player has
 
     private bool regenUnlocked = false;
     [SerializeField] private GameObject regen, speed, range, stun, drone; //buttons

@@ -11,6 +11,7 @@ public class DroneMovement : MonoBehaviour
     private float horizontalMove, verticalMove;
     [SerializeField] private float speed;
     [SerializeField] private GameObject droneCam;
+    [SerializeField] private float interactRadius = .5f;
 
     void Awake(){
         playerControls = new PlayerControls();
@@ -18,11 +19,13 @@ public class DroneMovement : MonoBehaviour
 
     void OnEnable(){
         playerControls.Land.ActivateDrone.performed += SwapToPlayer;
+        playerControls.Land.Interact.performed += Interact;
         playerControls.Enable();
     }
 
     void OnDisable(){
         playerControls.Land.ActivateDrone.performed -= SwapToPlayer;
+        playerControls.Land.Interact.performed -= Interact;
         playerControls.Disable();
     }
 
@@ -30,6 +33,23 @@ public class DroneMovement : MonoBehaviour
         horizontalMove = playerControls.Land.Move.ReadValue<Vector2>().x * speed;
         verticalMove = playerControls.Land.Move.ReadValue<Vector2>().y * speed;
         controller.Move(horizontalMove * Time.fixedDeltaTime, verticalMove * Time.fixedDeltaTime);
+    }
+
+    void Interact(InputAction.CallbackContext ctx){
+
+        if(ctx.performed){
+
+            LayerMask mask = LayerMask.GetMask("Interactable");
+            Collider2D col = Physics2D.OverlapCircle(transform.position, interactRadius, mask);
+
+            if(col != null){
+                GameObject target = col.gameObject;
+
+                if(target.tag == "ControlPanel"){
+                    target.GetComponent<ButtonScript>().ActivateAll();
+                }
+            }
+        }
     }
 
     void SwapToPlayer(InputAction.CallbackContext ctx){

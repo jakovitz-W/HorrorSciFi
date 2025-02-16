@@ -23,6 +23,7 @@ TagManager:
   - Ladder
   - Ground
   - ControlPanel
+  - Cure
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - Enemy
   - GameplayObjects
   - Bounds
-  - 
+  - Magnetic
   - 
   - 
   - 

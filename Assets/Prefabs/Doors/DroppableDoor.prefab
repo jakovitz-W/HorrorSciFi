@@ -87,6 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5806846207569903769}
   - component: {fileID: 7548956012896199021}
+  - component: {fileID: 2559396089250441744}
   m_Layer: 6
   m_Name: DroppableDoor
   m_TagString: Meltable
@@ -156,6 +157,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.3230228, y: 4.4801407}
   m_EdgeRadius: 0
+--- !u!114 &2559396089250441744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4358965474821680255}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6495e4de91ffc644daa303a9b2d61175, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 8739537436271135169}
 --- !u!1 &8616377657934037534
 GameObject:
   m_ObjectHideFlags: 0
@@ -227,15 +241,15 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 153029555
+  m_SortingLayer: -2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: cc22ffae5c191eb4c8b42b1ad70e678b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 1.3250922, y: 0.8149038}
+  m_Size: {x: 1.3058566, y: 0.8149038}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

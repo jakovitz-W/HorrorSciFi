@@ -50,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
                 droneCam.SetActive(true);
                 droneCam.transform.position = tinyDrone.transform.position;
                 
+                controller.rb.velocity = new Vector2(0,0);
                 horizontalMove = 0;
                 verticalMove = 0;
             }
