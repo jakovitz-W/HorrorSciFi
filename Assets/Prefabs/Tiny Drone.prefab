@@ -16,11 +16,11 @@ GameObject:
   - component: {fileID: 970583385340274927}
   m_Layer: 0
   m_Name: Tiny Drone
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8592079861697776901
 Transform:
   m_ObjectHideFlags: 0
@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MovementSmoothing: 0.067
+  rb: {fileID: 0}
   m_FacingRight: 1
   tiltAmount: 0
   tiltSpeed: 0
@@ -183,6 +184,7 @@ MonoBehaviour:
   player: {fileID: 0}
   speed: 10
   droneCam: {fileID: 0}
+  interactRadius: 0.5
 --- !u!1 &3903999150100858563
 GameObject:
   m_ObjectHideFlags: 0

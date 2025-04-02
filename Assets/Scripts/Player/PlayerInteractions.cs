@@ -28,6 +28,7 @@ public class PlayerInteractions : MonoBehaviour
     [SerializeField] private DialogueSystem diSystem;
     [SerializeField] private UpgradeSystem upgradeSystem;
     private PlayerMovement pMovement;
+    private BossCombat bossCombat;
 
     public bool hasCure = false;
 
@@ -36,9 +37,11 @@ public class PlayerInteractions : MonoBehaviour
         playerControls = new PlayerControls();
         levelManager = GameObject.Find("LevelManager").GetComponent<LevelManager>();
         pMovement = GetComponent<PlayerMovement>();
+        bossCombat = GetComponent<BossCombat>();
         rb = GetComponent<Rigidbody2D>();
         humans = new List<GameObject>();
 
+        bossCombat.enabled = false;
         activeToolText.text = "Active Tool: None";
         hasTorch = false;
         flameThrower.SetActive(false);
@@ -48,6 +51,7 @@ public class PlayerInteractions : MonoBehaviour
         hasTaser = false;
         taserActive = false;
 
+        //get from save system
         currentLevel = levelManager.levels[0];
         keyNum = 0;
     }
@@ -275,7 +279,23 @@ public class PlayerInteractions : MonoBehaviour
 
         if(door.GetComponent<DoorScript>().requireKey){
 
-            if(currentLevel.hasKey){
+            if(door.GetComponent<DoorScript>().isBoss){
+                if(hasCure){
+                    i++;
+                    currentLevel = levelManager.levels[i];
+                    transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                    rb.velocity = new Vector2(0,0);
+                    StartCoroutine(levelManager.OnRoomChange(i));
+                    door.GetComponent<DoorScript>().requireKey = false;
+                    bossCombat.enabled = true;
+
+                    return true;
+                } else{
+                    diSystem.SetText("MissingCure", false, true);
+                    Debug.Log("Requires Cure Item");
+                    return false;
+                }
+            } else if(currentLevel.hasKey){
 
                 i++;
                 currentLevel = levelManager.levels[i];

@@ -24,6 +24,7 @@ TagManager:
   - Ground
   - ControlPanel
   - Cure
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -39,7 +40,7 @@ TagManager:
   - GameplayObjects
   - Bounds
   - Magnetic
-  - 
+  - Boss
   - 
   - 
   - 

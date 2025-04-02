@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class HumanBehavior : MonoBehaviour
 {
+    /*JSON variables*/
+    
+    /*Script variables*/
     private Animator anim;
     public string type;
     private Rigidbody2D rb;
@@ -103,7 +106,6 @@ public class HumanBehavior : MonoBehaviour
 
                 if(hit.gameObject.tag == "Ladder" && !isClimbing){
                     if(Mathf.Abs(player.transform.position.y - transform.position.y) >= yBuffer){
-                        rb.gravityScale = 0;
                         isClimbing = true;
                         ladderPathing.enabled = true;
                         ladderPathing.GrabNodes(hit.gameObject);
@@ -150,7 +152,6 @@ public class HumanBehavior : MonoBehaviour
                 anim.SetBool("isWalking", false);
                 ladderPathing.enabled = false;
                 isClimbing = false;
-                rb.gravityScale = 1;
             }
         }
     }
@@ -160,6 +161,14 @@ public class HumanBehavior : MonoBehaviour
         if(col.gameObject.tag == "Dropoff"){
             dropoff = col.gameObject.transform;
             DropOff();
+        } else if(col.gameObject.tag == "Ladder"){
+            rb.gravityScale = 0;
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D col){
+        if(col.gameObject.tag == "Ladder"){
+            rb.gravityScale = 1;
         }
     }
 
@@ -293,7 +302,7 @@ public class HumanBehavior : MonoBehaviour
             monsters[i].GetComponent<EnemyBehavior>().Unlink();
         }
 
-        Destroy(this.gameObject);
+        gameObject.SetActive(false);
     }
 
     public void Flip(){

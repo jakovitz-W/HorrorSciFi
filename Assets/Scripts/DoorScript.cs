@@ -9,6 +9,7 @@ public class DoorScript : MonoBehaviour
     [SerializeField] private Sprite unlockedSprite;
     [SerializeField] private Light2D indicator;
     public bool requireKey = true; //for re-use of the prefab in hallways, true by default
+    public bool isBoss;
 
     void Awake(){
         rend = GetComponent<SpriteRenderer>();

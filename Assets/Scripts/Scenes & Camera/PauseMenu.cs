@@ -46,8 +46,34 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
     }
 
-    public void Quit(){
+    public void Save(){
+        //grab important variables, load into JSONs
+    }
+
+    public void SaveAndQuit(){
+        Save();
+        CloseApp();
+    }
+
+    public void SaveAndMain(){
+        Save();
+        //load start menu
+    }
+
+    public void Quit(bool save){
+        if(save){
+            SaveAndQuit();
+        } else{
+            CloseApp();
+        }
+    }
+
+    public void CloseApp(){
         Application.Quit();
+    }
+
+    public void Main(){
+
     }
 
     public void ResetRoom(){
