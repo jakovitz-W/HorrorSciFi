@@ -5,7 +5,7 @@ using UnityEngine;
 public class Boss : MonoBehaviour
 {
     [SerializeField] private GameObject[] tendrils;
-    [SerializeField] private float atkCooldown = 3f;
+    [SerializeField] private float atkCooldown = 5f;
     [SerializeField] private float speedIncr;
     [SerializeField] private float dmgCooldown;
     private bool isAttacking = false;
@@ -14,13 +14,20 @@ public class Boss : MonoBehaviour
     private int hits = 0;
 
     public bool testStrike = false;
-    
-    void OnEnable(){
+    public bool startBoss = false;
+    public bool bossActive = false;
+
+    public IEnumerator StartFight(){
+        //start first section of boss theme
+        //intro dialogue
+        yield return new WaitForSeconds(1f);
+        bossActive = true;
         StartCoroutine("AttackSequence");
     }
 
     void FixedUpdate(){
 
+    
         /*delete later*/
         if(testStrike){
             testStrike = false;
@@ -28,19 +35,30 @@ public class Boss : MonoBehaviour
                 StartCoroutine(tendrils[i].GetComponent<Tendrils>().Strike());
             }
         }
+        
+        for(int j = 0; j < tendrils.Length; j++){
+            if(tendrils[j].GetComponent<Tendrils>().striking){
+                isAttacking = true;
+                break;
+            } else{
+                isAttacking = false;
+            }
+        }
+
+        if(!isAttacking && bossActive){
+            StartCoroutine("AttackSequence");
+        }
+    
     }
 
     private IEnumerator AttackSequence(){
 
-        float cd = Random.Range(0.5f, atkCooldown);
+        float cd = Random.Range(5f, atkCooldown);
         for(int i = 0; i < tendrils.Length; i++){
             StartCoroutine(tendrils[i].GetComponent<Tendrils>().Strike());
         }
         yield return new WaitForSeconds(cd);
-
-        if(attackable){
-            StartCoroutine("AttackSequence");
-        }
+        isAttacking = false;
     }
 
     public IEnumerator OnHit(){
@@ -53,7 +71,6 @@ public class Boss : MonoBehaviour
             OnDeath();
         }
         attackable = false;
-        StopCoroutine("AttackSequence");
         PhaseChange();
         //flashing opacity animation
         yield return new WaitForSeconds(dmgCooldown);
@@ -64,12 +81,10 @@ public class Boss : MonoBehaviour
     private void PhaseChange(){
 
         phase++;
-
         for(int i = 0; i < tendrils.Length; i++){
             StartCoroutine(tendrils[i].GetComponent<Tendrils>().PhaseChange());
         }
-        atkCooldown *= 0.5f;
-        StartCoroutine("AttackSequence");
+        atkCooldown *= 0.5f;    
     }
 
     private void OnDeath(){
@@ -79,3 +94,4 @@ public class Boss : MonoBehaviour
     }
 
 }
+

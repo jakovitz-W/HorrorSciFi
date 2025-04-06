@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6932613250444356533}
   - component: {fileID: 5397145241101388338}
   - component: {fileID: 3263126940332661238}
+  - component: {fileID: 8413368270101859784}
   m_Layer: 7
   m_Name: Torch
   m_TagString: Torch
@@ -130,3 +131,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.445507, y: 1.1486899}
   m_EdgeRadius: 0
+--- !u!95 &8413368270101859784
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 247872731346355322}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 05a191c271158e04486b07c1f2d14c07, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

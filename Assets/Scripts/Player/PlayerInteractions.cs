@@ -78,15 +78,15 @@ public class PlayerInteractions : MonoBehaviour
 
         if(col.gameObject.name == "MoveHint"){
             col.gameObject.SetActive(false);
-            diSystem.SetText("Move", true, false);
+            diSystem.SetText("Move", true, false, -1);
 
         } else if(col.gameObject.name == "InteractHint"){
             col.gameObject.SetActive(false);
-            diSystem.SetText("Interact", true, false);
+            diSystem.SetText("Interact", true, false, -1);
 
         } else if(col.gameObject.name == "PickupHint"){
             col.gameObject.SetActive(false);
-            diSystem.SetText("Pickup", true, false);
+            diSystem.SetText("Pickup", true, false, -1);
         }
     }
 
@@ -183,7 +183,7 @@ public class PlayerInteractions : MonoBehaviour
                     hasTorch = true;
                     torchActive = true;
                     activeToolText.text = "Active Tool: Blowtorch";
-                    diSystem.SetText("UseTool", true, false);
+                    diSystem.SetText("UseTool", true, false, -1);
 
                 }else if(target.tag == "Taser"){
 
@@ -191,7 +191,7 @@ public class PlayerInteractions : MonoBehaviour
                     taserActive = true;
                     torchActive = false;
                     activeToolText.text = "Active Tool: Taser";
-                    diSystem.SetText("SwapTool", true, false);
+                    diSystem.SetText("SwapTool", true, false, -1);
                 }
                 target.SetActive(false);
             }
@@ -204,63 +204,75 @@ public class PlayerInteractions : MonoBehaviour
 
         if(ctx.performed){
 
-            Collider2D col = Physics2D.OverlapCircle(transform.position, interactRadius, mask);
+            Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, interactRadius, mask);
             
-            if(!diSystem.diContainer.activeSelf){ //only allow interaction when the dialogue box is not active
+            foreach(Collider2D col in cols){
+                if(!diSystem.diContainer.activeSelf){ //only allow interaction when the dialogue box is not active
 
-                if(col != null){
-                    GameObject target = col.gameObject;
+                    if(col != null){
+                        GameObject target = col.gameObject;
 
-                    //need to account for edge cases where there's multiple objects in the overlap circle
-                    //can be done with a foreach loop
-                    switch(target.tag){
-                        case "Key Item":
-                            diSystem.SetText("KeyItem", false, false);
-                            break;
-                        case "Door":
-                            if(CheckDoor(target)){
-                                target.GetComponent<DoorScript>().SetUnlocked();
-                            }
-                            break;
-                        case "Meltable":
-                            diSystem.SetText("Melt", false, false);
-                            break;
-                        case "Zappable":
-                            diSystem.SetText("Zap", false, false);
-                            break;
-                        case "Checkpoint":
-                            transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-                            rb.velocity = new Vector2(0,0);
-                            StartCoroutine(levelManager.Backtrack());
-                            int i = levelManager.LIndex - 1;
-                            currentLevel = levelManager.levels[i];
-                            break;
-                        case "Human":
-                            //TODO: check if human has special function
-                            //get human dialogue box if it has one
-                            HumanBehavior attributes = target.GetComponent<HumanBehavior>();
-                            diSystem.SetText(attributes.dialogueKey, false, true);
+                        //need to account for edge cases where there's multiple objects in the overlap circle
+                        //can be done with a foreach loop
+                        switch(target.tag){
+                            case "Key Item":
+                                diSystem.SetText("KeyItem", false, false, -1);
+                                break;
+                            case "Door":
+                                if(CheckDoor(target)){
+                                    target.GetComponent<DoorScript>().SetUnlocked();
+                                }
+                                break;
+                            case "Meltable":
+                                diSystem.SetText("Melt", false, false, -1);
+                                break;
+                            case "Zappable":
+                                diSystem.SetText("Zap", false, false, -1);
+                                break;
+                            case "Checkpoint":
+                                transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+                                rb.velocity = new Vector2(0,0);
+                                StartCoroutine(levelManager.Backtrack());
+                                int i = levelManager.LIndex - 1;
+                                currentLevel = levelManager.levels[i];
+                                break;
+                            case "Human":
+                                //TODO: check if human has special function
+                                //get human dialogue box if it has one
+                                HumanBehavior attributes = target.GetComponent<HumanBehavior>();
 
-                            if(humans.IndexOf(target) == -1){
-                                humans.Add(target);
-                                attributes.isFollowing = true;
-                            }
-
-                            break;
-                        case "Button":
-                            
-                            break;
-                        case "Exit":
-                            transform.position = levelManager.levels[levelManager.LIndex].checkpoint.transform.position; //oof
-                            break;
-                        case "Enemy":
-                            diSystem.SetText("Monster", false, false);
-                            break;
-                        case "Upgrade":
-                            upgradeSystem.OpenMenu();
-                            break;
-                        default:
-                            break;
+                                if(attributes.type != "special"){                                
+                                    diSystem.SetText(attributes.dialogueKey, false, true, -1);
+                                    if(humans.IndexOf(target) == -1){
+                                        humans.Add(target);
+                                        attributes.isFollowing = true;
+                                    }
+                                } else if(attributes.dialogueKey == "FirstMate"){
+                                    if(!hasCure){
+                                        diSystem.SetText(attributes.dialogueKey, false, false, 0);
+                                    } else{
+                                        currentLevel.hasKey = true;
+                                        keyUI[keyNum].GetComponent<Image>().color = Color.white;
+                                        keyNum++;
+                                        diSystem.SetText(attributes.dialogueKey, false, false, 1);
+                                    }
+                                }
+                                break;
+                            case "Button":
+                                
+                                break;
+                            case "Exit":
+                                transform.position = levelManager.levels[levelManager.LIndex].checkpoint.transform.position; //oof
+                                break;
+                            case "Enemy":
+                                diSystem.SetText("Monster", false, false, -1);
+                                break;
+                            case "Upgrade":
+                                upgradeSystem.OpenMenu();
+                                break;
+                            default:
+                                break;
+                        }
                     }
                 }
             }
@@ -270,6 +282,13 @@ public class PlayerInteractions : MonoBehaviour
     public void RemoveHuman(GameObject human){
         upgradeSystem.humansSaved++;
         humans.Remove(human);
+    }
+
+    public void TeleportHumans(int level){
+        for(int i = 0; i < humans.Count; i++){
+            humans[i].transform.position = transform.position;
+            humans[i].transform.parent = levelManager.levelParents[level].transform;
+        }
     }
 
     //clean up this function, maybe utilize hasKey instead of repeating lines
@@ -288,10 +307,10 @@ public class PlayerInteractions : MonoBehaviour
                     StartCoroutine(levelManager.OnRoomChange(i));
                     door.GetComponent<DoorScript>().requireKey = false;
                     bossCombat.enabled = true;
-
+                    
                     return true;
                 } else{
-                    diSystem.SetText("MissingCure", false, true);
+                    diSystem.SetText("MissingCure", false, true, -1);
                     Debug.Log("Requires Cure Item");
                     return false;
                 }
@@ -308,7 +327,7 @@ public class PlayerInteractions : MonoBehaviour
                 return true;
 
             } else{
-                diSystem.SetText("DoorLocked", false, true);
+                diSystem.SetText("DoorLocked", false, true, -1);
                 return false;
             }
         } else{

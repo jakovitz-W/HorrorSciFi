@@ -108,7 +108,7 @@ public class UpgradeSystem : MonoBehaviour
 
     public void UnlockMiniDrone(){
         movement.droneUnlocked = true;
-        diSystem.SetText("MiniDrone", true, false);
+        diSystem.SetText("MiniDrone", true, false, -1);
         drone.SetActive(false);
         movement.hasDroneKey = false;
     }

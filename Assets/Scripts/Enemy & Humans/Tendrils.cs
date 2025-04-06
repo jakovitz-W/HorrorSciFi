@@ -14,10 +14,11 @@ public class Tendrils : MonoBehaviour
     [SerializeField] private Transform upper, lower;
     private bool upperReached = false, lowerReached = true;
 
-    private bool striking = false;
+    public bool striking = false;
     private float originX;
     float originSpeed;
     
+    /*Add some x variability for normal movement*/
     void OnEnable(){
         player = GameObject.FindWithTag("Player").transform;
         originX = transform.position.x;
@@ -48,6 +49,12 @@ public class Tendrils : MonoBehaviour
                 upperReached = false;
                 lowerReached = true;
                 yDir = -yDir;
+            }
+        } else{
+            if(transform.position.x == originX){ 
+                striking = false;
+            } else{
+                striking = true;
             }
         }
 
@@ -88,6 +95,5 @@ public class Tendrils : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         
         speed = originSpeed;
-        striking = false;
     }    
 }

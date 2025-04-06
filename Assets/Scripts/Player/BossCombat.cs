@@ -13,6 +13,7 @@ public class BossCombat : MonoBehaviour
     private bool invincible = false;
     [SerializeField] private float iTime = 0.5f;
     [SerializeField] private float attackRadius = 1.5f;
+    [SerializeField] private Boss boss;
 
     void OnEnable(){
         interactions = GetComponent<PlayerInteractions>();
@@ -20,6 +21,7 @@ public class BossCombat : MonoBehaviour
         ctrls = new PlayerControls();
         lm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 
+        StartCoroutine(boss.StartFight());
         ctrls.Land.UseWeapon.performed += UseWeapon;
     }
 
@@ -63,6 +65,6 @@ public class BossCombat : MonoBehaviour
 
     void OnDeath(){
         interactions.enabled = true;
-        StartCoroutine(lm.Backtrack());
+        //StartCoroutine(lm.Backtrack());
     }
 }

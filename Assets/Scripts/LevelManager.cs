@@ -9,7 +9,7 @@ public class LevelManager : MonoBehaviour
     public Level[] levels; //array of Level class (found at end of script)
     private GameObject player;
     [HideInInspector] public int LIndex; //level index, increment/decrement upon changing rooms
-    [SerializeField] private GameObject[] levelParents;  //objects contained in a room get placed under a single parent in the hierarchy
+    public GameObject[] levelParents;  //objects contained in a room get placed under a single parent in the hierarchy
     [SerializeField] private GameObject[] doors; //exit point
     [SerializeField] private Animator transition;
     
@@ -26,7 +26,7 @@ public class LevelManager : MonoBehaviour
         //activates next room & teleports the player
         levelParents[room].SetActive(true);
         player.transform.position = levels[room].checkpoint.transform.position;
-
+        player.GetComponent<PlayerInteractions>().TeleportHumans(LIndex);
         //deactivates all other rooms
         for(int i = 0; i < levels.Length; i++){
             if(i != room){
@@ -57,6 +57,7 @@ public class LevelManager : MonoBehaviour
         //sets the previous room active & teleports the player to the last room's exit point
         levelParents[LIndex].SetActive(true);
         player.transform.position = doors[LIndex].transform.position;
+        player.GetComponent<PlayerInteractions>().TeleportHumans(LIndex);
 
         //deactivates all other rooms
         for(int i = 0; i < levels.Length; i++){

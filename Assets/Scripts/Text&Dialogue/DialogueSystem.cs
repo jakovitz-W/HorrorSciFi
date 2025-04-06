@@ -38,19 +38,19 @@ public class DialogueSystem : MonoBehaviour
     }
 
     //isHint to specify if the text should be hint text or a popup dialogue box
-    public void SetText(string key, bool isHint, bool random){
+    public void SetText(string key, bool isHint, bool random, int specific){
         hint = isHint;
         int index = FindIndexByKey(key);
-
         if(hint){
             hintText.SetActive(true);
-            hintText.GetComponent<TypewriterEffect>().SetString(hintList[index].GetDialogue(), true);
+            hintText.GetComponent<TypewriterEffect>().SetString(hintList[index].GetDialogue(specific), true);
         } else{
+            
             diContainer.SetActive(true);
 
             containerImg.sprite = diList[index].characterImage;
             if(!random){
-                diText.GetComponent<TypewriterEffect>().SetString(diList[index].GetDialogue(), false);
+                diText.GetComponent<TypewriterEffect>().SetString(diList[index].GetDialogue(specific), false);
             } else{
                 //add check for removal, set to false for now
                 diText.GetComponent<TypewriterEffect>().SetString(diList[index].GetRandomOption(false), false);
@@ -75,8 +75,13 @@ public class Dialogue{ //set fields in inspector
     }
 
     //checks if next option exists & picks from list accordingly || for ordered dialogue
-    public string GetDialogue(){
+    public string GetDialogue(int specific){
         string option;
+
+        if(specific != -1){
+            option = di[specific];
+            return option;
+        }
         option = di[iteration];
 
         if(iteration < (di.Count - 1)){ //.count starts counting at 1, index for lists start at 0
