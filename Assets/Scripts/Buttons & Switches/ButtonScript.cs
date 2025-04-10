@@ -59,17 +59,20 @@ public class Affected{
         Default,
         ElectricDoor,
         ConveyerBelt,
-        Magnet
+        Magnet,
+        Arm
     }
     [SerializeField] private ObjName name;    
     [SerializeField] private GameObject actor; //naming abstract variables is hard :(
     public bool activated = false;
+    public bool isHorizontal = false;
 
     public void Activate(){
         activated = !activated;        
 
         switch(name){
         case ObjName.ElectricDoor:
+            actor.GetComponentInChildren<Animator>().SetBool("isHorizontal", isHorizontal);
             Door();
             break;
         case ObjName.ConveyerBelt:
@@ -77,6 +80,9 @@ public class Affected{
             break;
         case ObjName.Magnet:
             Magnet();
+            break;
+        case ObjName.Arm:
+            Arm();
             break;
         case ObjName.Default:
             Debug.Log("Default");
@@ -96,6 +102,11 @@ public class Affected{
 
     private void Magnet(){
         actor.GetComponent<PointEffector2D>().enabled = activated;
+    }
+
+    private void Arm(){
+        activated = !activated;
+        actor.GetComponent<MechanicalArm>().Activate();
     }
 
 }

@@ -43,7 +43,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -108,7 +108,532 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4608
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7e1dd7b43d5e0e4bb89a1581424fca3
+      internalID: 2081672070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_1
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 4608
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40db6b0803a6bbf408bbd6e3cd22e543
+      internalID: -945597960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_2
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 4608
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1e312c76c576a4e4d986222cdff87155
+      internalID: -1652248931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_3
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 4608
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 818e1f2b6955c1446a54cff5f7d387a7
+      internalID: 281833679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3840
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bf64c9f600666943875b39a3a698e7d
+      internalID: 1186022576
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_5
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 3840
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db560d7c912e07d46b9eb46750e1a235
+      internalID: 1274326331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_6
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 3840
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eef7679dc2f875e42ba6bfc9ca5df1b3
+      internalID: 950814956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_7
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 3840
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0123ce1c16ffe614b97dac28bd9b5e10
+      internalID: 1021634933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3072
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1672edd57804f3499fa01170996d8ea
+      internalID: -1735453082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_9
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 3072
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a21f6d4d3f76eb7478eb528a284c9644
+      internalID: -370541232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_10
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 3072
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5325ca3782acf83418ecf3257d822d49
+      internalID: 960963491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_11
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 3072
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1fdd1b3745a9ada4db1186d27d9e25b0
+      internalID: 1784199711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2304
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c8ca594571a98e42a34aed63c64187b
+      internalID: -204630368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_13
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 2304
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67f6c3e90e0b3c9499373ba561ae89fd
+      internalID: -1672345083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_14
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 2304
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ae88d98728e6dd40820bbc5e4facab4
+      internalID: -797767169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_15
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 2304
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8699692bd5f7a98459716c03f9d9d774
+      internalID: -1129230933
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ef8a64dede9d474cb5b67e694550daa
+      internalID: -1120744886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_17
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 1536
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 974db4e1cc2de88449c50d66ed8dfa11
+      internalID: -1587415277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_18
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 1536
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc0c1305b193eff408018edb345b53b5
+      internalID: 979883548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_19
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 1536
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36387671f63460c4da97d87e5a87cf66
+      internalID: 1261494020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25019969ebaec7d4da86e18a9ee76bcd
+      internalID: -1294701700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_21
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 768
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10f8b1067de33b8459aadda29b5c2132
+      internalID: -2110853022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_22
+      rect:
+        serializedVersion: 2
+        x: 2304
+        y: 768
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89133d1c4f28aec4ab6587923bcd262d
+      internalID: -566790243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_23
+      rect:
+        serializedVersion: 2
+        x: 3456
+        y: 768
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72eb0c41261676946b3fa9a5b4ff40fa
+      internalID: 1132832540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1)_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1152
+        height: 768
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8847b642ed492624092505f4b92696cc
+      internalID: -296421171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -119,7 +644,32 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Boss Rm Window 1_Moss (1)_0: 2081672070
+      Boss Rm Window 1_Moss (1)_1: -945597960
+      Boss Rm Window 1_Moss (1)_10: 960963491
+      Boss Rm Window 1_Moss (1)_11: 1784199711
+      Boss Rm Window 1_Moss (1)_12: -204630368
+      Boss Rm Window 1_Moss (1)_13: -1672345083
+      Boss Rm Window 1_Moss (1)_14: -797767169
+      Boss Rm Window 1_Moss (1)_15: -1129230933
+      Boss Rm Window 1_Moss (1)_16: -1120744886
+      Boss Rm Window 1_Moss (1)_17: -1587415277
+      Boss Rm Window 1_Moss (1)_18: 979883548
+      Boss Rm Window 1_Moss (1)_19: 1261494020
+      Boss Rm Window 1_Moss (1)_2: -1652248931
+      Boss Rm Window 1_Moss (1)_20: -1294701700
+      Boss Rm Window 1_Moss (1)_21: -2110853022
+      Boss Rm Window 1_Moss (1)_22: -566790243
+      Boss Rm Window 1_Moss (1)_23: 1132832540
+      Boss Rm Window 1_Moss (1)_24: -296421171
+      Boss Rm Window 1_Moss (1)_3: 281833679
+      Boss Rm Window 1_Moss (1)_4: 1186022576
+      Boss Rm Window 1_Moss (1)_5: 1274326331
+      Boss Rm Window 1_Moss (1)_6: 950814956
+      Boss Rm Window 1_Moss (1)_7: 1021634933
+      Boss Rm Window 1_Moss (1)_8: -1735453082
+      Boss Rm Window 1_Moss (1)_9: -370541232
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

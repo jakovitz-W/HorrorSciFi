@@ -11,9 +11,7 @@ GameObject:
   - component: {fileID: 3723536912305703811}
   - component: {fileID: 8160891248604098959}
   - component: {fileID: 7320252637721385119}
-  - component: {fileID: 2503851265197671140}
-  - component: {fileID: 7158400290919233782}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -30,7 +28,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.9940014, y: 12.81, z: 0.25736502}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 6, y: 6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -75,7 +73,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 153029555
   m_SortingLayer: -2
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_Sprite: {fileID: -241611326, guid: 0cc3922298047de40b8b304c54708927, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -99,7 +97,7 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -132,42 +130,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.62786853, y: 0.6437713}
   m_EdgeRadius: 0
---- !u!50 &2503851265197671140
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3361160098202949562}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 5
-  m_LinearDrag: 6
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
---- !u!114 &7158400290919233782
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3361160098202949562}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aad65bbe30d104849958e43e029e3046, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

@@ -227,9 +227,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Inventory"",
+                    ""name"": ""OpenInv"",
                     ""type"": ""Button"",
-                    ""id"": ""973361ac-10b6-4864-904d-81258fb68cb0"",
+                    ""id"": ""7899c4f2-0666-4395-a58a-5bd5f8133faa"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -272,12 +272,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""6f8ab7a3-3d56-4efd-b639-f5a98ca19778"",
+                    ""id"": ""40eadd03-f289-4277-9183-095b62684457"",
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Land"",
-                    ""action"": ""Inventory"",
+                    ""action"": ""OpenInv"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -305,7 +305,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_General_Pause = m_General.FindAction("Pause", throwIfNotFound: true);
         m_General_Skip = m_General.FindAction("Skip", throwIfNotFound: true);
         m_General_OpenDebugMenu = m_General.FindAction("OpenDebugMenu", throwIfNotFound: true);
-        m_General_Inventory = m_General.FindAction("Inventory", throwIfNotFound: true);
+        m_General_OpenInv = m_General.FindAction("OpenInv", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -456,7 +456,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_General_Pause;
     private readonly InputAction m_General_Skip;
     private readonly InputAction m_General_OpenDebugMenu;
-    private readonly InputAction m_General_Inventory;
+    private readonly InputAction m_General_OpenInv;
     public struct GeneralActions
     {
         private @PlayerControls m_Wrapper;
@@ -464,7 +464,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_General_Pause;
         public InputAction @Skip => m_Wrapper.m_General_Skip;
         public InputAction @OpenDebugMenu => m_Wrapper.m_General_OpenDebugMenu;
-        public InputAction @Inventory => m_Wrapper.m_General_Inventory;
+        public InputAction @OpenInv => m_Wrapper.m_General_OpenInv;
         public InputActionMap Get() { return m_Wrapper.m_General; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -483,9 +483,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @OpenDebugMenu.started += instance.OnOpenDebugMenu;
             @OpenDebugMenu.performed += instance.OnOpenDebugMenu;
             @OpenDebugMenu.canceled += instance.OnOpenDebugMenu;
-            @Inventory.started += instance.OnInventory;
-            @Inventory.performed += instance.OnInventory;
-            @Inventory.canceled += instance.OnInventory;
+            @OpenInv.started += instance.OnOpenInv;
+            @OpenInv.performed += instance.OnOpenInv;
+            @OpenInv.canceled += instance.OnOpenInv;
         }
 
         private void UnregisterCallbacks(IGeneralActions instance)
@@ -499,9 +499,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @OpenDebugMenu.started -= instance.OnOpenDebugMenu;
             @OpenDebugMenu.performed -= instance.OnOpenDebugMenu;
             @OpenDebugMenu.canceled -= instance.OnOpenDebugMenu;
-            @Inventory.started -= instance.OnInventory;
-            @Inventory.performed -= instance.OnInventory;
-            @Inventory.canceled -= instance.OnInventory;
+            @OpenInv.started -= instance.OnOpenInv;
+            @OpenInv.performed -= instance.OnOpenInv;
+            @OpenInv.canceled -= instance.OnOpenInv;
         }
 
         public void RemoveCallbacks(IGeneralActions instance)
@@ -542,6 +542,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnSkip(InputAction.CallbackContext context);
         void OnOpenDebugMenu(InputAction.CallbackContext context);
-        void OnInventory(InputAction.CallbackContext context);
+        void OnOpenInv(InputAction.CallbackContext context);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class UpgradeSystem : MonoBehaviour
 {
@@ -21,6 +22,7 @@ public class UpgradeSystem : MonoBehaviour
     public int humansSaved = 0;
     private int spent = 0;
     public int wallet = 0; //how much currency the player has
+    [SerializeField] private TMP_Text tokens;
 
     private bool regenUnlocked = false;
     [SerializeField] private GameObject regen, speed, range, stun, drone; //buttons
@@ -33,7 +35,7 @@ public class UpgradeSystem : MonoBehaviour
     
     public void OpenMenu(){
         wallet = humansSaved - spent;
-
+        tokens.text = "Tokens: " + wallet;
         if(movement.hasDroneKey){
             drone.SetActive(true);
         } else{
@@ -53,6 +55,7 @@ public class UpgradeSystem : MonoBehaviour
 
     void Recalculate(){
         wallet = humansSaved - spent;
+        tokens.text = "Tokens: " + wallet;
 
         if(wallet < regenCost || regenUnlocked){
             regen.SetActive(false);

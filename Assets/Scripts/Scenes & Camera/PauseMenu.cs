@@ -60,31 +60,9 @@ public class PauseMenu : MonoBehaviour
         //load start menu
     }
 
-    public void Quit(bool save){
-        if(save){
-            SaveAndQuit();
-        } else{
-            CloseApp();
-        }
-    }
-
     public void CloseApp(){
         Application.Quit();
     }
 
-    public void Main(){
-
-    }
-
-    public void ResetRoom(){
-        //play loading animation
-        //grab room
-        //grab initial state of the room?
-        //set all critical objects back to their initial position/state
-            //if critical object position/state has changed then reset them
-            //else skip
-        //Set player position
-        //stop loading animation
-    }
 
 }

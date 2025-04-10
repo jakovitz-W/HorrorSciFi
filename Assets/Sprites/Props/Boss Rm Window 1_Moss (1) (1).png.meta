@@ -1,0 +1,677 @@
+fileFormatVersion: 2
+guid: 3b2d45628cacd5240afc57e18bdc69ce
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 1
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4104
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 056198a97c61fca4c8709b879fe7d600
+      internalID: -965246270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_1
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 4104
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dbbe4b88ffd0714b8cb4e6658965038
+      internalID: -2033144467
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_2
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 4104
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffe46d53051728c43bfe138cd8365e62
+      internalID: -230322967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_3
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 4104
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58a17b218d07b104683f0371e5417ff5
+      internalID: -1878069191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3420
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a551ccc0ebbebb042bb22779a41338a4
+      internalID: 26067324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_5
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 3420
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ada43f820f7c3b468b7e374a9e8dc86
+      internalID: -55393240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_6
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 3420
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63606d405d7ef8145bd388159d98eb46
+      internalID: -1743665077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_7
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 3420
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9d1271fd95d19084295b305fefc72bb2
+      internalID: -1075783080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2736
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 14b2d72506aae56448bb802ae3b6a745
+      internalID: -1966435113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_9
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2736
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46cb0c52010f87148826dc94192850cc
+      internalID: 176625693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_10
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 2736
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b13044ba29721341b81b76f106e9121
+      internalID: 1824409534
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_11
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 2736
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2156cdae443d4bb448a9d7ec69b720ac
+      internalID: 1841191612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2052
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6107ec43593aaea4d8894f1aecc5ebf2
+      internalID: 1795703764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_13
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 2052
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26ccc71169026f34dbbea20083390220
+      internalID: 680447861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_14
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 2052
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 06fc1a2bc7cb49f439fe4c17fa8e86f9
+      internalID: 1955639132
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_15
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 2052
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cea91c1ee6dfcf9458f5b63b42630c04
+      internalID: -1635889273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1368
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75d3ab98fb672d9408b929faa0fe1236
+      internalID: 890529022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_17
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 1368
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c515595a6641b6418d9ee8e32a7a0f4
+      internalID: -1338764535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_18
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 1368
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2bfcb57c642d9864b8721ba5ab76935f
+      internalID: 2027275345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_19
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 1368
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a1cfccfc09372b48ac41c9fd1c8d59d
+      internalID: -2089139059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 684
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68ebc557833fd0a449f22b0d1c88ad61
+      internalID: -643303901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_21
+      rect:
+        serializedVersion: 2
+        x: 1024
+        y: 684
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd4392f2f1a8b674fadc06ca07ac25d5
+      internalID: -52643693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_22
+      rect:
+        serializedVersion: 2
+        x: 2048
+        y: 684
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c9d94be7c47fc840abda91c9e762397
+      internalID: 1622949843
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_23
+      rect:
+        serializedVersion: 2
+        x: 3072
+        y: 684
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87c9b358d796aef4e8d6097c40e7bef0
+      internalID: -133370649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Boss Rm Window 1_Moss (1) (1)_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1024
+        height: 684
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80c7bf16bf1a052469dce520dde34b30
+      internalID: 993929648
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Boss Rm Window 1_Moss (1) (1)_0: -965246270
+      Boss Rm Window 1_Moss (1) (1)_1: -2033144467
+      Boss Rm Window 1_Moss (1) (1)_10: 1824409534
+      Boss Rm Window 1_Moss (1) (1)_11: 1841191612
+      Boss Rm Window 1_Moss (1) (1)_12: 1795703764
+      Boss Rm Window 1_Moss (1) (1)_13: 680447861
+      Boss Rm Window 1_Moss (1) (1)_14: 1955639132
+      Boss Rm Window 1_Moss (1) (1)_15: -1635889273
+      Boss Rm Window 1_Moss (1) (1)_16: 890529022
+      Boss Rm Window 1_Moss (1) (1)_17: -1338764535
+      Boss Rm Window 1_Moss (1) (1)_18: 2027275345
+      Boss Rm Window 1_Moss (1) (1)_19: -2089139059
+      Boss Rm Window 1_Moss (1) (1)_2: -230322967
+      Boss Rm Window 1_Moss (1) (1)_20: -643303901
+      Boss Rm Window 1_Moss (1) (1)_21: -52643693
+      Boss Rm Window 1_Moss (1) (1)_22: 1622949843
+      Boss Rm Window 1_Moss (1) (1)_23: -133370649
+      Boss Rm Window 1_Moss (1) (1)_24: 993929648
+      Boss Rm Window 1_Moss (1) (1)_3: -1878069191
+      Boss Rm Window 1_Moss (1) (1)_4: 26067324
+      Boss Rm Window 1_Moss (1) (1)_5: -55393240
+      Boss Rm Window 1_Moss (1) (1)_6: -1743665077
+      Boss Rm Window 1_Moss (1) (1)_7: -1075783080
+      Boss Rm Window 1_Moss (1) (1)_8: -1966435113
+      Boss Rm Window 1_Moss (1) (1)_9: 176625693
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -11,35 +11,48 @@ public class Inventory : MonoBehaviour
     [SerializeField] private PlayerInteractions player;
     [SerializeField] private UpgradeSystem upgradeSystem;
     [SerializeField] private TMP_Text following, tokens;
-    [SerializeField] private Image torch, taser;
-    [SerializeField] private Image[] collectibles;
+    [SerializeField] private RawImage torch, taser, cure;
     [SerializeField] private GameObject menu;
+    private bool menuActive = false;
 
     void Awake(){
         playerControls = new PlayerControls();
     }
 
+    //remember to enable playercontrols
     private void OnEnable(){
-        playerControls.General.Inventory.performed += OpenMenu;
+        playerControls.General.OpenInv.performed += OpenInv;
+        playerControls.Enable();
     }
 
     private void OnDisable(){
-        playerControls.General.Inventory.performed -= OpenMenu;
+        playerControls.General.OpenInv.performed -= OpenInv;
+        playerControls.Disable();
     }
 
-    void OpenMenu(InputAction.CallbackContext ctx){
+
+    private void OpenInv(InputAction.CallbackContext ctx){
         
         if(ctx.performed){
-            if(!menu.activeSelf){ //menu is closed
-                menu.SetActive(true);
+
+            menuActive = !menuActive;
+            menu.SetActive(menuActive);
+
+            if(menuActive){
                 following.text = "Following: " + player.humans.Count;
                 tokens.text = "Tokens: " + upgradeSystem.wallet;
-                //set torch/taser images to active/inactive
-                //check collectibles
 
-            } else{ //menu open
-                menu.SetActive(false);
+                if(player.hasTorch){
+                    torch.color = new Color(1f, 1f, 1f, 1f); //changing alpha value
+                }
+                if(player.hasTaser){
+                    taser.color = new Color(1f, 1f, 1f, 1f);
+                }
+                if(player.hasCure){
+                    taser.color = new Color(1f, 1f, 1f, 1f);
+                }
             }
+
         }
     }
 }

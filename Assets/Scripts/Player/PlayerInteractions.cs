@@ -23,12 +23,13 @@ public class PlayerInteractions : MonoBehaviour
     public GameObject flameThrower, taser;
     public bool hasTorch, hasTaser;
     public bool torchActive, taserActive;
-    [SerializeField] private TMP_Text activeToolText;
-
+    [SerializeField] private GameObject[] toolsUI;
+    
     [SerializeField] private DialogueSystem diSystem;
     [SerializeField] private UpgradeSystem upgradeSystem;
     private PlayerMovement pMovement;
     private BossCombat bossCombat;
+
 
     public bool hasCure = false;
 
@@ -42,7 +43,6 @@ public class PlayerInteractions : MonoBehaviour
         humans = new List<GameObject>();
 
         bossCombat.enabled = false;
-        activeToolText.text = "Active Tool: None";
         hasTorch = false;
         flameThrower.SetActive(false);
         taserActive = false;
@@ -150,14 +150,23 @@ public class PlayerInteractions : MonoBehaviour
             if(torchActive && hasTaser){
                 torchActive = false;
                 flameThrower.SetActive(false); //in case player is still holding down click
+                toolsUI[0].SetActive(false);
+                toolsUI[1].SetActive(true);
                 taserActive = true;
-                activeToolText.text = "Active Tool: Taser";
+
 
             } else if(taserActive && hasTorch){
                 torchActive = true;
                 taserActive = false;
+                toolsUI[1].SetActive(false);
+                toolsUI[0].SetActive(true);
                 taser.SetActive(false);
-                activeToolText.text = "Active Tool: Blowtorch";
+
+            } else if((!torchActive && !taserActive) && (hasTorch && hasTaser)){ //for case when player respawns outside the boss room
+                torchActive = true;
+                taserActive = false;
+                toolsUI[1].SetActive(false);
+                toolsUI[0].SetActive(true);
             }
         }
     }
@@ -182,7 +191,8 @@ public class PlayerInteractions : MonoBehaviour
 
                     hasTorch = true;
                     torchActive = true;
-                    activeToolText.text = "Active Tool: Blowtorch";
+                    toolsUI[0].SetActive(true);
+
                     diSystem.SetText("UseTool", true, false, -1);
 
                 }else if(target.tag == "Taser"){
@@ -190,7 +200,9 @@ public class PlayerInteractions : MonoBehaviour
                     hasTaser = true;
                     taserActive = true;
                     torchActive = false;
-                    activeToolText.text = "Active Tool: Taser";
+
+                    toolsUI[0].SetActive(false);
+                    toolsUI[1].SetActive(true);
                     diSystem.SetText("SwapTool", true, false, -1);
                 }
                 target.SetActive(false);
@@ -291,7 +303,6 @@ public class PlayerInteractions : MonoBehaviour
         }
     }
 
-    //clean up this function, maybe utilize hasKey instead of repeating lines
     bool CheckDoor(GameObject door){
 
         int i = levelManager.LIndex;
@@ -306,6 +317,14 @@ public class PlayerInteractions : MonoBehaviour
                     rb.velocity = new Vector2(0,0);
                     StartCoroutine(levelManager.OnRoomChange(i));
                     door.GetComponent<DoorScript>().requireKey = false;
+
+                    taserActive = false;
+                    torchActive = false;
+
+                    toolsUI[0].SetActive(false);
+                    toolsUI[1].SetActive(false);
+                    toolsUI[2].SetActive(true);
+
                     bossCombat.enabled = true;
                     
                     return true;
