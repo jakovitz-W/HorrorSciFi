@@ -55,6 +55,8 @@ public class MechanicalArm : MonoBehaviour
                 target.transform.parent = this.transform;
                 currentDir = -currentDir;
             }
+        } else if(col.gameObject.tag != "Player"){
+            currentDir = -currentDir;
         }
     }
 }

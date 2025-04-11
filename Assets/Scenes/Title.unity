@@ -2100,6 +2100,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   credits: {fileID: 1430350813}
+  subMenus: []
+  optionMenus: []
 --- !u!4 &965188843
 Transform:
   m_ObjectHideFlags: 0
@@ -2917,6 +2919,7 @@ GameObject:
   - component: {fileID: 1350253731}
   - component: {fileID: 1350253733}
   - component: {fileID: 1350253732}
+  - component: {fileID: 1350253734}
   m_Layer: 5
   m_Name: Title
   m_TagString: Untagged
@@ -2981,6 +2984,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1350253730}
   m_CullTransparentMesh: 1
+--- !u!95 &1350253734
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1350253730}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b82aa69dbe562ba47a58aae8a142b95a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1416742624
 GameObject:
   m_ObjectHideFlags: 0
@@ -4413,6 +4437,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Options
       objectReference: {fileID: 0}
+    - target: {fileID: 2827080319946854139, guid: 1697d2952ad59784c8bbe8f40921083b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4541027732506698789, guid: 1697d2952ad59784c8bbe8f40921083b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5966834956412970129, guid: 1697d2952ad59784c8bbe8f40921083b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6396588265520066394, guid: 1697d2952ad59784c8bbe8f40921083b, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -4492,6 +4528,14 @@ PrefabInstance:
     - target: {fileID: 6396588265520066394, guid: 1697d2952ad59784c8bbe8f40921083b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6969616758055782026, guid: 1697d2952ad59784c8bbe8f40921083b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7147842492875017400, guid: 1697d2952ad59784c8bbe8f40921083b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
