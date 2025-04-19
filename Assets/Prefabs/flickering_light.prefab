@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7474146867959349125, guid: 75083ca347913a04b83a3a1354b95bfb, type: 3}
       propertyPath: m_Name
-      value: Hanging Bar Light (1) Variant
+      value: flickering_light
       objectReference: {fileID: 0}
     - target: {fileID: 8697234936145990144, guid: 75083ca347913a04b83a3a1354b95bfb, type: 3}
       propertyPath: m_LocalPosition.x

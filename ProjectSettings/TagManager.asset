@@ -25,6 +25,7 @@ TagManager:
   - ControlPanel
   - Cure
   - Boss
+  - crate
   layers:
   - Default
   - TransparentFX

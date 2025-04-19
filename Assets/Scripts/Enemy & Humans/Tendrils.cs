@@ -12,11 +12,13 @@ public class Tendrils : MonoBehaviour
 
     private int yDir = 1;
     [SerializeField] private Transform upper, lower;
-    private bool upperReached = false, lowerReached = true;
+    public bool upperReached = false, lowerReached = true;
 
     public bool striking = false;
     private float originX;
     float originSpeed;
+
+    public bool shouldMove = false;
     
     /*Add some x variability for normal movement*/
     void OnEnable(){
@@ -37,28 +39,28 @@ public class Tendrils : MonoBehaviour
 
     void FixedUpdate(){
         
-        if(!striking){
+        if(shouldMove){
+            if(!striking){
 
-            targetPos = new Vector2(originX, yDir *(transform.position.y + 1));
+                targetPos = new Vector2(originX, transform.position.y + yDir);
 
-            if(transform.position.y >= upper.position.y && !upperReached){
-                upperReached = true;
-                lowerReached = false;
-                yDir = -yDir;
-            } else if(transform.position.y <= lower.position.y && !lowerReached){
-                upperReached = false;
-                lowerReached = true;
-                yDir = -yDir;
+                if(transform.position.y >= upper.position.y && !upperReached){
+                    upperReached = true;
+                    lowerReached = false;
+                    yDir = -yDir;
+                    Debug.Log(yDir);
+                }
+                
+                if(transform.position.y <= lower.position.y && !lowerReached){
+                    upperReached = false;
+                    lowerReached = true;
+                    yDir = -yDir;
+                }
             }
-        } else{
-            if(transform.position.x == originX){ 
-                striking = false;
-            } else{
-                striking = true;
-            }
+
+            transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
         }
 
-        transform.position = Vector2.MoveTowards(transform.position, targetPos, speed * Time.deltaTime);
     }
 
     public IEnumerator Strike(){
@@ -66,34 +68,13 @@ public class Tendrils : MonoBehaviour
         float x;
 
         speed -= speed * 0.5f;
+        float rand = Random.Range(0.7f, 1f);
+        yield return new WaitForSeconds(rand);
+
+        GetComponent<Animator>().SetBool("strike", true);
         yield return new WaitForSeconds(1f);
+        GetComponent<Animator>().SetBool("strike", false);
 
-        //calculate target position
-        if(player.position.x < transform.position.x){ //left side
-
-            if(xDir == -1){ //towards player
-                x = Random.Range(player.position.x, (transform.position.x - xBuff)); //pick point between player + buffer & position - buffer
-            } else{//pick random
-                x = Random.Range(transform.position.x - xBuff, transform.position.x);
-            }
-        } else{ //right side
-
-            if(xDir == 1){//towards player
-                x = Random.Range(player.position.x, (transform.position.x + xBuff)); //pick point between player - buffer & position + buffer
-            }else{ //pick random
-                x = Random.Range(transform.position.x, transform.position.x + xBuff);
-            }
-        }
-        
-        striking = true;
-        speed = originSpeed * 4f;
-        targetPos = new Vector2(x, transform.position.y);
-        yield return new WaitForSeconds(1f);
-
-        speed *= .7f;
-        targetPos = new Vector2(originX, transform.position.y);
-        yield return new WaitForSeconds(0.5f);
-        
         speed = originSpeed;
     }    
 }

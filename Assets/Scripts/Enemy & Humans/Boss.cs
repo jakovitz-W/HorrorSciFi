@@ -20,14 +20,18 @@ public class Boss : MonoBehaviour
     public IEnumerator StartFight(){
         //start first section of boss theme
         //intro dialogue
-        yield return new WaitForSeconds(1f);
+        //yield return new WaitForSeconds(1f);
         bossActive = true;
         StartCoroutine("AttackSequence");
+        
+        for(int i = 0; i < tendrils.Length; i++){
+            tendrils[i].GetComponent<Tendrils>().shouldMove = true;
+        }
+        yield return null; //delete later
     }
 
     void FixedUpdate(){
 
-    
         /*delete later*/
         if(testStrike){
             testStrike = false;
@@ -35,30 +39,23 @@ public class Boss : MonoBehaviour
                 StartCoroutine(tendrils[i].GetComponent<Tendrils>().Strike());
             }
         }
-        
-        for(int j = 0; j < tendrils.Length; j++){
-            if(tendrils[j].GetComponent<Tendrils>().striking){
-                isAttacking = true;
-                break;
-            } else{
-                isAttacking = false;
-            }
-        }
 
-        if(!isAttacking && bossActive){
-            StartCoroutine("AttackSequence");
+        if(startBoss){
+            startBoss = false;
+            StartCoroutine("StartFight");
         }
-    
     }
 
     private IEnumerator AttackSequence(){
 
-        float cd = Random.Range(5f, atkCooldown);
+        isAttacking = true;
+        float cd = Random.Range(3f, atkCooldown);
         for(int i = 0; i < tendrils.Length; i++){
             StartCoroutine(tendrils[i].GetComponent<Tendrils>().Strike());
         }
         yield return new WaitForSeconds(cd);
         isAttacking = false;
+        StartCoroutine(AttackSequence());
     }
 
     public IEnumerator OnHit(){

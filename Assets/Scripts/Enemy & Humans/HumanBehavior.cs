@@ -281,6 +281,12 @@ public class HumanBehavior : MonoBehaviour
         }
     }
 
+    public void Unlink(){ //spaghetti-esque, don't do this
+        for(int i = 0; i < monsters.Count; i++){
+            monsters[i].GetComponent<EnemyBehavior>().Unlink();
+        }
+    }
+
     public void DropOff(){
 
         dropped = true;
@@ -290,10 +296,7 @@ public class HumanBehavior : MonoBehaviour
         isClimbing = false;
         isFrightened = false;
         currentSpeed = followSpeed;
-        
-        for(int i = 0; i < monsters.Count; i++){
-            monsters[i].GetComponent<EnemyBehavior>().Unlink();
-        }
+        Unlink();
     }
 
     void OnDeath(){

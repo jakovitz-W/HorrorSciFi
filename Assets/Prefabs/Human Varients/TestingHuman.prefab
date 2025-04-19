@@ -113,6 +113,10 @@ PrefabInstance:
       value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 8403373314787828621, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 100693469080946567}
+    - target: {fileID: 8403373314787828621, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: idleSpeed
       value: 0.9
       objectReference: {fileID: 0}
@@ -129,3 +133,14 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
+--- !u!114 &100693469080946567 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4868198486547425732, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
+  m_PrefabInstance: {fileID: 4821926480999444035}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b280a14dd3bd0b546b9ad56210253290, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

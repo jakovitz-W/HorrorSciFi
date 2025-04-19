@@ -9,7 +9,8 @@ public class ButtonScript : MonoBehaviour
     private SpriteRenderer rend;
     [SerializeField] private Sprite activeSprite, notActiveSprite;
     [SerializeField] private Light2D indicator;
-    [SerializeField] private bool activated = false;
+    [SerializeField] private bool activated = false;    
+    [SerializeField] private Animator anim;
     
     void OnEnable(){
         rend = GetComponent<SpriteRenderer>();
@@ -28,7 +29,9 @@ public class ButtonScript : MonoBehaviour
     public void ActivateAll(){
 
         activated = !activated;
-
+        if(anim != null){
+            anim.SetBool("pressed", true);
+        }
         if(activated){
             rend.sprite = activeSprite;
             indicator.color = Color.green;
@@ -64,15 +67,14 @@ public class Affected{
     }
     [SerializeField] private ObjName name;    
     [SerializeField] private GameObject actor; //naming abstract variables is hard :(
-    public bool activated = false;
-    public bool isHorizontal = false;
 
+    public bool activated = false;
     public void Activate(){
         activated = !activated;        
 
+
         switch(name){
         case ObjName.ElectricDoor:
-            actor.GetComponentInChildren<Animator>().SetBool("isHorizontal", isHorizontal);
             Door();
             break;
         case ObjName.ConveyerBelt:

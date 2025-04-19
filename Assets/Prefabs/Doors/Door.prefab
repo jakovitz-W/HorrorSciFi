@@ -318,6 +318,7 @@ MonoBehaviour:
   unlockedSprite: {fileID: 21300000, guid: 34eb952d0dfc880448ba701edfc1de20, type: 3}
   indicator: {fileID: 5013419569094090504}
   requireKey: 0
+  isBoss: 0
 --- !u!1 &8187408682238148293
 GameObject:
   m_ObjectHideFlags: 0

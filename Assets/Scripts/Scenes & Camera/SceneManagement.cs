@@ -28,7 +28,7 @@ public class SceneManagement : MonoBehaviour
         playerControls.Disable();
     }
     public void StartGame(){
-
+        SceneManager.LoadScene(0);
     }
 
     public void QuitGame(){
@@ -54,6 +54,7 @@ public class SceneManagement : MonoBehaviour
         activeSubMenu.SetActive(true);       
     }
 
+    //bound to escape
     public void CloseSubMenu(InputAction.CallbackContext ctx){
         
         if(ctx.performed){

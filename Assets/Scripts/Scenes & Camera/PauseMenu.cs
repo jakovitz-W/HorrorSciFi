@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -46,8 +47,16 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
     }
 
+    public void Unstuck(){
+        
+        PlayerMovement player = GameObject.Find("Player").GetComponent<PlayerMovement>();
+        player.OnDeath();
+        pauseMenu.SetActive(false);
+    }
+
     public void Save(){
         //grab important variables, load into JSONs
+        Debug.Log("saving");
     }
 
     public void SaveAndQuit(){
@@ -57,11 +66,12 @@ public class PauseMenu : MonoBehaviour
 
     public void SaveAndMain(){
         Save();
-        //load start menu
+        SceneManager.LoadScene(1);
     }
 
     public void CloseApp(){
         Application.Quit();
+        Debug.Log("quit");
     }
 
 

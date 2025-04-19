@@ -70,14 +70,14 @@ public class PlayerMovement : MonoBehaviour
         controller.Move(horizontalMove * Time.fixedDeltaTime, verticalMove * Time.fixedDeltaTime);
     }
     public void OnDeath(){
-
+        Time.timeScale = 1f;
         GameObject checkpoint = levelManager.levels[levelManager.LIndex].checkpoint;
         transform.position = checkpoint.transform.position;
         horizontalMove = 0f;
     }
 
     public void ReduceSpeed(){
-        if(runSpeed > 10){
+        if(runSpeed > 12){
             runSpeed -= (.05f * runSpeed);
         } else{
             //too slow to continue

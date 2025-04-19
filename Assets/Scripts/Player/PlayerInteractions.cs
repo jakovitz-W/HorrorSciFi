@@ -219,26 +219,25 @@ public class PlayerInteractions : MonoBehaviour
             Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, interactRadius, mask);
             
             foreach(Collider2D col in cols){
+                GameObject target = col.gameObject;
+                
                 if(!diSystem.diContainer.activeSelf){ //only allow interaction when the dialogue box is not active
 
                     if(col != null){
-                        GameObject target = col.gameObject;
-
-                        //need to account for edge cases where there's multiple objects in the overlap circle
-                        //can be done with a foreach loop
+                        
                         switch(target.tag){
                             case "Key Item":
                                 diSystem.SetText("KeyItem", false, false, -1);
                                 break;
                             case "Door":
-                                if(CheckDoor(target)){
+                                if(CheckDoor(target, true)){
                                     target.GetComponent<DoorScript>().SetUnlocked();
                                 }
                                 break;
                             case "Meltable":
                                 diSystem.SetText("Melt", false, false, -1);
                                 break;
-                            case "Zappable":
+                            case "ControlPanel":
                                 diSystem.SetText("Zap", false, false, -1);
                                 break;
                             case "Checkpoint":
@@ -270,9 +269,6 @@ public class PlayerInteractions : MonoBehaviour
                                     }
                                 }
                                 break;
-                            case "Button":
-                                
-                                break;
                             case "Exit":
                                 transform.position = levelManager.levels[levelManager.LIndex].checkpoint.transform.position; //oof
                                 break;
@@ -286,8 +282,14 @@ public class PlayerInteractions : MonoBehaviour
                                 break;
                         }
                     }
+                }else{
+                    if(target.tag == "Door"){ //let player through doors while speaking to astronaut/creatures
+                        if(CheckDoor(target, false)){
+                            target.GetComponent<DoorScript>().SetUnlocked();
+                        }
+                    }
                 }
-            }
+            } 
         }
     }
 
@@ -300,10 +302,11 @@ public class PlayerInteractions : MonoBehaviour
         for(int i = 0; i < humans.Count; i++){
             humans[i].transform.position = transform.position;
             humans[i].transform.parent = levelManager.levelParents[level].transform;
+            humans[i].GetComponent<HumanBehavior>().Unlink();
         }
     }
 
-    bool CheckDoor(GameObject door){
+    bool CheckDoor(GameObject door, bool showDialogue){
 
         int i = levelManager.LIndex;
 
@@ -329,8 +332,11 @@ public class PlayerInteractions : MonoBehaviour
                     
                     return true;
                 } else{
-                    diSystem.SetText("MissingCure", false, true, -1);
-                    Debug.Log("Requires Cure Item");
+                    if(showDialogue){
+                        diSystem.SetText("MissingCure", false, true, -1);
+                        Debug.Log("Requires Cure Item");    
+                    }
+
                     return false;
                 }
             } else if(currentLevel.hasKey){
@@ -346,7 +352,10 @@ public class PlayerInteractions : MonoBehaviour
                 return true;
 
             } else{
-                diSystem.SetText("DoorLocked", false, true, -1);
+                if(showDialogue){
+                   diSystem.SetText("DoorLocked", false, true, -1); 
+                }
+                
                 return false;
             }
         } else{

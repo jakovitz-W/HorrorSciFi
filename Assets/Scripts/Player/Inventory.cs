@@ -9,9 +9,10 @@ public class Inventory : MonoBehaviour
 {
     [HideInInspector] public PlayerControls playerControls;
     [SerializeField] private PlayerInteractions player;
+    [SerializeField] private PlayerMovement pMovement;
     [SerializeField] private UpgradeSystem upgradeSystem;
     [SerializeField] private TMP_Text following, tokens;
-    [SerializeField] private RawImage torch, taser, cure;
+    [SerializeField] private RawImage torch, taser, cure, drone;
     [SerializeField] private GameObject menu;
     private bool menuActive = false;
 
@@ -43,13 +44,17 @@ public class Inventory : MonoBehaviour
                 tokens.text = "Tokens: " + upgradeSystem.wallet;
 
                 if(player.hasTorch){
-                    torch.color = new Color(1f, 1f, 1f, 1f); //changing alpha value
+                    torch.color = new Color(1f, 1f, 1f, 1f); //changing color and alpha value
                 }
                 if(player.hasTaser){
                     taser.color = new Color(1f, 1f, 1f, 1f);
                 }
                 if(player.hasCure){
-                    taser.color = new Color(1f, 1f, 1f, 1f);
+                    cure.color = new Color(1f, 1f, 1f, 1f);
+                }
+
+                if(pMovement.droneUnlocked){
+                    drone.color = new Color(1f, 1f, 1f, 1f);
                 }
             }
 

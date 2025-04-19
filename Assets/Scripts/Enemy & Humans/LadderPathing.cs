@@ -2,6 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*To place nodes:
+    -enable node sprite renderers (optional)
+    -enter play mode
+    -set node as child of sample human
+    -set node y position to 0
+    -set node's parent back to ladder
+    -write down/copy y position
+    -exit play mode
+    -set node's y position
+
+    -x position is arbitrary, anything close to ladder will do
+*/
 public class LadderPathing : MonoBehaviour
 {
     private Transform player;
@@ -53,7 +66,6 @@ public class LadderPathing : MonoBehaviour
                 }
             }
         }
-
     }
 
     public void GrabNodes(GameObject ladder){
