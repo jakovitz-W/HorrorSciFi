@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+
+    [SerializeField] private Boss boss;
     //store stages in GameObject[] and set active/unactive to reduce lag
     public Level[] levels; //array of Level class (found at end of script)
     private GameObject player;
@@ -26,14 +28,14 @@ public class LevelManager : MonoBehaviour
         //activates next room & teleports the player
         levelParents[room].SetActive(true);
         player.transform.position = levels[room].checkpoint.transform.position;
-        player.GetComponent<PlayerInteractions>().TeleportHumans(LIndex);
+        player.GetComponent<PlayerInteractions>().TeleportHumans(room);
         //deactivates all other rooms
         for(int i = 0; i < levels.Length; i++){
             if(i != room){
                 levelParents[i].SetActive(false);
             }
         }
-        LIndex++;
+        LIndex = room;
 
         //end fade transition
         yield return new WaitForSeconds(1);
@@ -41,6 +43,12 @@ public class LevelManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         player.GetComponent<PlayerMovement>().enabled = true;
         player.GetComponent<PlayerInteractions>().enabled = true;
+        
+        if(levels[room].isBossRoom){
+            player.GetComponent<PlayerInteractions>().enabled = false;
+            boss.Reset();
+        }
+
     }
 
     public IEnumerator Backtrack(){ //this method allows the player to go to the previous room
@@ -75,7 +83,8 @@ public class LevelManager : MonoBehaviour
     }
 
     void Start(){
-
+        Time.timeScale = 1f;
+        AudioManager.Instance.PlayMusic("ambient");
         player = GameObject.FindWithTag("Player");
         LIndex = 0;
 
@@ -95,5 +104,6 @@ public class LevelManager : MonoBehaviour
 public class Level{ //used to store information about individual rooms in the scene
     public GameObject checkpoint; //entry/backtrack point
     public bool hasKey; //allows access to the room's exit point
+    public bool isBossRoom = false;
 } 
 

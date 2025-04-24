@@ -43,6 +43,12 @@ public class DebugMenu : MonoBehaviour
         }
     }
 
+    public void OpenDebug(){
+        isActive = !isActive;
+        debugMenu.SetActive(isActive);
+        Cursor.visible = true;
+    }
+
     public void Resume(){
         debugMenu.SetActive(false);
         Time.timeScale = 1f;
@@ -63,5 +69,14 @@ public class DebugMenu : MonoBehaviour
 
     public void UnlockDrone(){
         player.GetComponent<PlayerMovement>().droneUnlocked = true;
+    }
+
+    public void SkipToBoss(){
+        UnlockWeapons();
+        UnlockDrone();
+        UnlockDoors();
+        player.GetComponent<PlayerInteractions>().hasCure = true;
+
+        StartCoroutine(levelManager.OnRoomChange(5));
     }
 }

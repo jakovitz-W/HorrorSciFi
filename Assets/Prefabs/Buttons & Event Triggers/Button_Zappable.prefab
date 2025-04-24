@@ -153,7 +153,8 @@ MonoBehaviour:
     activated: 0
   activeSprite: {fileID: 443903343, guid: 3c11d8bd47de4234f8d320e01230111d, type: 3}
   notActiveSprite: {fileID: -288518026, guid: 3c11d8bd47de4234f8d320e01230111d, type: 3}
-  indicator: {fileID: 3632898210847486676}
+  indicators:
+  - {fileID: 3632898210847486676}
   activated: 0
   anim: {fileID: 0}
 --- !u!1 &1336121520758174921

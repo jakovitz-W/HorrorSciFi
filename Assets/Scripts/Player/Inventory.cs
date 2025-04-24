@@ -41,7 +41,7 @@ public class Inventory : MonoBehaviour
 
             if(menuActive){
                 following.text = "Following: " + player.humans.Count;
-                tokens.text = "Tokens: " + upgradeSystem.wallet;
+                tokens.text = "Upgrade Tokens: " + upgradeSystem.wallet;
 
                 if(player.hasTorch){
                     torch.color = new Color(1f, 1f, 1f, 1f); //changing color and alpha value

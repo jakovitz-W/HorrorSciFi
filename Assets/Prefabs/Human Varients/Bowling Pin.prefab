@@ -44,6 +44,10 @@ PrefabInstance:
       propertyPath: m_Constraints
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2937599409755454986, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
+      propertyPath: m_ExcludeLayers.m_Bits
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3186145300131072566, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -70,11 +74,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7875369140235486737, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -4.2
+      value: -2.37
       objectReference: {fileID: 0}
     - target: {fileID: 7875369140235486737, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.81
+      value: -0.83
       objectReference: {fileID: 0}
     - target: {fileID: 7875369140235486737, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: m_LocalPosition.z

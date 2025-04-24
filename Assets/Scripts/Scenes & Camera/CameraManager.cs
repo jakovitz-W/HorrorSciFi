@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 
 public class CameraManager : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class CameraManager : MonoBehaviour
     [SerializeField] protected bool canFollow = true;
     [SerializeField] protected bool autoScroll = false;
 
+    [SerializeField] private Light2D light;
 
     protected void Update()
     {
@@ -63,5 +65,9 @@ public class CameraManager : MonoBehaviour
             autoScroll = false;
         }
 
+    }
+
+    public void UpdateLightIntensity(float intensity){
+        light.intensity = intensity;
     }  
 }

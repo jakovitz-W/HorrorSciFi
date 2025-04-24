@@ -11,9 +11,9 @@ public class HumanBehavior : MonoBehaviour
     public string type;
     private Rigidbody2D rb;
     public string dialogueKey;  
-    public float health, maxHealth;
+    public float health =100, maxHealth = 100;
     public FloatingHealthBar healthBar;
-    [SerializeField] private float damageAmnt;
+    [SerializeField] private float damageAmnt = 10;
 
     [SerializeField] private float idleSpeed, fleeSpeed, followSpeed;
     public int direction = 1;
@@ -35,7 +35,10 @@ public class HumanBehavior : MonoBehaviour
     [SerializeField] private float sightDistance = 4f;
     [SerializeField] private Collider2D mainCol;
     public bool dropped = false;
+    private bool stopped = false;
     private Transform dropoff;
+
+    private AudioSource footsteps = null;
 
     void OnEnable(){
         monsters = new List<GameObject>();
@@ -49,7 +52,7 @@ public class HumanBehavior : MonoBehaviour
     }
 
     void FixedUpdate(){
-        
+
         if(dropped){
             if(Mathf.Abs(transform.position.x - dropoff.position.x) > 0){
                 
@@ -79,14 +82,13 @@ public class HumanBehavior : MonoBehaviour
         }
 
 
-        if(isFrightened && !dropped){
+        if(isFrightened && !dropped && !isFollowing){
 
             CheckStuck();
 
-            if(!stuck){
+            if(!stuck && !stopped){
                 StopCoroutine("ChooseDirection");
                 anim.SetBool("isWalking", true);
-                currentSpeed = fleeSpeed;
                 runFrom = ReturnClosest(); //watch out for async issues
                 
                 if(direction != runFrom.GetComponent<EnemyBehavior>().direction){
@@ -154,6 +156,16 @@ public class HumanBehavior : MonoBehaviour
                 isClimbing = false;
             }
         }
+
+        if(currentSpeed != 0 && !isClimbing){
+            if(footsteps == null){
+                footsteps = AudioManager.Instance.PlayRepeatingAtPoint("footsteps", this.transform);                
+            }
+        } else{
+            if(footsteps != null){
+                Destroy(footsteps.gameObject);
+            }
+        }
     }
 
     void OnTriggerEnter2D(Collider2D col){
@@ -173,6 +185,10 @@ public class HumanBehavior : MonoBehaviour
     }
 
     private void CheckStuck(){
+        
+        if(isFollowing){
+            return;
+        }
         
         RaycastHit2D forwardRay = Physics2D.Raycast(transform.position, -direction * Vector2.left, sightDistance);
 
@@ -233,6 +249,7 @@ public class HumanBehavior : MonoBehaviour
 
         currentSpeed = idleSpeed;
         anim.SetBool("isWalking", true);
+
         float rand = Random.Range(1f, 3f);
         yield return new WaitForSeconds(rand);
         
@@ -246,7 +263,7 @@ public class HumanBehavior : MonoBehaviour
 
         currentSpeed = idleSpeed;
         anim.SetBool("isWalking", true);
-
+        
         if(!isFrightened && !isFollowing){
             StartCoroutine("ChooseDirection");
         } else{
@@ -257,19 +274,27 @@ public class HumanBehavior : MonoBehaviour
     public void Hit(){
 
         if(health > 0){
-            StartCoroutine(TakeDamage(damageAmnt));
+            StartCoroutine("TakeDamage");
         } else{
+            AudioManager.Instance.PlaySFXAtPoint("human_die", monsters[0].transform);
             OnDeath();
         }
     }
-    private IEnumerator TakeDamage(float damageAmount){
-
-        health -= damageAmount;
+    private IEnumerator TakeDamage(){
+        
+        stopped = true;
+        anim.SetBool("isWalking", false);
+        currentSpeed = 0f;
+        health -= damageAmnt;
         healthBar.UpdateHealthBar(health, maxHealth);
 
         GetComponent<SpriteRenderer>().color = Color.red;
         yield return new WaitForSeconds(.05f);
         GetComponent<SpriteRenderer>().color = Color.white;
+        yield return new WaitForSeconds(2f);
+        currentSpeed = fleeSpeed;
+        anim.SetBool("isWalking", true);
+        stopped = false;
     }
 
     public void Link(GameObject monster){
@@ -277,6 +302,7 @@ public class HumanBehavior : MonoBehaviour
         monsters.Add(monster);
 
         if(!isFollowing){
+            currentSpeed = fleeSpeed;
             isFrightened = true;
         }
     }
@@ -288,8 +314,12 @@ public class HumanBehavior : MonoBehaviour
     }
 
     public void DropOff(){
-
+        if(!isFollowing){
+            return;
+        }
+        
         dropped = true;
+
         player.gameObject.GetComponent<PlayerInteractions>().RemoveHuman(this.gameObject);
         mainCol.enabled = false;
         isFollowing = false;
@@ -297,6 +327,7 @@ public class HumanBehavior : MonoBehaviour
         isFrightened = false;
         currentSpeed = followSpeed;
         Unlink();
+        StartCoroutine("ChooseDirection");
     }
 
     void OnDeath(){
@@ -304,7 +335,6 @@ public class HumanBehavior : MonoBehaviour
         for(int i = 0; i < monsters.Count; i++){
             monsters[i].GetComponent<EnemyBehavior>().Unlink();
         }
-
         gameObject.SetActive(false);
     }
 

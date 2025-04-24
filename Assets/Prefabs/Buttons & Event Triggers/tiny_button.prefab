@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7006202034108617952}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -13.218, y: -2.939, z: -0.047104895}
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_ConstrainProportionsScale: 0
@@ -148,12 +148,15 @@ MonoBehaviour:
   - name: 3
     actor: {fileID: 0}
     activated: 0
-    isHorizontal: 0
   activeSprite: {fileID: 443903343, guid: 3c11d8bd47de4234f8d320e01230111d, type: 3}
   notActiveSprite: {fileID: -288518026, guid: 3c11d8bd47de4234f8d320e01230111d, type: 3}
-  indicator: {fileID: 0}
+  indicators:
+  - {fileID: 0}
+  - {fileID: 0}
   activated: 0
   anim: {fileID: 7357118366117363383}
+  isTiny: 1
+  default_intensity: 31
 --- !u!95 &7357118366117363383
 Animator:
   serializedVersion: 5

@@ -50,6 +50,134 @@ AudioSource:
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
+  Priority: 69
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 42.7
+  Pan2D: 0
+  rolloffMode: 2
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!1 &5267226394983344488
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8400679129628179454}
+  - component: {fileID: 7999491055689552474}
+  m_Layer: 0
+  m_Name: UISource
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8400679129628179454
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5267226394983344488}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5233428489212545029}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!82 &7999491055689552474
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5267226394983344488}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
   MinDistance: 1
@@ -153,13 +281,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5815916559119440845}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 49.368668, y: -34.481594, z: -0.41555327}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8554368655084326568}
   - {fileID: 3216251192468394103}
+  - {fileID: 8400679129628179454}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5364543904436446450
@@ -177,9 +306,51 @@ MonoBehaviour:
   music:
   - name: ambient
     clip: {fileID: 8300000, guid: 9eed7885269103a42baabc8261d63ed8, type: 3}
-  sfxSounds: []
+  - name: boss
+    clip: {fileID: 8300000, guid: cfe67082e975d9b43bcc4537dd473f8f, type: 3}
+  sfxSounds:
+  - name: monster_idle
+    clip: {fileID: 8300000, guid: 9a9f99a78e1745544bccc36d917d1879, type: 3}
+  - name: monster_stun
+    clip: {fileID: 8300000, guid: 64f7ab2d41d13f942b7afaa7cf9b5287, type: 3}
+  - name: boss_hurt
+    clip: {fileID: 8300000, guid: 266b9f51d68cfa34f9066ea4882fe0d1, type: 3}
+  - name: electric_door
+    clip: {fileID: 8300000, guid: ac72778e95522324c8703b3eeae9e63d, type: 3}
+  - name: drone_hover
+    clip: {fileID: 8300000, guid: 16fcc6b6388540b4a894492457643dce, type: 3}
+  - name: drone_torch
+    clip: {fileID: 8300000, guid: 052bb7d6953974640a2332601cd22ccb, type: 3}
+  - name: drone_taser
+    clip: {fileID: 8300000, guid: 83e6963ca483ac84cbff5929bd09d7a7, type: 3}
+  - name: fridge_rattle
+    clip: {fileID: 8300000, guid: 8fb50cae9b4759f4e8c02f1b95311fd1, type: 3}
+  - name: fridge_burst
+    clip: {fileID: 8300000, guid: 75abc5be373ecb04f86959b322928b69, type: 3}
+  - name: metal_box
+    clip: {fileID: 8300000, guid: f6710821d58a44c45be6e06ae9fc7fc6, type: 3}
+  - name: mechanical_arm
+    clip: {fileID: 8300000, guid: 72aa5f4c94762f04b96362c4ce1e23d3, type: 3}
+  - name: boss_attack
+    clip: {fileID: 8300000, guid: 34567316058cfb54ba31ce41d1c78ee8, type: 3}
+  - name: boss_ouch
+    clip: {fileID: 8300000, guid: 12f9eb98d5a395343987611bc99eee6e, type: 3}
+  - name: footsteps
+    clip: {fileID: 8300000, guid: 5cb1f3021be976c4d8f98d6aa261d8bb, type: 3}
+  - name: human_die
+    clip: {fileID: 8300000, guid: a6808d883d2c3e04c91426c421376453, type: 3}
+  - name: tiny_button
+    clip: {fileID: 8300000, guid: a6808d883d2c3e04c91426c421376453, type: 3}
+  - name: magnet
+    clip: {fileID: 8300000, guid: 6a6a1a4d3840bdf42a59a56b1c554c42, type: 3}
+  UISounds:
+  - name: terminal
+    clip: {fileID: 8300000, guid: ce2e49bbd46c200429bb75958fbae869, type: 3}
+  - name: button
+    clip: {fileID: 8300000, guid: af20178837539a94fb104ed44243a99b, type: 3}
   musicSource: {fileID: 1335383534958013170}
   sfxSource: {fileID: 2276260694619645514}
+  UISource: {fileID: 7999491055689552474}
 --- !u!1 &7169375684250856761
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,14 +394,14 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 85
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500

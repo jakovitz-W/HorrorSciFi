@@ -26,6 +26,9 @@ TagManager:
   - Cure
   - Boss
   - crate
+  - boss_center
+  - reset_button
+  - magnet
   layers:
   - Default
   - TransparentFX
@@ -43,7 +46,7 @@ TagManager:
   - Magnetic
   - Boss
   - Moveable
-  - 
+  - Human
   - 
   - 
   - 

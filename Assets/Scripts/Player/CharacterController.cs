@@ -13,12 +13,24 @@ public class CharacterController : MonoBehaviour
     [SerializeField] private float tiltSpeed = 50f;
     private Quaternion targetRotation;
 
+    private AudioSource hoverSound = null;
+
     private void Awake(){
         rb = GetComponent<Rigidbody2D>();
     }
 
     public void Move(float moveX, float moveY){
     
+        if(Mathf.Abs(moveX) > 0 || Mathf.Abs(moveY) > 0){
+            if(hoverSound == null){
+                hoverSound = AudioManager.Instance.PlayRepeatingAtPoint("drone_hover", this.transform);
+            }
+
+        } else{
+            if(hoverSound != null){
+                Destroy(hoverSound.gameObject);
+            }
+        }
 
         Vector3 targetVelocity = new Vector2(moveX * 10f, moveY * 10f);
         rb.velocity = Vector3.SmoothDamp(rb.velocity, targetVelocity, ref m_Velocity, m_MovementSmoothing);

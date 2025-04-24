@@ -6,7 +6,10 @@ using UnityEngine.InputSystem;
 /*Keep Disabled until Boss Room*/
 public class BossCombat : MonoBehaviour
 {
+    [SerializeField] private Animator anim;
+    [SerializeField] private Camera mainCam;
     private PlayerInteractions interactions;
+    private PlayerMovement movement;
     [SerializeField] private LevelManager lm;
     private PlayerControls ctrls;
     [SerializeField] private int hitpoints = 3;
@@ -14,19 +17,26 @@ public class BossCombat : MonoBehaviour
     [SerializeField] private float iTime = 0.5f;
     [SerializeField] private float attackRadius = 1.5f;
     [SerializeField] private Boss boss;
-
-    void OnEnable(){
-        interactions = GetComponent<PlayerInteractions>();
-        interactions.enabled = false;
+    
+    void Awake(){
         ctrls = new PlayerControls();
+    }
+    void OnEnable(){
+
+        mainCam.GetComponent<Animator>().SetBool("boss", true);
+        interactions = GetComponent<PlayerInteractions>();
+        movement = GetComponent<PlayerMovement>();
+        anim =  GetComponent<Animator>();
+        interactions.enabled = false;
         lm = GameObject.Find("LevelManager").GetComponent<LevelManager>();
 
-        StartCoroutine(boss.StartFight());
         ctrls.Land.UseWeapon.performed += UseWeapon;
+        ctrls.Enable();  //always remember to enable controls
     }
 
     void OnDisable(){
         ctrls.Land.UseWeapon.performed -= UseWeapon;
+        ctrls.Disable();
     }
 
     void UseWeapon(InputAction.CallbackContext ctx){
@@ -35,7 +45,11 @@ public class BossCombat : MonoBehaviour
         if(ctx.performed){
             Collider2D col = Physics2D.OverlapCircle(transform.position, attackRadius, mask);
 
-            StartCoroutine(col.gameObject.GetComponent<Boss>().OnHit());
+            if(col != null){
+                if(col.gameObject.tag == "boss_center"){
+                    StartCoroutine(boss.OnHit());
+                } 
+            }
         }
     }
 
@@ -43,28 +57,36 @@ public class BossCombat : MonoBehaviour
 
         if(col.gameObject.tag == "Boss" && !invincible){
 
-            StartCoroutine("IFrames");
+            StartCoroutine(IFrames());
             hitpoints--;
 
             if(hitpoints <= 0){
                 OnDeath();
                 invincible = false;
-                StopCoroutine("IFrames");
             }
 
         }
     }
 
     private IEnumerator IFrames(){
+
         invincible = true;
-        //flashing opacity animation
+        anim.SetBool("iframe", true);
         yield return new WaitForSeconds(iTime);
-        //return to full opacity
+        anim.SetBool("iframe", false);
         invincible = false;
     }
 
     void OnDeath(){
+        anim.SetBool("iframe", false);
+        invincible = false;
+        hitpoints = 3;
         interactions.enabled = true;
-        //StartCoroutine(lm.Backtrack());
+        mainCam.GetComponent<Animator>().SetBool("boss", false);
+        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        AudioManager.Instance.StopAll();
+        StartCoroutine(lm.Backtrack());
+        AudioManager.Instance.PlayMusic("ambient");
+        this.enabled = false;
     }
 }

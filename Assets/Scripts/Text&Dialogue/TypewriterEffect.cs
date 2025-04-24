@@ -11,6 +11,18 @@ public class TypewriterEffect : MonoBehaviour
     private float typingSpeed;
     private string fullText;
     private bool hint;
+    private bool allowHint = true;
+
+    public void DisableHints(){
+        allowHint = false;
+    }
+
+    public void SetTextSpeed(float speed){
+        //have to do it this way bc unity does not allow min to be larger than max on sliders
+        //in this case the larger values equal slower text speed, so it needs to be reversed
+        defaultSpeed = Mathf.Abs(speed);
+        typingSpeed = defaultSpeed;
+    }
 
     private void Awake(){
         fullText = textMesh.text;
@@ -31,6 +43,11 @@ public class TypewriterEffect : MonoBehaviour
 
     public void SetString(string text, bool isHint){
         hint = isHint;
+
+        if(isHint && !allowHint){
+            return;
+        }
+
         fullText = text;
         textMesh.text = string.Empty;
         StartCoroutine(TypeText());

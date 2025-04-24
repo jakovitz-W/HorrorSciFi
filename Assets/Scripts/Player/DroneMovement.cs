@@ -47,6 +47,8 @@ public class DroneMovement : MonoBehaviour
 
                 if(target.tag == "ControlPanel"){
                     target.GetComponent<ButtonScript>().ActivateAll();
+                } else if(target.tag == "reset_button"){
+                    target.GetComponent<ResetButton>().Reset();
                 }
             }
         }

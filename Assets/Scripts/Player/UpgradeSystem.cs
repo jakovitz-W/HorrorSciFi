@@ -2,9 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class UpgradeSystem : MonoBehaviour
-{
+{   
+    private PlayerControls playerControls;    
+    [SerializeField] private PauseMenu pauseMenu;
     private GameObject player;
     private PlayerMovement movement;
     private PlayerInteractions interactions;
@@ -27,13 +30,31 @@ public class UpgradeSystem : MonoBehaviour
     private bool regenUnlocked = false;
     [SerializeField] private GameObject regen, speed, range, stun, drone; //buttons
 
+
+    public void DebugAdd(){
+        humansSaved++;
+        UpdateWallet();
+    }
+    
     void Awake(){
+        playerControls = new PlayerControls();
         player = GameObject.FindWithTag("Player");
         movement = player.GetComponent<PlayerMovement>();
         interactions = player.GetComponent<PlayerInteractions>();
     }
+
+    void OnEnable(){
+        playerControls.Land.Interact.performed += CloseMenu;
+        playerControls.Enable();
+    }
+
+    void OnDisable(){
+        playerControls.Land.Interact.performed -= CloseMenu;
+        playerControls.Disable();
+    }
     
     public void OpenMenu(){
+        
         wallet = humansSaved - spent;
         tokens.text = "Tokens: " + wallet;
         if(movement.hasDroneKey){
@@ -43,18 +64,39 @@ public class UpgradeSystem : MonoBehaviour
         }
 
         if(!upgradeMenu.activeSelf){
+            movement.enabled = false;
+            interactions.enabled = false;
+            pauseMenu.enabled = false;
+            Cursor.visible = true;
             upgradeMenu.SetActive(true);   
             Recalculate();
             Time.timeScale = 0f;     
-        } else{
+        }
+    }
+
+    public void CloseMenu(InputAction.CallbackContext ctx){
+        if(ctx.performed){
+
+            if(!upgradeMenu.activeSelf){
+                return;
+            }
+            pauseMenu.enabled = true;
+            movement.enabled = true;
+            interactions.enabled = true;
+            Cursor.visible = false;
+
             upgradeMenu.SetActive(false);
             Time.timeScale = 1f;
         }
+    }
 
+    public void UpdateWallet(){
+        wallet = humansSaved - spent;        
     }
 
     void Recalculate(){
-        wallet = humansSaved - spent;
+
+        UpdateWallet();
         tokens.text = "Tokens: " + wallet;
 
         if(wallet < regenCost || regenUnlocked){

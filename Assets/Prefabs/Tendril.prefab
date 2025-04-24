@@ -100,10 +100,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  xDir: 1
+  xDir: -1
   upper: {fileID: 0}
   lower: {fileID: 0}
+  upperReached: 0
+  lowerReached: 1
   striking: 0
+  shouldMove: 0
+  isVertical: 0
+  onWall: 0
+  stationary: 0
+  active: 1
 --- !u!61 &5581949584992824126
 BoxCollider2D:
   m_ObjectHideFlags: 0

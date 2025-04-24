@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 881560782391853121, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
+      propertyPath: m_Value
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 1171625862703066871, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: m_Size.x
       value: 0.59487885
@@ -48,6 +52,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4068827812250442035, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7363680071014847787, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -66,15 +74,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7875369140235486737, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.69
+      value: 0.31
       objectReference: {fileID: 0}
     - target: {fileID: 7875369140235486737, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -22.05
+      value: 22.57
       objectReference: {fileID: 0}
     - target: {fileID: 7875369140235486737, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.25740004
       objectReference: {fileID: 0}
     - target: {fileID: 7875369140235486737, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -106,7 +114,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8403373314787828621, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: health
-      value: 100
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8403373314787828621, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: fleeSpeed
@@ -122,7 +130,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8403373314787828621, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: maxHealth
-      value: 100
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 8403373314787828621, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: followSpeed

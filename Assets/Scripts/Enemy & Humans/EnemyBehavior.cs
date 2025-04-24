@@ -18,8 +18,9 @@ public class EnemyBehavior : MonoBehaviour
     public int direction = -1; //change in inspector for monsters placed facing right
    
     public float attackCooldown = 1f;
-    public float attackBuffer = 2f;
+    public float attackBuffer = 1.5f;
     public bool isAttacking = false;
+    private AudioSource footsteps = null;
 
     void OnEnable()
     {
@@ -64,12 +65,12 @@ public class EnemyBehavior : MonoBehaviour
                 StartCoroutine("ChooseDirection");
             }
 
-        } else if(target != null){
+        } else if(target != null || target.activeSelf){
             //follow
             Vector2 destination = new Vector2(target.transform.position.x, transform.position.y);
             transform.position = Vector2.MoveTowards(transform.position, destination, currentSpeed * Time.deltaTime);
 
-            float distance = Mathf.Abs(transform.position.x - target.transform.position.x);
+            float distance = Mathf.Abs(Vector2.Distance(this.transform.position, target.transform.position));
             if(distance <= attackBuffer){
                 if(!isAttacking){
                     StartCoroutine("Attack");
@@ -82,6 +83,16 @@ public class EnemyBehavior : MonoBehaviour
             Vector2 destination = new Vector2(transform.position.x + direction, transform.position.y);
             transform.position = Vector2.MoveTowards(transform.position, destination, currentSpeed * Time.deltaTime);
         }
+
+        if(currentSpeed != 0){
+            if(footsteps == null){
+                footsteps = AudioManager.Instance.PlayRepeatingAtPoint("footsteps", this.transform);                
+            }
+        } else{
+            if(footsteps != null){
+                Destroy(footsteps.gameObject);
+            }
+        }
     }
 
     private IEnumerator ChooseDirection(){
@@ -92,7 +103,7 @@ public class EnemyBehavior : MonoBehaviour
         yield return new WaitForSeconds(rand);
         
         currentSpeed = 0f;
-
+        AudioManager.Instance.PlaySFXAtPoint("monster_idle", this.transform);
         Flip();
 
         anim.SetBool("walking", false);
@@ -112,6 +123,7 @@ public class EnemyBehavior : MonoBehaviour
 
     public IEnumerator Stun(float stunTime){
         
+        AudioManager.Instance.PlaySFXAtPoint("monster_stun", this.transform);
         col.enabled = false;
         currentSpeed = 0f;
         
@@ -138,27 +150,18 @@ public class EnemyBehavior : MonoBehaviour
     private IEnumerator Attack(){
         //play attack animation
         //Debug.Log("Attack");
-        anim.SetBool("walking", false);
-        isAttacking = true;
-        currentSpeed = 0f;
 
+        anim.SetBool("walking", false);
+        anim.SetTrigger("attack");
+        isAttacking = true;
+
+        currentSpeed = 0f;
         target.GetComponent<HumanBehavior>().Hit();
         yield return new WaitForSeconds(attackCooldown);
-        
-        isAttacking = false;
         currentSpeed = chaseSpeed;
-        anim.SetBool("walking", true);
-    }
+        isAttacking = false;
 
-    void OnCollisionEnter2D(Collision2D col){
-        
-        if(col.gameObject.tag == "Human"){ //case where human runs into monster that's facing opposite direction
-    
-            if(!hasTarget && !col.gameObject.GetComponent<HumanBehavior>().dropped){
-                StopCoroutine("ChooseDirection");
-                Flip();
-            }
-        }
+        anim.SetBool("walking", true);
     }
 
     public void Flip(){

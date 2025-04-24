@@ -25,11 +25,11 @@ public class EvilWalls : MonoBehaviour
     private IEnumerator Timer(){
 
         col.enabled = false;
-        rend.color = Color.green;
+        rend.color = new Color(0f, 1f, 0f, .5f);
 
         yield return new WaitForSeconds(timer);
         col.enabled = true;
-        rend.color = Color.red;
+        rend.color = new Color(1f, 0f, 0f, .5f);
         yield return new WaitForSeconds(timer);
 
         StartCoroutine(Timer());

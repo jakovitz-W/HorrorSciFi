@@ -28,6 +28,7 @@ public class SceneManagement : MonoBehaviour
         playerControls.Disable();
     }
     public void StartGame(){
+        AudioManager.Instance.PlayUISound("button");
         SceneManager.LoadScene(0);
     }
 
@@ -39,6 +40,7 @@ public class SceneManagement : MonoBehaviour
     //assign index from the button calling it in the inspector
     public void OpenOption(int index){
 
+        AudioManager.Instance.PlayUISound("button");
         //note:acc = 0, audio= 1, ctrls = 2
         for(int i = 0; i < optionMenus.Length; i++){
             optionMenus[i].SetActive(false);
@@ -49,7 +51,8 @@ public class SceneManagement : MonoBehaviour
     }
 
     public void OpenSubMenu(int index){
-        //note:options = 0, save = 1, confirmation = 2
+        AudioManager.Instance.PlayUISound("button");
+        //note:options = 0, confirmation = 1
         activeSubMenu = subMenus[index];
         activeSubMenu.SetActive(true);       
     }
@@ -70,12 +73,16 @@ public class SceneManagement : MonoBehaviour
                     break;
                 }
             }
+
+            if(credits != null && credits.activeSelf){
+                credits.SetActive(false);
+            }
         }
     }
 
     //same as close but bound to a button
     public void Back(){
-
+        AudioManager.Instance.PlayUISound("button");
         if(activeSubMenu != null){
             activeSubMenu.SetActive(false);
             activeSubMenu = null;

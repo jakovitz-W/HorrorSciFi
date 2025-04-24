@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 
-/*TODO: fix bug where player keeps moving on scene change, fix bug where player sometimes moves with mini drone*/
 public class PlayerInteractions : MonoBehaviour
 {
     public LevelManager levelManager;
@@ -23,13 +22,13 @@ public class PlayerInteractions : MonoBehaviour
     public GameObject flameThrower, taser;
     public bool hasTorch, hasTaser;
     public bool torchActive, taserActive;
+    private AudioSource toolAudio;
     [SerializeField] private GameObject[] toolsUI;
     
     [SerializeField] private DialogueSystem diSystem;
     [SerializeField] private UpgradeSystem upgradeSystem;
     private PlayerMovement pMovement;
     private BossCombat bossCombat;
-
 
     public bool hasCure = false;
 
@@ -87,6 +86,9 @@ public class PlayerInteractions : MonoBehaviour
         } else if(col.gameObject.name == "PickupHint"){
             col.gameObject.SetActive(false);
             diSystem.SetText("Pickup", true, false, -1);
+        } else if(col.gameObject.name == "UpgradeHint"){
+            col.gameObject.SetActive(false);
+            diSystem.SetText("Upgrade", true, false, -1);
         }
     }
 
@@ -98,8 +100,10 @@ public class PlayerInteractions : MonoBehaviour
                 if(hasTorch && torchActive){
                     //check if adding lights to particle path is possible
                     flameThrower.SetActive(true);
+                    toolAudio = AudioManager.Instance.PlayRepeatingGlobal("drone_torch");
                 } else if(hasTaser && taserActive){
                     taser.SetActive(true);
+                    toolAudio = AudioManager.Instance.PlayRepeatingGlobal("drone_taser");
                 }
 
                 LayerMask mask = LayerMask.GetMask("Interactable", "Enemy");
@@ -137,10 +141,16 @@ public class PlayerInteractions : MonoBehaviour
         if(ctx.canceled){
             if(hasTorch && torchActive){
                 flameThrower.SetActive(false);
+                if(toolAudio != null){
+                    Destroy(toolAudio.gameObject);                    
+                }
             } else if(hasTaser && taserActive){
                 taser.SetActive(false);
+                if(toolAudio != null){
+                    Destroy(toolAudio.gameObject);                    
+                }
+
             }
-           
         }
     }
 
@@ -204,6 +214,8 @@ public class PlayerInteractions : MonoBehaviour
                     toolsUI[0].SetActive(false);
                     toolsUI[1].SetActive(true);
                     diSystem.SetText("SwapTool", true, false, -1);
+                } else if(target.tag == "Cure"){
+                    hasCure = true;
                 }
                 target.SetActive(false);
             }
@@ -212,10 +224,14 @@ public class PlayerInteractions : MonoBehaviour
 
     void Interact(InputAction.CallbackContext ctx){
 
-        LayerMask mask = LayerMask.GetMask("Interactable", "Key Item", "Enemy");
+        LayerMask mask = LayerMask.GetMask("Interactable", "Key Item", "Enemy", "Human");
 
         if(ctx.performed){
 
+            if(pMovement.droneActive){
+                return;
+            }
+            
             Collider2D[] cols = Physics2D.OverlapCircleAll(transform.position, interactRadius, mask);
             
             foreach(Collider2D col in cols){
@@ -248,26 +264,8 @@ public class PlayerInteractions : MonoBehaviour
                                 currentLevel = levelManager.levels[i];
                                 break;
                             case "Human":
-                                //TODO: check if human has special function
-                                //get human dialogue box if it has one
                                 HumanBehavior attributes = target.GetComponent<HumanBehavior>();
-
-                                if(attributes.type != "special"){                                
-                                    diSystem.SetText(attributes.dialogueKey, false, true, -1);
-                                    if(humans.IndexOf(target) == -1){
-                                        humans.Add(target);
-                                        attributes.isFollowing = true;
-                                    }
-                                } else if(attributes.dialogueKey == "FirstMate"){
-                                    if(!hasCure){
-                                        diSystem.SetText(attributes.dialogueKey, false, false, 0);
-                                    } else{
-                                        currentLevel.hasKey = true;
-                                        keyUI[keyNum].GetComponent<Image>().color = Color.white;
-                                        keyNum++;
-                                        diSystem.SetText(attributes.dialogueKey, false, false, 1);
-                                    }
-                                }
+                                DealWithHuman(attributes, target);
                                 break;
                             case "Exit":
                                 transform.position = levelManager.levels[levelManager.LIndex].checkpoint.transform.position; //oof
@@ -293,16 +291,50 @@ public class PlayerInteractions : MonoBehaviour
         }
     }
 
+    private void DealWithHuman(HumanBehavior attributes, GameObject human){
+
+        if(attributes.type != "special"){
+            
+            if(attributes.dialogueKey != "default"){
+                diSystem.SetText(attributes.dialogueKey, false, false, -1);
+            } else{
+                diSystem.SetText(attributes.dialogueKey, false, true, -1);
+            }
+            
+            if(humans.IndexOf(human) == -1){
+                humans.Add(human);
+                attributes.isFollowing = true;
+            }
+        } else if(attributes.dialogueKey == "FirstMate"){
+            if(!hasCure){
+                diSystem.SetText("noCure", false, false, -1);
+            } else{
+                currentLevel.hasKey = true;
+                keyUI[keyNum].GetComponent<Image>().color = Color.white;
+                keyNum++;
+                diSystem.SetText("yesCure", false, false, -1);
+            }
+        } else if(attributes.dialogueKey == "unlockdrone"){
+            pMovement.hasDroneKey = true;
+            diSystem.SetText(attributes.dialogueKey, false, false, -1);
+        }
+    }
+
     public void RemoveHuman(GameObject human){
         upgradeSystem.humansSaved++;
         humans.Remove(human);
+        upgradeSystem.UpdateWallet();
     }
 
     public void TeleportHumans(int level){
+
         for(int i = 0; i < humans.Count; i++){
-            humans[i].transform.position = transform.position;
-            humans[i].transform.parent = levelManager.levelParents[level].transform;
-            humans[i].GetComponent<HumanBehavior>().Unlink();
+
+            if(!humans[i].GetComponent<HumanBehavior>().dropped){
+                humans[i].transform.parent = levelManager.levelParents[level].transform;            
+                humans[i].transform.position = transform.position;
+                humans[i].GetComponent<HumanBehavior>().Unlink();                
+            }
         }
     }
 
@@ -319,7 +351,6 @@ public class PlayerInteractions : MonoBehaviour
                     transform.rotation = Quaternion.Euler(0f, 0f, 0f);
                     rb.velocity = new Vector2(0,0);
                     StartCoroutine(levelManager.OnRoomChange(i));
-                    door.GetComponent<DoorScript>().requireKey = false;
 
                     taserActive = false;
                     torchActive = false;
@@ -329,7 +360,7 @@ public class PlayerInteractions : MonoBehaviour
                     toolsUI[2].SetActive(true);
 
                     bossCombat.enabled = true;
-                    
+                    this.enabled = false;
                     return true;
                 } else{
                     if(showDialogue){

@@ -4,29 +4,46 @@ using UnityEngine;
 
 public class Boss : MonoBehaviour
 {
+    private Animator anim;
     [SerializeField] private GameObject[] tendrils;
     [SerializeField] private float atkCooldown = 5f;
     [SerializeField] private float speedIncr;
-    [SerializeField] private float dmgCooldown;
+    [SerializeField] private float dmgCooldown = 1f;
     private bool isAttacking = false;
     private bool attackable = true;
     private int phase = 1;
     private int hits = 0;
 
+    /*test vars*/
     public bool testStrike = false;
     public bool startBoss = false;
-    public bool bossActive = false;
+
+
+    public void Reset(){
+        anim = GetComponent<Animator>();
+        StopCoroutine("StartFight");
+        phase = 1;
+        hits = 0;
+        attackable = true;
+
+        for(int i = 0; i < tendrils.Length; i++){
+            tendrils[i].GetComponent<Tendrils>().Reset();
+        }
+        StartCoroutine("StartFight");
+    }
 
     public IEnumerator StartFight(){
+        
+        AudioManager.Instance.PlayMusic("boss");
         //start first section of boss theme
         //intro dialogue
         //yield return new WaitForSeconds(1f);
-        bossActive = true;
         StartCoroutine("AttackSequence");
         
         for(int i = 0; i < tendrils.Length; i++){
             tendrils[i].GetComponent<Tendrils>().shouldMove = true;
         }
+        
         yield return null; //delete later
     }
 
@@ -40,6 +57,7 @@ public class Boss : MonoBehaviour
             }
         }
 
+        /*delete later*/
         if(startBoss){
             startBoss = false;
             StartCoroutine("StartFight");
@@ -60,6 +78,7 @@ public class Boss : MonoBehaviour
 
     public IEnumerator OnHit(){
 
+
         if(!attackable){
             yield return null;
         } else if(hits <= 3){
@@ -67,11 +86,12 @@ public class Boss : MonoBehaviour
         } else if(hits > 3){
             OnDeath();
         }
-        attackable = false;
+        attackable = false;        
+        AudioManager.Instance.PlaySFXAtPoint("boss_ouch", this.transform);
         PhaseChange();
-        //flashing opacity animation
+        anim.SetBool("iframe", true);
         yield return new WaitForSeconds(dmgCooldown);
-        //return to full opacity
+        anim.SetBool("iframe", false);
         attackable = true;
     }
 
@@ -79,12 +99,13 @@ public class Boss : MonoBehaviour
 
         phase++;
         for(int i = 0; i < tendrils.Length; i++){
-            StartCoroutine(tendrils[i].GetComponent<Tendrils>().PhaseChange());
+            StartCoroutine(tendrils[i].GetComponent<Tendrils>().PhaseChange(phase));
         }
         atkCooldown *= 0.5f;    
     }
 
     private void OnDeath(){
+        Debug.Log("died");
         //play death animation
         //destroy object
         //you are win
