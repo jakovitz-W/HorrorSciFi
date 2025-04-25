@@ -1,107 +1,103 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Boss : MonoBehaviour
 {
     private Animator anim;
-    [SerializeField] private GameObject[] tendrils;
-    [SerializeField] private float atkCooldown = 5f;
-    [SerializeField] private float speedIncr;
-    [SerializeField] private float dmgCooldown = 1f;
-    private bool isAttacking = false;
+    [SerializeField] private float dmgCooldown = 3f;
     private bool attackable = true;
-    private int phase = 1;
+    private int phase = 0;
     private int hits = 0;
 
-    /*test vars*/
-    public bool testStrike = false;
-    public bool startBoss = false;
+    [SerializeField] private GameObject[] phases;
+    [SerializeField] private GameObject initial;
+    [SerializeField] private AnimationClip[] introAnimations;
+    private PlayerMovement player;
 
+    private Tendrils[] tendrils;
+    public Transform playerOrigin;
 
     public void Reset(){
+        player = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
         anim = GetComponent<Animator>();
         StopCoroutine("StartFight");
-        phase = 1;
+        phase = 0;
         hits = 0;
         attackable = true;
 
-        for(int i = 0; i < tendrils.Length; i++){
-            tendrils[i].GetComponent<Tendrils>().Reset();
+        initial.SetActive(true);
+
+        for(int i = 0; i < phases.Length; i++){
+            phases[i].SetActive(false);
         }
+
         StartCoroutine("StartFight");
     }
 
     public IEnumerator StartFight(){
-        
+
+        player.enabled = false;
+        initial.SetActive(false);
+        phases[0].SetActive(true);   
+
+        tendrils = phases[0].GetComponentsInChildren<Tendrils>(); 
+
         AudioManager.Instance.PlayMusic("boss");
-        //start first section of boss theme
-        //intro dialogue
-        //yield return new WaitForSeconds(1f);
-        StartCoroutine("AttackSequence");
+        yield return new WaitForSeconds(introAnimations[0].length); 
         
         for(int i = 0; i < tendrils.Length; i++){
-            tendrils[i].GetComponent<Tendrils>().shouldMove = true;
-        }
-        
-        yield return null; //delete later
-    }
-
-    void FixedUpdate(){
-
-        /*delete later*/
-        if(testStrike){
-            testStrike = false;
-            for(int i = 0; i < tendrils.Length; i++){
-                StartCoroutine(tendrils[i].GetComponent<Tendrils>().Strike());
-            }
+            tendrils[i].Reset();
+            StartCoroutine(tendrils[i].Strike());
         }
 
-        /*delete later*/
-        if(startBoss){
-            startBoss = false;
-            StartCoroutine("StartFight");
-        }
-    }
-
-    private IEnumerator AttackSequence(){
-
-        isAttacking = true;
-        float cd = Random.Range(3f, atkCooldown);
-        for(int i = 0; i < tendrils.Length; i++){
-            StartCoroutine(tendrils[i].GetComponent<Tendrils>().Strike());
-        }
-        yield return new WaitForSeconds(cd);
-        isAttacking = false;
-        StartCoroutine(AttackSequence());
+        player.enabled = true;
     }
 
     public IEnumerator OnHit(){
 
-
-        if(!attackable){
-            yield return null;
-        } else if(hits <= 3){
+        
+        if(attackable && hits < 3){
             hits++;
-        } else if(hits > 3){
+            player.transform.position = playerOrigin.position;
+
+            attackable = false;        
+            AudioManager.Instance.PlaySFXAtPoint("boss_ouch", this.transform);
+
+            anim.SetBool("iframe", true);
+            yield return new WaitForSeconds(dmgCooldown);
+            anim.SetBool("iframe", false);            
+            
+            //phase change
+            phase++;
+
+            for(int i = 0; i < tendrils.Length; i++){
+                tendrils[i].Reset();
+            }
+
+            phases[phase].SetActive(true);
+
+            for(int i = 0; i < phases.Length; i++){
+                if(i != phase){
+                    phases[i].SetActive(false);
+                }
+            }
+
+            tendrils = phases[phase].GetComponentsInChildren<Tendrils>(); 
+
+ 
+            yield return new WaitForSeconds(introAnimations[phase].length);
+
+            for(int i = 0; i < tendrils.Length; i++){
+                StartCoroutine(tendrils[i].Strike());
+            }
+
+            attackable = true;    
+
+        } else if(hits >= 3){
             OnDeath();
         }
-        attackable = false;        
-        AudioManager.Instance.PlaySFXAtPoint("boss_ouch", this.transform);
-        PhaseChange();
-        anim.SetBool("iframe", true);
-        yield return new WaitForSeconds(dmgCooldown);
-        anim.SetBool("iframe", false);
-        attackable = true;
-    }
-
-    private void PhaseChange(){
-
-        phase++;
-        for(int i = 0; i < tendrils.Length; i++){
-            StartCoroutine(tendrils[i].GetComponent<Tendrils>().PhaseChange(phase));
-        }
-        atkCooldown *= 0.5f;    
     }
 
     private void OnDeath(){
@@ -109,6 +105,9 @@ public class Boss : MonoBehaviour
         //play death animation
         //destroy object
         //you are win
+
+        //replace with end dialogue then load next scene
+        SceneManager.LoadScene(0);
     }
 
 }

@@ -5,11 +5,9 @@ using UnityEngine;
 public class Tendrils : MonoBehaviour
 {
     private Animator anim;
-    private Transform player;
-    private float xBuff = 3;
+    [SerializeField] private AnimationClip strikeClip;
     private Vector2 targetPos;
     [SerializeField] private float speed = 4;
-    [SerializeField] private int xDir;
 
     private int yDir = 1;
     [SerializeField] private Transform upper, lower;
@@ -20,57 +18,32 @@ public class Tendrils : MonoBehaviour
     private Vector2 startPos;
     float originSpeed;
 
-    public bool shouldMove = false;
     public bool isVertical = false;
     public bool onWall = false;
     public bool stationary = false;
-    public bool active = false;
+    private float atckCooldown = 5f;
     
 
     void OnEnable(){
         anim = GetComponent<Animator>();
         startPos = transform.position;
-        player = GameObject.FindWithTag("Player").transform;
         originX = transform.position.x;
         originSpeed = speed;
     }
 
     public void Reset(){
+        anim.ResetTrigger("strike");
+        StopAllCoroutines();
         transform.position = startPos;
-        shouldMove = false;
-    }
-
-    public IEnumerator PhaseChange(int phase){
-
-        originSpeed = speed;
-        speed = 0;
-        yield return new WaitForSeconds(2f);
-        float mod = Random.Range(1f,2f);
-        speed = originSpeed * mod;
-        xBuff -= 0.25f;
-
-        if(phase == 2){
-            if(isVertical){
-                anim.SetTrigger("emerge_vertical");
-                active = true;
-            }
-        }
-
-        if(phase == 3){
-            if(onWall){
-                anim.SetTrigger("emerge_horizontal");
-                active = true;
-                shouldMove = true;
-            }
-        }
     }
 
 
     void FixedUpdate(){
         
-        if(shouldMove && !stationary){
+        if(!stationary){
+
             if(!striking){
-                
+
                 targetPos = new Vector2(originX, transform.position.y + yDir);
 
                 if(transform.position.y >= upper.position.y && !upperReached){
@@ -94,28 +67,34 @@ public class Tendrils : MonoBehaviour
 
     public IEnumerator Strike(){
 
-        if(!active){
-            yield break;
-        }
-
         float rand;
+        bool atck_decision = true;
 
         if(isVertical || onWall){
             rand = Random.Range(0, 10);
-            if(rand < 7){
-                yield break;
+            if(rand < 5){
+                atck_decision = false;
             }
         }
 
-        speed -= speed * 0.5f;
-        rand = Random.Range(0.7f, 1f);
-        yield return new WaitForSeconds(rand);
+        if(atck_decision){
+            striking = true;
+            speed -= speed * 0.5f;
+            rand = Random.Range(0.7f, 1f);
+            yield return new WaitForSeconds(rand);
 
-        AudioManager.Instance.PlaySFXAtPoint("boss_attack", this.transform);
-        anim.SetBool("strike", true);
-        yield return new WaitForSeconds(1f);
-        anim.SetBool("strike", false);
+            AudioManager.Instance.PlaySFXAtPoint("boss_attack", this.transform);
+            anim.SetTrigger("strike");
+            yield return new WaitForSeconds(strikeClip.length);
 
-        speed = originSpeed;
+            speed = originSpeed;                    
+        }
+        striking = false;
+
+        yield return new WaitForSeconds(atckCooldown);
+        if(this.gameObject.activeSelf){
+            StartCoroutine("Strike");   
+        }
+        
     }    
 }

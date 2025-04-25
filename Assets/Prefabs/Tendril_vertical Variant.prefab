@@ -60,6 +60,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Tendril_vertical Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2603064585980696748, guid: 78e9451d6acb034469ed293615f24ed3, type: 3}
+      propertyPath: isVertical
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2603064585980696748, guid: 78e9451d6acb034469ed293615f24ed3, type: 3}
+      propertyPath: stationary
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

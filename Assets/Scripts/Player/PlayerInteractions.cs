@@ -183,15 +183,18 @@ public class PlayerInteractions : MonoBehaviour
 
     void Pickup(InputAction.CallbackContext ctx){
 
-        LayerMask mask = LayerMask.GetMask("Key Item", "Weapon");
+        LayerMask mask = LayerMask.GetMask("Key Item", "Weapon", "Bounds");
         if(ctx.performed){
 
-            Collider2D col = Physics2D.OverlapCircle(transform.position, interactRadius, mask);
+            Collider2D col = Physics2D.OverlapCircle(transform.position, 0.5f, mask);
 
             if(col != null){
 
                 GameObject target = col.gameObject;
 
+                if(target.tag == "Ground" || target.tag == "BlocksSight"){
+                    return;
+                }
                 if(target.tag == "Key Item"){
 
                     currentLevel.hasKey = true;
@@ -295,7 +298,7 @@ public class PlayerInteractions : MonoBehaviour
 
         if(attributes.type != "special"){
             
-            if(attributes.dialogueKey != "default"){
+            if(attributes.dialogueKey != "Default"){
                 diSystem.SetText(attributes.dialogueKey, false, false, -1);
             } else{
                 diSystem.SetText(attributes.dialogueKey, false, true, -1);
@@ -316,6 +319,8 @@ public class PlayerInteractions : MonoBehaviour
             }
         } else if(attributes.dialogueKey == "unlockdrone"){
             pMovement.hasDroneKey = true;
+            diSystem.SetText(attributes.dialogueKey, false, false, -1);
+        } else{
             diSystem.SetText(attributes.dialogueKey, false, false, -1);
         }
     }

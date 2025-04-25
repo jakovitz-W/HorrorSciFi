@@ -159,7 +159,7 @@ public class Affected{
     }
 
     private void Magnet(){
-        actor.GetComponent<PointEffector2D>().enabled = activated;
+        actor.GetComponent<PointEffector2D>().forceMagnitude = -10;
         if(activated){
             audioSource = AudioManager.Instance.PlayRepeatingAtPoint("magnet", actor.transform);            
         } else{

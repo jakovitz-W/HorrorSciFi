@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class HumanBehavior : MonoBehaviour
 {
-    /*JSON variables*/
-    
     /*Script variables*/
     private Animator anim;
     public string type;
@@ -37,6 +35,7 @@ public class HumanBehavior : MonoBehaviour
     public bool dropped = false;
     private bool stopped = false;
     private Transform dropoff;
+    private bool alive;
 
     private AudioSource footsteps = null;
 
@@ -335,6 +334,7 @@ public class HumanBehavior : MonoBehaviour
         for(int i = 0; i < monsters.Count; i++){
             monsters[i].GetComponent<EnemyBehavior>().Unlink();
         }
+        alive = false;
         gameObject.SetActive(false);
     }
 

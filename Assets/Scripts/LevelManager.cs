@@ -86,11 +86,13 @@ public class LevelManager : MonoBehaviour
         Time.timeScale = 1f;
         AudioManager.Instance.PlayMusic("ambient");
         player = GameObject.FindWithTag("Player");
-        LIndex = 0;
 
+        //load from save
+        LIndex = 0;
+        
         for(int i = LIndex + 1; i < levels.Length; i++){
             levelParents[i].SetActive(false);
-            levels[i].hasKey = false;
+            levels[i].hasKey = false;//load from save
         }
 
         //starts player in first room

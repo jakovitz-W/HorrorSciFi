@@ -83,7 +83,7 @@ public class PauseMenu : MonoBehaviour
         Save();
         Time.timeScale = 1f;
         AudioManager.Instance.StopAll();
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(0);
     }
 
     public void CloseApp(){

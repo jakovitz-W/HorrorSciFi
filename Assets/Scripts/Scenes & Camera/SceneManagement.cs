@@ -29,7 +29,7 @@ public class SceneManagement : MonoBehaviour
     }
     public void StartGame(){
         AudioManager.Instance.PlayUISound("button");
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void QuitGame(){

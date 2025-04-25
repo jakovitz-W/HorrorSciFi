@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: onWall
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2603064585980696748, guid: 78e9451d6acb034469ed293615f24ed3, type: 3}
+      propertyPath: stationary
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5581949584992824126, guid: 78e9451d6acb034469ed293615f24ed3, type: 3}
       propertyPath: m_SpriteTilingProperty.drawMode
       value: 2

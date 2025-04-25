@@ -60,6 +60,7 @@ public class BossCombat : MonoBehaviour
             StartCoroutine(IFrames());
             hitpoints--;
 
+            transform.position = boss.playerOrigin.position;
             if(hitpoints <= 0){
                 OnDeath();
                 invincible = false;
