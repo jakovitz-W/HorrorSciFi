@@ -10,10 +10,12 @@ public class PauseMenu : MonoBehaviour
     private bool isActive = false;
     public GameObject pauseMenu;
     [SerializeField] private MixManager mixManager;
+    [SerializeField] private PlayerInteractions interactions;
 
     private void Awake(){
 
-        playerControls = new PlayerControls();        
+        playerControls = new PlayerControls();
+        interactions = GameObject.FindWithTag("Player").GetComponent<PlayerInteractions>();
         mixManager = GameObject.Find("MixManager").GetComponent<MixManager>();
         isActive = false;
         pauseMenu.SetActive(false);
@@ -36,6 +38,8 @@ public class PauseMenu : MonoBehaviour
             if(!isActive){
                 AudioManager.Instance.PauseAll();
                 pauseMenu.SetActive(true);
+                interactions.StopToolAudio();
+                interactions.enabled = false;
                 isActive = true;                
                 Cursor.visible = true;
                 Time.timeScale = 0f;
@@ -51,6 +55,7 @@ public class PauseMenu : MonoBehaviour
             AudioManager.Instance.PlayUISound("button");
         }
 
+        interactions.enabled = true;
         AudioManager.Instance.ResumeMusic();
         mixManager.ResumeMaster();
         pauseMenu.SetActive(false);
@@ -63,24 +68,10 @@ public class PauseMenu : MonoBehaviour
         AudioManager.Instance.PlayUISound("button");
         PlayerMovement player = GameObject.Find("Player").GetComponent<PlayerMovement>();
         player.OnDeath();
-        AudioManager.Instance.ResumeMusic();
-        mixManager.ResumeMaster();
-        pauseMenu.SetActive(false);
+        Resume(false);
     }
 
-    public void Save(){
-        AudioManager.Instance.PlayUISound("button");
-        //grab important variables, load into JSONs
-        Debug.Log("saving");
-    }
-
-    public void SaveAndQuit(){
-        Save();
-        CloseApp();
-    }
-
-    public void SaveAndMain(){
-        Save();
+    public void Main(){
         Time.timeScale = 1f;
         AudioManager.Instance.StopAll();
         SceneManager.LoadScene(0);

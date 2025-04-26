@@ -15,7 +15,7 @@ public class ButtonScript : MonoBehaviour
     public float default_intensity; //for tiny button indicators only
     public bool pressed = false; //for and gate style buttons
 
-    void OnEnable(){
+    void Awake(){
         rend = GetComponent<SpriteRenderer>();
 
         if(activated){
@@ -159,7 +159,7 @@ public class Affected{
     }
 
     private void Magnet(){
-        actor.GetComponent<PointEffector2D>().forceMagnitude = -10;
+        actor.GetComponent<PointEffector2D>().forceMagnitude = -500;
         if(activated){
             audioSource = AudioManager.Instance.PlayRepeatingAtPoint("magnet", actor.transform);            
         } else{

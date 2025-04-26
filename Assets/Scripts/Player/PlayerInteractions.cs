@@ -92,6 +92,14 @@ public class PlayerInteractions : MonoBehaviour
         }
     }
 
+    public void StopToolAudio(){
+        if(toolAudio != null){
+            Destroy(toolAudio);            
+        }
+
+        flameThrower.SetActive(false);
+        taser.SetActive(false);
+    }
     void UseWeapon(InputAction.CallbackContext ctx){
 
         if(ctx.started){
@@ -251,6 +259,7 @@ public class PlayerInteractions : MonoBehaviour
                             case "Door":
                                 if(CheckDoor(target, true)){
                                     target.GetComponent<DoorScript>().SetUnlocked();
+                                    return;
                                 }
                                 break;
                             case "Meltable":
@@ -272,6 +281,7 @@ public class PlayerInteractions : MonoBehaviour
                                 break;
                             case "Exit":
                                 transform.position = levelManager.levels[levelManager.LIndex].checkpoint.transform.position; //oof
+                                Cursor.visible = false;
                                 break;
                             case "Enemy":
                                 diSystem.SetText("Monster", false, false, -1);
@@ -312,9 +322,12 @@ public class PlayerInteractions : MonoBehaviour
             if(!hasCure){
                 diSystem.SetText("noCure", false, false, -1);
             } else{
-                currentLevel.hasKey = true;
-                keyUI[keyNum].GetComponent<Image>().color = Color.white;
-                keyNum++;
+                if(!currentLevel.hasKey){
+                    currentLevel.hasKey = true;
+                    keyUI[keyNum].GetComponent<Image>().color = Color.white;
+                    keyNum++;                    
+                }
+   
                 diSystem.SetText("yesCure", false, false, -1);
             }
         } else if(attributes.dialogueKey == "unlockdrone"){

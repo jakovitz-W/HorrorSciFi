@@ -75,6 +75,7 @@ public class SceneManagement : MonoBehaviour
             }
 
             if(credits != null && credits.activeSelf){
+                AudioManager.Instance.StopAll();
                 credits.SetActive(false);
             }
         }

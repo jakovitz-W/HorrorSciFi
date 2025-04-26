@@ -8,7 +8,7 @@ public class AudioManager : MonoBehaviour
     public static AudioManager Instance;
     public Sound[] music, sfxSounds, UISounds;
 
-    public AudioSource musicSource, sfxSource, UISource;
+    public AudioSource musicSource, sfxSource, UISource, globalSource;
 
     private void Awake(){
         
@@ -46,16 +46,18 @@ public class AudioManager : MonoBehaviour
         UISource.Stop();
     }
 
+    //global
     public void PlaySFX(string name){
         Sound s = Array.Find(sfxSounds, x => x.name == name);
 
         if(s == null){
             Debug.Log("Sound not found");
         } else{
-            sfxSource.PlayOneShot(s.clip);
+            globalSource.PlayOneShot(s.clip);
         }
     }
 
+    //localized
     public void PlaySFXAtPoint(string name, Transform spawnPoint){
 
         Sound s = Array.Find(sfxSounds, x => x.name == name);
@@ -80,7 +82,7 @@ public class AudioManager : MonoBehaviour
             Debug.Log("sound not found");
             return null;
         } else{
-            AudioSource audioSource = Instantiate(sfxSource, this.transform.position, Quaternion.identity);
+            AudioSource audioSource = Instantiate(globalSource, this.transform.position, Quaternion.identity);
             audioSource.clip = s.clip;
             audioSource.loop = true;
             audioSource.Play();

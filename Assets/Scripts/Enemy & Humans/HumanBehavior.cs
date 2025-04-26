@@ -88,10 +88,14 @@ public class HumanBehavior : MonoBehaviour
             if(!stuck && !stopped){
                 StopCoroutine("ChooseDirection");
                 anim.SetBool("isWalking", true);
-                runFrom = ReturnClosest(); //watch out for async issues
-                
-                if(direction != runFrom.GetComponent<EnemyBehavior>().direction){
-                    Flip();
+
+                if(monsters.Count != 0){
+                    runFrom = ReturnClosest(); //watch out for async issues
+                    
+                    if(direction != runFrom.GetComponent<EnemyBehavior>().direction){
+                        Flip();
+                    }
+
                 }
 
                 destination = new Vector2(transform.position.x + direction, transform.position.y);

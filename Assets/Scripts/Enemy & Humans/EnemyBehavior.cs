@@ -67,6 +67,14 @@ public class EnemyBehavior : MonoBehaviour
 
         } else if(target != null || target.activeSelf){
             //follow
+            if(target.transform.position.x > this.transform.position.x && direction == -1){
+                Flip();
+            }
+
+            if(target.transform.position.x < this.transform.position.x && direction == 1){
+                Flip();
+            }
+
             Vector2 destination = new Vector2(target.transform.position.x, transform.position.y);
             transform.position = Vector2.MoveTowards(transform.position, destination, currentSpeed * Time.deltaTime);
 

@@ -84,7 +84,7 @@ public class Dialogue{ //set fields in inspector
         }
         option = di[iteration];
 
-        if(iteration < (di.Count - 1)){ //.count starts counting at 1, index for lists start at 0
+        if(iteration < (di.Count - 1)){ //.Count starts counting at 1, index for lists start at 0
             iteration++;
         }
 

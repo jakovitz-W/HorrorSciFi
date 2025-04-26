@@ -10,6 +10,8 @@ public class DebugMenu : MonoBehaviour
     public GameObject debugMenu;
     public GameObject player;
     public LevelManager levelManager;
+    private bool collidersEnabled = true;
+    private bool inTestRoom = false;
 
     private void Awake(){
         playerControls = new PlayerControls();
@@ -18,17 +20,17 @@ public class DebugMenu : MonoBehaviour
     }
 
     private void OnEnable(){
-        playerControls.General.OpenDebugMenu.performed += OpenDebug;
+        playerControls.General.OpenDebugMenu.performed += OpenDebugMenu;
         playerControls.Enable();
     }
 
     private void OnDisable(){
-        playerControls.General.OpenDebugMenu.performed -= OpenDebug; 
+        playerControls.General.OpenDebugMenu.performed -= OpenDebugMenu; 
         playerControls.Disable();
     }
 
 
-    void OpenDebug(InputAction.CallbackContext ctx){
+    void OpenDebugMenu(InputAction.CallbackContext ctx){
 
         if(ctx.performed){
             isActive = !isActive;
@@ -36,6 +38,7 @@ public class DebugMenu : MonoBehaviour
         }
 
         if(isActive){
+            inTestRoom = false;
             Cursor.visible = true;
             Time.timeScale = 0f;
         } else{
@@ -47,12 +50,17 @@ public class DebugMenu : MonoBehaviour
         isActive = !isActive;
         debugMenu.SetActive(isActive);
         Cursor.visible = true;
+        inTestRoom = true;
     }
 
     public void Resume(){
         debugMenu.SetActive(false);
         Time.timeScale = 1f;
-        Cursor.visible = false;
+        
+        if(!inTestRoom){
+            Cursor.visible = false;            
+        }
+
     }
 
     public void UnlockDoors(){
@@ -78,5 +86,27 @@ public class DebugMenu : MonoBehaviour
         player.GetComponent<PlayerInteractions>().hasCure = true;
 
         StartCoroutine(levelManager.OnRoomChange(5));
+    }
+
+    public void SkipToLab(){
+        UnlockWeapons();
+        UnlockDoors();
+
+        StartCoroutine(levelManager.OnRoomChange(4));
+    }
+
+    public void SkipToMedbay(){
+        UnlockWeapons();
+        UnlockDoors();
+
+        StartCoroutine(levelManager.OnRoomChange(2));
+    }
+
+    public void ToggleCollision(){
+        collidersEnabled = !collidersEnabled;
+        
+        foreach(Collider2D col in player.GetComponents<Collider2D>()){
+            col.enabled = collidersEnabled;
+        }
     }
 }

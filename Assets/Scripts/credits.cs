@@ -10,6 +10,7 @@ public class credits : MonoBehaviour
     public GameObject parent;
     void OnEnable(){
         start = transform.position;
+        AudioManager.Instance.PlayMusic("boss");
     }
 
     void Update(){
@@ -24,6 +25,7 @@ public class credits : MonoBehaviour
     }
 
     public void Reset(){
+        AudioManager.Instance.StopAll();
         transform.position = start;
     }
 }

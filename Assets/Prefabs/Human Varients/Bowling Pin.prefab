@@ -117,9 +117,17 @@ PrefabInstance:
       value: 0.005
       objectReference: {fileID: 0}
     - target: {fileID: 8403373314787828621, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
+      propertyPath: type
+      value: special
+      objectReference: {fileID: 0}
+    - target: {fileID: 8403373314787828621, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: mainCol
       value: 
       objectReference: {fileID: 2307289961814850205}
+    - target: {fileID: 8403373314787828621, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
+      propertyPath: dialogueKey
+      value: bowlingPin
+      objectReference: {fileID: 0}
     - target: {fileID: 8663595104554411995, guid: c2556f82c46fe9e4890342fd952d807e, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

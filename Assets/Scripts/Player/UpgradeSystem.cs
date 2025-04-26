@@ -125,6 +125,7 @@ public class UpgradeSystem : MonoBehaviour
     }
 
     public void StartRegen(){
+        AudioManager.Instance.PlayUISound("terminal");
         StartCoroutine(movement.RegenSpeed());
         regenUnlocked = true;
         spent += regenCost;
@@ -132,6 +133,7 @@ public class UpgradeSystem : MonoBehaviour
     }
 
     public void IncreaseBaseSpeed(){
+        AudioManager.Instance.PlayUISound("terminal");
         movement.baseSpeed += speedIncrease;
         movement.runSpeed = movement.baseSpeed;
         spent += speedCost;
@@ -139,19 +141,21 @@ public class UpgradeSystem : MonoBehaviour
     }
 
     public void IncreaseRange(){
+        AudioManager.Instance.PlayUISound("terminal");
         interactions.attackRadius += attackUpgrade;
-        //increase the lifetime of the flame/taser particles
         spent += rangeCost;
         Recalculate();
     }
 
     public void IncreaseStunDuration(){
+        AudioManager.Instance.PlayUISound("terminal");
         interactions.stunTime += stunUpgrade;
         spent += durationCost;
         Recalculate();
     }
 
     public void UnlockMiniDrone(){
+        AudioManager.Instance.PlayUISound("terminal");
         movement.droneUnlocked = true;
         diSystem.SetText("MiniDrone", true, false, -1);
         drone.SetActive(false);
