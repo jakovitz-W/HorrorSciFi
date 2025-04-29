@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class credits : MonoBehaviour
 {
@@ -19,7 +21,9 @@ public class credits : MonoBehaviour
         transform.position = Vector2.MoveTowards(transform.position, targetPos, step);
 
         if(last.position.y >= threshold.position.y){
-            Reset();
+            Cursor.visible = true;
+            AudioManager.Instance.StopAll();
+            SceneManager.LoadScene(0); //replace w/ call to scenemanagement.loadasync
             parent.SetActive(false);
         }
     }

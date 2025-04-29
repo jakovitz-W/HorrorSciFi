@@ -12,6 +12,8 @@ public class TypewriterEffect : MonoBehaviour
     private string fullText;
     private bool hint;
     private bool allowHint = true;
+    public bool done = false;
+    public bool isCutscene = false;
 
     public void DisableHints(){
         allowHint = false;
@@ -55,8 +57,16 @@ public class TypewriterEffect : MonoBehaviour
 
     IEnumerator TypeText(){
         foreach(char letter in fullText){
+            if(isCutscene && AudioManager.Instance != null){
+                AudioManager.Instance.PlayUISound("typing");
+            }
+            done = false;
             textMesh.text += letter;
             yield return new WaitForSeconds(typingSpeed);
+
+            if(textMesh.text == fullText){
+                done = true;
+            }
         }
         if(hint){
             StartCoroutine(FadeText());              
@@ -77,10 +87,13 @@ public class TypewriterEffect : MonoBehaviour
                 if(textMesh.text != fullText){
                     typingSpeed = 0.001f;
                 } else{
-                    GameObject container = this.gameObject.transform.parent.gameObject;
-                    textMesh.text = string.Empty;
-                    typingSpeed = defaultSpeed;
-                    container.SetActive(false);
+
+                    if(!isCutscene){
+                        GameObject container = this.gameObject.transform.parent.gameObject;
+                        textMesh.text = string.Empty;
+                        typingSpeed = defaultSpeed;
+                        container.SetActive(false);                        
+                    }
                 }
             }
         }

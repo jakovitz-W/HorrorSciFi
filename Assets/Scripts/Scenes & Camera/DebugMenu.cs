@@ -14,19 +14,19 @@ public class DebugMenu : MonoBehaviour
     private bool inTestRoom = false;
 
     private void Awake(){
-        playerControls = new PlayerControls();
+        //playerControls = new PlayerControls();
         isActive = false;
         debugMenu.SetActive(false);
     }
 
     private void OnEnable(){
-        playerControls.General.OpenDebugMenu.performed += OpenDebugMenu;
-        playerControls.Enable();
+        //playerControls.General.OpenDebugMenu.performed += OpenDebugMenu;
+        //playerControls.Enable();
     }
 
     private void OnDisable(){
-        playerControls.General.OpenDebugMenu.performed -= OpenDebugMenu; 
-        playerControls.Disable();
+        //playerControls.General.OpenDebugMenu.performed -= OpenDebugMenu; 
+        //playerControls.Disable();
     }
 
 

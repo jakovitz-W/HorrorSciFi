@@ -169,7 +169,7 @@ AudioSource:
   m_GameObject: {fileID: 5267226394983344488}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -8990832587187392859, guid: 143cee2e4b86b80449a8633bc2d7181f, type: 2}
+  OutputAudioMixerGroup: {fileID: -4812063016949382500, guid: 143cee2e4b86b80449a8633bc2d7181f, type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
@@ -313,7 +313,7 @@ MonoBehaviour:
   - name: monster_idle
     clip: {fileID: 8300000, guid: 9a9f99a78e1745544bccc36d917d1879, type: 3}
   - name: monster_stun
-    clip: {fileID: 8300000, guid: 64f7ab2d41d13f942b7afaa7cf9b5287, type: 3}
+    clip: {fileID: 8300000, guid: d3c511e6d0d2f5b489f699448e745052, type: 3}
   - name: boss_hurt
     clip: {fileID: 8300000, guid: 266b9f51d68cfa34f9066ea4882fe0d1, type: 3}
   - name: electric_door
@@ -349,6 +349,8 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: ce2e49bbd46c200429bb75958fbae869, type: 3}
   - name: button
     clip: {fileID: 8300000, guid: af20178837539a94fb104ed44243a99b, type: 3}
+  - name: typing
+    clip: {fileID: 8300000, guid: a75fdf5d1047fca4580fe559d15e0458, type: 3}
   musicSource: {fileID: 1335383534958013170}
   sfxSource: {fileID: 2276260694619645514}
   UISource: {fileID: 7999491055689552474}

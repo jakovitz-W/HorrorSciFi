@@ -21,7 +21,7 @@ public class Tendrils : MonoBehaviour
     public bool isVertical = false;
     public bool onWall = false;
     public bool stationary = false;
-    private float atckCooldown = 5f;
+    private float atckCooldown = 4f;
     
 
     void OnEnable(){

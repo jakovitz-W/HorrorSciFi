@@ -35,7 +35,6 @@ public class HumanBehavior : MonoBehaviour
     public bool dropped = false;
     private bool stopped = false;
     private Transform dropoff;
-    private bool alive;
 
     private AudioSource footsteps = null;
 
@@ -52,24 +51,8 @@ public class HumanBehavior : MonoBehaviour
 
     void FixedUpdate(){
 
-        if(dropped){
-            if(Mathf.Abs(transform.position.x - dropoff.position.x) > 0){
-                
-                if(direction == 1 && dropoff.position.x < transform.position.x){
-                    Flip();
-                }else if(direction == -1 && dropoff.position.x > transform.position.x){
-                    Flip();
-                }
 
-                destination = new Vector2(dropoff.position.x, transform.position.y);
-                transform.position = Vector2.MoveTowards(transform.position, destination, currentSpeed * Time.deltaTime);
-            } else{
-                currentSpeed = 0;
-                anim.SetBool("isWalking", false);
-            }
-        }
-
-        if(!isFollowing && !isFrightened && !dropped){
+        if(!isFollowing && !isFrightened){
 
             if(!idling){
                 idling = true;
@@ -79,7 +62,6 @@ public class HumanBehavior : MonoBehaviour
                 transform.position = Vector2.MoveTowards(transform.position, destination, currentSpeed * Time.deltaTime);
             }
         }
-
 
         if(isFrightened && !dropped && !isFollowing){
 
@@ -317,13 +299,13 @@ public class HumanBehavior : MonoBehaviour
     }
 
     public void DropOff(){
-        if(!isFollowing){
-            return;
-        }
         
         dropped = true;
 
-        player.gameObject.GetComponent<PlayerInteractions>().RemoveHuman(this.gameObject);
+        if(isFollowing && player != null){
+            player.gameObject.GetComponent<PlayerInteractions>().RemoveHuman(this.gameObject);            
+        }
+
         mainCol.enabled = false;
         isFollowing = false;
         isClimbing = false;
@@ -331,6 +313,7 @@ public class HumanBehavior : MonoBehaviour
         currentSpeed = followSpeed;
         Unlink();
         StartCoroutine("ChooseDirection");
+        idling = true;
     }
 
     void OnDeath(){
@@ -338,7 +321,6 @@ public class HumanBehavior : MonoBehaviour
         for(int i = 0; i < monsters.Count; i++){
             monsters[i].GetComponent<EnemyBehavior>().Unlink();
         }
-        alive = false;
         gameObject.SetActive(false);
     }
 

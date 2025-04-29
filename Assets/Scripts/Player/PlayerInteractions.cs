@@ -314,7 +314,8 @@ public class PlayerInteractions : MonoBehaviour
                 diSystem.SetText(attributes.dialogueKey, false, true, -1);
             }
             
-            if(humans.IndexOf(human) == -1){
+            if(humans.IndexOf(human) == -1 && !attributes.dropped){
+
                 humans.Add(human);
                 attributes.isFollowing = true;
             }
@@ -363,7 +364,7 @@ public class PlayerInteractions : MonoBehaviour
         if(door.GetComponent<DoorScript>().requireKey){
 
             if(door.GetComponent<DoorScript>().isBoss){
-                if(hasCure){
+                if(hasCure && currentLevel.hasKey){
                     i++;
                     currentLevel = levelManager.levels[i];
                     transform.rotation = Quaternion.Euler(0f, 0f, 0f);

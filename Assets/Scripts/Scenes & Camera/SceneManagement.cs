@@ -13,7 +13,7 @@ public class SceneManagement : MonoBehaviour
 
     [SerializeField] private GameObject[] optionMenus;
     private GameObject activeOption;
-
+    public GameObject loadScreen;
 
     private void Awake(){
         playerControls = new PlayerControls();
@@ -100,4 +100,17 @@ public class SceneManagement : MonoBehaviour
     public void Credits(){
         credits.SetActive(true);
     }
+
+    IEnumerator LoadSceneAsync(int scene){
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene);
+        loadScreen.SetActive(true);
+        while (!asyncLoad.isDone){
+            yield return null;
+        }
+        loadScreen.SetActive(false);
+    }
+
 }
+    
+

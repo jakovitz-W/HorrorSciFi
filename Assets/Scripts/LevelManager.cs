@@ -84,7 +84,6 @@ public class LevelManager : MonoBehaviour
 
     void Start(){
         Time.timeScale = 1f;
-        AudioManager.Instance.PlayMusic("ambient");
         player = GameObject.FindWithTag("Player");
 
         //load from save

@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class Boss : MonoBehaviour
 {
@@ -11,13 +10,13 @@ public class Boss : MonoBehaviour
     private int phase = 0;
     private int hits = 0;
 
-    [SerializeField] private GameObject[] phases;
-    [SerializeField] private GameObject initial;
+    public GameObject[] phases;
     [SerializeField] private AnimationClip[] introAnimations;
     private PlayerMovement player;
 
     private Tendrils[] tendrils;
     public Transform playerOrigin;
+    public GameObject endCutscene;
 
     public void Reset(){
         player = GameObject.FindWithTag("Player").GetComponent<PlayerMovement>();
@@ -27,9 +26,8 @@ public class Boss : MonoBehaviour
         hits = 0;
         attackable = true;
 
-        initial.SetActive(true);
-
-        for(int i = 0; i < phases.Length; i++){
+        phases[0].SetActive(true);   
+        for(int i = 1; i < phases.Length; i++){
             phases[i].SetActive(false);
         }
 
@@ -39,9 +37,7 @@ public class Boss : MonoBehaviour
     public IEnumerator StartFight(){
 
         player.enabled = false;
-        initial.SetActive(false);
-        phases[0].SetActive(true);   
-
+        
         tendrils = phases[0].GetComponentsInChildren<Tendrils>(); 
 
         AudioManager.Instance.PlayMusic("boss");
@@ -57,10 +53,13 @@ public class Boss : MonoBehaviour
 
     public IEnumerator OnHit(){
 
-        
+        hits++;  
         if(attackable && hits < 3){
-            hits++;
+            Debug.Log(hits);
+
             player.transform.position = playerOrigin.position;
+            player.enabled = false;
+            player.Reset();
 
             attackable = false;        
             AudioManager.Instance.PlaySFXAtPoint("boss_ouch", this.transform);
@@ -72,23 +71,14 @@ public class Boss : MonoBehaviour
             //phase change
             phase++;
 
-            for(int i = 0; i < tendrils.Length; i++){
-                tendrils[i].Reset();
-            }
-
             phases[phase].SetActive(true);
-
-            for(int i = 0; i < phases.Length; i++){
-                if(i != phase){
-                    phases[i].SetActive(false);
-                }
-            }
 
             tendrils = phases[phase].GetComponentsInChildren<Tendrils>(); 
 
- 
+            
             yield return new WaitForSeconds(introAnimations[phase].length);
 
+            player.enabled = true;
             for(int i = 0; i < tendrils.Length; i++){
                 StartCoroutine(tendrils[i].Strike());
             }
@@ -96,18 +86,15 @@ public class Boss : MonoBehaviour
             attackable = true;    
 
         } else if(hits >= 3){
+            AudioManager.Instance.PlaySFXAtPoint("boss_ouch", this.transform);
             OnDeath();
         }
     }
 
     private void OnDeath(){
-        Debug.Log("died");
-        //play death animation
-        //destroy object
-        //you are win
-
-        //replace with end dialogue then load next scene
-        SceneManager.LoadScene(0);
+        this.gameObject.SetActive(false);
+        endCutscene.SetActive(true);
+        AudioManager.Instance.PauseAll();
     }
 
 }

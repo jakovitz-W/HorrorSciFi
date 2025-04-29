@@ -79,6 +79,8 @@ public class BossCombat : MonoBehaviour
     }
 
     void OnDeath(){
+        boss.phases[1].SetActive(false);
+        boss.phases[2].SetActive(false);
         anim.SetBool("iframe", false);
         invincible = false;
         hitpoints = 3;

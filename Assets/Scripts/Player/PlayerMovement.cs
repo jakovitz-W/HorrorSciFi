@@ -69,6 +69,13 @@ public class PlayerMovement : MonoBehaviour
         }
         controller.Move(horizontalMove * Time.fixedDeltaTime, verticalMove * Time.fixedDeltaTime);
     }
+
+    public void Reset(){   
+        horizontalMove = 0;
+        verticalMove = 0; 
+        GetComponent<Rigidbody2D>().velocity = new Vector3(0f,0f,0f);
+        transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+    }
     public void OnDeath(){
         Time.timeScale = 1f;
         GameObject checkpoint = levelManager.levels[levelManager.LIndex].checkpoint;

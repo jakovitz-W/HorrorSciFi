@@ -65,7 +65,7 @@ public class MechanicalArm : MonoBehaviour
                 currentDir = -currentDir;
                 anim.SetBool("open", false);
             }
-        } else if(col.gameObject.tag != "Player" && col.gameObject.tag != "Ground"){
+        } else if(col.gameObject.tag != "Player" && col.gameObject.tag != "Ground" && col.gameObject.tag != "BlocksSight"){
             currentDir = -currentDir;
         }
     }

@@ -6,7 +6,7 @@ using TMPro;
 
 public class DialogueSystem : MonoBehaviour
 {
-    public GameObject hintText, diContainer, diText;
+    public GameObject hintText, diContainer, diText, cutsceneText;
     public Image containerImg;
     public List<Dialogue> diList; //add to list in inspector to create dialogue instances
     public List<Dialogue> hintList;
@@ -52,10 +52,15 @@ public class DialogueSystem : MonoBehaviour
             if(!random){
                 diText.GetComponent<TypewriterEffect>().SetString(diList[index].GetDialogue(specific), false);
             } else{
-                //add check for removal, set to false for now
+                //add check for removal to function parameters, set to false for now
                 diText.GetComponent<TypewriterEffect>().SetString(diList[index].GetRandomOption(false), false);
             }
         }
+    }
+
+    public void SetCutsceneText(string key){
+        int index = FindIndexByKey(key);
+        cutsceneText.GetComponent<TypewriterEffect>().SetString(diList[index].GetDialogue(-1), false);
     }
 }
 
@@ -65,6 +70,7 @@ public class Dialogue{ //set fields in inspector
     [SerializeField] private List<string> di; //using list for easy removal
     private int iteration;
     public Sprite characterImage;
+    public bool hasNext = true;
 
     void Awake(){
         iteration = 0;
@@ -86,6 +92,8 @@ public class Dialogue{ //set fields in inspector
 
         if(iteration < (di.Count - 1)){ //.Count starts counting at 1, index for lists start at 0
             iteration++;
+        } else{
+            hasNext = false;
         }
 
         return option;

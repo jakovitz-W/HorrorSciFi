@@ -73,6 +73,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Main(){
         Time.timeScale = 1f;
+        mixManager.ResumeMaster();
         AudioManager.Instance.StopAll();
         SceneManager.LoadScene(0);
     }
