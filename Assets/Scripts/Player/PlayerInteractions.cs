@@ -380,13 +380,19 @@ public class PlayerInteractions : MonoBehaviour
 
                     bossCombat.enabled = true;
                     this.enabled = false;
+                    door.GetComponent<DoorScript>().requireKey = false;
                     return true;
-                } else{
+                } else if(!hasCure){
                     if(showDialogue){
                         diSystem.SetText("MissingCure", false, true, -1);
                         Debug.Log("Requires Cure Item");    
                     }
 
+                    return false;
+                } else{
+                    if(showDialogue){
+                        diSystem.SetText("DoorLocked", false, true, -1); 
+                    }  
                     return false;
                 }
             } else if(currentLevel.hasKey){
